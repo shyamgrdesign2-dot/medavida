@@ -34,7 +34,7 @@ export function Receipts({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">Receipts</div>
           <div className="text-[11.5px] text-dim">Snap once · auto-matched to spend</div>

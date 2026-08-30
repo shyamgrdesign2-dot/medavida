@@ -39,7 +39,7 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
       <div className="sticky top-0 z-10 bg-bg/80 px-5 pb-2 pt-4 backdrop-blur-xl">
         <div className="flex items-center gap-3">
           {onBack && (
-            <button onClick={() => { haptic("tap"); onBack(); }} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink">
+            <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink">
               <ChevronLeft size={18} strokeWidth={2} />
             </button>
           )}

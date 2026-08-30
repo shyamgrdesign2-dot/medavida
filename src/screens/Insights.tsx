@@ -8,6 +8,7 @@ import { haptic } from "@/lib/haptics";
 
 const PERIODS = ["This month", "Quarter", "Year"];
 const MULT = [1, 3.1, 11.8];
+const DELTA = [14, 9, 22]; // growth vs prior period, per filter
 const LABELS = [
   ["W1", "W2", "W3", "W4", "W5"],
   ["Apr", "May", "Jun", "Jul", "Aug"],
@@ -96,7 +97,7 @@ export function Insights() {
         <AnimatedGradient tone="teal" opacity={0.6} />
         <div className="relative flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-faint"><TrendingUp size={13} strokeWidth={2.4} />Net cashflow · {PERIODS[p].toLowerCase()}</div>
         <div className="tnum relative mt-1 font-display text-[28px] font-semibold text-go">+{money0(net)}</div>
-        <div className="relative mt-1 text-[11.5px] text-dim">Up <span className="font-semibold text-go">14%</span> vs the prior {p === 0 ? "month" : p === 1 ? "quarter" : "year"}</div>
+        <div className="relative mt-1 text-[11.5px] text-dim">Up <span className="font-semibold text-go">{DELTA[p]}%</span> vs the prior {p === 0 ? "month" : p === 1 ? "quarter" : "year"}</div>
       </Squircle>
 
       {/* cashflow chart */}

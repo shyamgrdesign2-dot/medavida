@@ -59,11 +59,11 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
               <BadgeCheck size={15} className="flex-none text-teal-2" />
             </div>
           </div>
-          <button onClick={() => { haptic("tap"); onQuick?.("approvals"); }} className="relative flex h-10 w-10 flex-none items-center justify-center rounded-full border border-border bg-surface text-ink">
+          <button onClick={() => { haptic("tap"); onQuick?.("approvals"); }} aria-label="Notifications" className="relative flex h-10 w-10 flex-none items-center justify-center rounded-full border border-border bg-surface text-ink">
             <Bell size={17} strokeWidth={2} />
             <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-teal px-1 text-[9px] font-bold text-on-teal">3</span>
           </button>
-          <button onClick={() => { haptic("tap"); onQuick?.("more"); }} className="flex-none">
+          <button onClick={() => { haptic("tap"); onQuick?.("more"); }} aria-label="Account" className="flex-none">
             <PatternAvatar seed={CLINIC.name} size={40} label="MF" />
           </button>
         </motion.div>

@@ -75,7 +75,7 @@ export function CardWallet({ width = 320, onCardTap }: { width?: number; onCardT
               onDragEnd={(_, info) => { if (info.offset.y < -26 || info.velocity.y < -180) cycle(); }}
               onTap={() => { if (isFront) handleTap(idx); }}
             >
-              <div className="pointer-events-none absolute -inset-x-1 bottom-0 top-2 rounded-[12px]" style={{ boxShadow: isFront ? "0 18px 30px -18px rgba(0,0,0,0.8)" : "none" }} />
+              <div className="pointer-events-none absolute -inset-x-1 bottom-0 top-2 rounded-[10px]" style={{ boxShadow: isFront ? "0 18px 30px -18px rgba(0,0,0,0.8)" : "none" }} />
               <ZevaCard card={card} interactive={isFront} />
             </motion.div>
           );

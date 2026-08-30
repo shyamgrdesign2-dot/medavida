@@ -26,13 +26,13 @@ export function Settlement({ onBack }: { onBack: () => void }) {
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center justify-between px-5 pt-4">
         <div className="flex items-center gap-3">
-          <button onClick={() => { haptic("tap"); onBack(); }} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+          <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
           <div>
             <div className="font-display text-[18px] font-semibold text-ink">Settlement</div>
             <div className="text-[11.5px] text-dim">MetaPay · instant disbursement</div>
           </div>
         </div>
-        <button onClick={() => haptic("tap")} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-dim"><Download size={16} strokeWidth={2} /></button>
+        <button onClick={() => haptic("tap")} aria-label="Download statement" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-dim"><Download size={16} strokeWidth={2} /></button>
       </div>
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
