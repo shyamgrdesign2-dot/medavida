@@ -106,7 +106,7 @@ export function Insights() {
           <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Money in vs out</div>
           <div className="flex items-center gap-3 text-[10px] font-semibold">
             <span className="flex items-center gap-1 text-go"><span className="h-2 w-2 rounded-full bg-go" />In</span>
-            <span className="flex items-center gap-1 text-dim"><span className="h-2 w-2 rounded-full bg-surface-3" />Out</span>
+            <span className="flex items-center gap-1 text-dim"><span className="h-2 w-2 rounded-full" style={{ background: "var(--chart-out)" }} />Out</span>
           </div>
         </div>
         <div className="flex items-end gap-2.5">
@@ -114,7 +114,7 @@ export function Insights() {
             <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
               <div className="flex h-[104px] w-full items-end justify-center gap-[3px]">
                 <motion.div className="w-[45%] rounded-t-[4px] bg-go" initial={{ height: 0 }} animate={{ height: `${Math.max(6, (mo.in / MAX) * 100)}%` }} transition={{ delay: 0.1 + i * 0.05, type: "spring", stiffness: 220, damping: 26 }} />
-                <motion.div className="w-[45%] rounded-t-[4px] bg-surface-3" initial={{ height: 0 }} animate={{ height: `${Math.max(6, (mo.out / MAX) * 100)}%` }} transition={{ delay: 0.15 + i * 0.05, type: "spring", stiffness: 220, damping: 26 }} />
+                <motion.div className="w-[45%] rounded-t-[4px]" style={{ background: "var(--chart-out)" }} initial={{ height: 0 }} animate={{ height: `${Math.max(6, (mo.out / MAX) * 100)}%` }} transition={{ delay: 0.15 + i * 0.05, type: "spring", stiffness: 220, damping: 26 }} />
               </div>
               <span className="text-[9px] font-semibold text-faint">{LABELS[p][i]}</span>
             </div>

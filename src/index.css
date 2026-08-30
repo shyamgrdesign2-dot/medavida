@@ -82,6 +82,8 @@
   --acc-slate: #9aa0aa;
   /* brand mark gradient — theme-aware so the teal Z stays visible on white */
   --mark-1: #5cffef; --mark-2: #23ffed; --mark-3: #0fd8c8;
+  /* muted "out"/comparison series in charts — visible on both grounds */
+  --chart-out: #2e333b;
 }
 
 /* the light palette — refined: neutral page ground, white cards, soft shadows,
@@ -102,6 +104,7 @@
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
     --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
     --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
+    --chart-out: #cdd4de;
   }
 }
 :root[data-theme="light"] {
@@ -119,6 +122,7 @@
   --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
   --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
     --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
+    --chart-out: #cdd4de;
 }
 
 /* kill the transition smear when the theme flips */
