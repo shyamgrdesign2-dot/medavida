@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, Check, Delete, ChevronDown } from "lucide-react";
+import { motion } from "motion/react";
+import { ChevronLeft, Check, Delete, ChevronDown, Wallet } from "lucide-react";
 import { PatternAvatar, Icon } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
+import { BottomSheet } from "@/components/BottomSheet";
 import { money } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
 
@@ -26,11 +27,25 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
   const targets = mode === "move" || mode === "add" ? ACCOUNTS : RECIPIENTS;
   const [target, setTarget] = useState(0);
   const [amount, setAmount] = useState("0");
-  const [from] = useState(ACCOUNTS[0]);
+  // "add" is a top-up from an external bank, so it has no internal source account
+  const [fromIdx, setFromIdx] = useState(mode === "move" ? 1 : 0);
+  const [pickFrom, setPickFrom] = useState(false);
   const [done, setDone] = useState(false);
 
   const title = mode === "send" ? "Send money" : mode === "add" ? "Add money" : "Move money";
   const val = parseFloat(amount) || 0;
+  const from = ACCOUNTS[fromIdx];
+  const hasSource = mode !== "add";
+  // in "move" mode the funding account can't be the destination account
+  const sameAccount = mode === "move" && targets[target]?.id === from.id;
+  const insufficient = hasSource && val > from.bal;
+  const blocked = val <= 0 || (hasSource && (insufficient || sameAccount));
+
+  const chooseFrom = (i: number) => {
+    haptic("tap");
+    setFromIdx(i);
+    setPickFrom(false);
+  };
 
   const press = (k: string) => {
     haptic("tap");
@@ -42,7 +57,7 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
       return a + k;
     });
   };
-  const submit = () => { if (val <= 0) return; haptic("success"); setDone(true); setTimeout(onBack, 1600); };
+  const submit = () => { if (blocked) return; haptic("success"); setDone(true); setTimeout(onBack, 1600); };
 
   if (done) {
     return (
@@ -51,7 +66,7 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
           <Check size={40} strokeWidth={3} />
         </motion.div>
         <div className="mt-5 font-display text-[24px] font-semibold text-ink">{money(val)} {mode === "add" ? "added" : mode === "move" ? "moved" : "sent"}</div>
-        <div className="mt-1 text-[13px] text-dim">{mode === "send" ? "to" : "into"} {(targets[target] as any).name} · instantly</div>
+        <div className="mt-1 text-[13px] text-dim">{hasSource ? `from ${from.name} ` : ""}{mode === "send" ? "to" : "into"} {(targets[target] as any).name} · instantly</div>
       </div>
     );
   }
@@ -84,9 +99,21 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
       <div className="flex flex-1 flex-col items-center justify-center">
         <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">{mode === "add" ? "Add to" : "To"} {(targets[target] as any).name}</div>
         <div className="tnum mt-2 font-display text-[52px] font-semibold leading-none text-ink">{money(val).replace(".00", "")}</div>
-        <button className="mt-3 flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-[12px] font-semibold text-dim">
-          From {from.name} <ChevronDown size={13} strokeWidth={2.4} />
-        </button>
+        {hasSource && (
+          <>
+            <motion.button
+              onClick={() => { haptic("tap"); setPickFrom(true); }}
+              whileTap={{ scale: 0.96 }}
+              aria-label="Change funding account"
+              className={"mt-3 flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-colors " + (insufficient || sameAccount ? "border-stop/40 bg-stop/8 text-stop" : "border-border bg-surface text-dim")}
+            >
+              From {from.name} · {money(from.bal).replace(".00", "")} <ChevronDown size={13} strokeWidth={2.4} />
+            </motion.button>
+            <div className="mt-1.5 h-4 text-[11px] font-semibold text-stop">
+              {sameAccount ? "Pick a different source account" : insufficient ? "Not enough in this account" : ""}
+            </div>
+          </>
+        )}
       </div>
 
       {/* keypad */}
@@ -99,10 +126,40 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
       </div>
 
       <div className="flex-none px-6 pb-8 pt-2">
-        <NeoPopButton onClick={submit} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
-          {mode === "add" ? "Add" : "Send"} {val > 0 ? money(val).replace(".00", "") : ""}
-        </NeoPopButton>
+        <div className={"transition-opacity " + (blocked ? "opacity-45" : "opacity-100")}>
+          <NeoPopButton onClick={submit} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
+            {mode === "add" ? "Add" : mode === "move" ? "Move" : "Send"} {val > 0 ? money(val).replace(".00", "") : ""}
+          </NeoPopButton>
+        </div>
       </div>
+
+      {/* funding-account picker */}
+      <BottomSheet open={pickFrom} onClose={() => setPickFrom(false)} title="Pay from">
+        <div className="space-y-2">
+          {ACCOUNTS.map((a, i) => {
+            const on = i === fromIdx;
+            const isDest = mode === "move" && targets[target]?.id === a.id;
+            const low = val > 0 && val > a.bal;
+            return (
+              <button
+                key={a.id}
+                onClick={() => { if (!isDest) chooseFrom(i); }}
+                disabled={isDest}
+                className={"flex w-full items-center gap-3 rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface") + (isDest ? " opacity-40" : "")}
+              >
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-surface-2 text-teal-2"><Wallet size={18} strokeWidth={2.2} /></span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[14px] font-semibold text-ink">{a.name}</span>
+                  <span className={"block text-[11.5px] " + (low ? "text-stop" : "text-dim")}>
+                    {money(a.bal).replace(".00", "")} available{isDest ? " · destination" : low ? " · too low" : ""}
+                  </span>
+                </span>
+                {on && <Check size={18} strokeWidth={3} className="flex-none text-teal-2" />}
+              </button>
+            );
+          })}
+        </div>
+      </BottomSheet>
     </div>
   );
 }
