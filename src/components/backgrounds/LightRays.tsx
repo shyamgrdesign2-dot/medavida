@@ -38,6 +38,7 @@ export function LightRays({
   followMouse = true,
   mouseInfluence = 0.1,
   className = "",
+  style,
 }: {
   raysOrigin?: Origin;
   raysColor?: string;
@@ -48,6 +49,7 @@ export function LightRays({
   followMouse?: boolean;
   mouseInfluence?: number;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
@@ -178,5 +180,5 @@ void main(){vec4 color;mainImage(color, gl_FragCoord.xy);gl_FragColor = color;}`
     };
   }, [raysOrigin, raysColor, raysSpeed, lightSpread, rayLength, saturation, followMouse, mouseInfluence]);
 
-  return <div ref={containerRef} className={"pointer-events-none absolute inset-0 overflow-hidden " + className} />;
+  return <div ref={containerRef} style={style} className={"pointer-events-none absolute inset-0 overflow-hidden " + className} />;
 }

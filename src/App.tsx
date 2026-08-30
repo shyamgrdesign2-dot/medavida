@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { startGyro } from "./lib/gyro";
 import { PhoneFrame } from "./components/PhoneFrame";
 import { Splash } from "./screens/Splash";
 import { Onboarding } from "./screens/Onboarding";
@@ -17,6 +18,14 @@ const hold = params.get("hold") === "1";
 
 export function App() {
   const [screen, setScreen] = useState<Screen>(initial);
+
+  // Request motion access on the very first tap anywhere (iOS needs a gesture),
+  // then the shared gyro stream drives every card + the logo mark.
+  useEffect(() => {
+    const kick = () => { void startGyro(); };
+    window.addEventListener("pointerdown", kick, { once: true });
+    return () => window.removeEventListener("pointerdown", kick);
+  }, []);
 
   return (
     <PhoneFrame>

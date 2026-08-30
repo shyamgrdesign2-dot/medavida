@@ -356,7 +356,7 @@ export function Onboarding({ onStart, onSignin }: { onStart: () => void; onSigni
 
       {/* brand row */}
       <div className="relative z-20 flex items-center gap-2 px-5 pt-3">
-        <ZevaMark size={20} tone="teal" />
+        <ZevaMark size={20} tone="teal" live />
         <span className="font-display text-[15px] font-semibold lowercase tracking-tight text-ink">{APP_NAME}</span>
       </div>
 

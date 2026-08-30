@@ -55,7 +55,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden">
       <AnimatedBackground variant="css" intensity={0.5} />
-      <LightRays raysOrigin="top-center" raysColor="#23FFED" raysSpeed={0.7} lightSpread={0.9} rayLength={1.9} followMouse={false} className="opacity-70" />
+      <LightRays raysOrigin="top-center" raysColor="#23FFED" raysSpeed={0.7} lightSpread={0.9} rayLength={1.9} followMouse={false} style={{ opacity: "var(--rays-op, 0.7)" }} />
 
       <div className="relative z-10 flex flex-none items-center gap-2.5 px-6 pt-5">
         {step === "otp" && (
@@ -63,7 +63,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
             <ArrowLeft2 size={18} variant="Linear" color="currentColor" />
           </button>
         )}
-        <ZevaMark size={30} tone="teal" />
+        <ZevaMark size={30} tone="teal" live />
         <span className="font-display text-[21px] font-semibold lowercase tracking-tight text-ink">{APP_NAME}</span>
       </div>
 

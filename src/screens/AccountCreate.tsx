@@ -60,7 +60,7 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
             </div>
           ))}
         </div>
-        <ZevaMark size={20} tone="teal" />
+        <ZevaMark size={20} tone="teal" live />
       </div>
 
       {/* step content */}

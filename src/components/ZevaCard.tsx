@@ -8,6 +8,7 @@ import { money } from "@/lib/data";
 import { ZevaMark } from "./ZevaMark";
 import { APP_NAME } from "@/lib/brand";
 import { haptic } from "@/lib/haptics";
+import { subscribeGyro, startGyro } from "@/lib/gyro";
 
 const RADIUS = 10;
 
@@ -83,14 +84,10 @@ function EmvChip() {
   );
 }
 
-// iOS needs an explicit permission grant (on a user gesture) for gyroscope.
-type DOE = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
-
 export function ZevaCard({ card, interactive = true }: { card: ZCard; interactive?: boolean }) {
   const v = VARIANT[card.variant];
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const [gyroReady, setGyroReady] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   const px = useMotionValue(0);
@@ -113,40 +110,20 @@ export function ZevaCard({ card, interactive = true }: { card: ZCard; interactiv
   }
   const reset = () => { px.set(0); py.set(0); };
 
-  function onOrient(e: DeviceOrientationEvent) {
-    const g = (e.gamma ?? 0) / 40;
-    const b = ((e.beta ?? 0) - 45) / 40;
-    px.set(Math.max(-0.5, Math.min(0.5, g)));
-    py.set(Math.max(-0.5, Math.min(0.5, b)));
-  }
-  async function enableGyro() {
-    if (gyroReady || reduce) return;
-    const D = window.DeviceOrientationEvent as DOE | undefined;
-    if (D && typeof D.requestPermission === "function") {
-      try { if ((await D.requestPermission()) !== "granted") return; } catch { return; }
-    }
-    window.addEventListener("deviceorientation", onOrient);
-    setGyroReady(true);
-  }
-
-  // auto-attach where no permission is required (Android/desktop sensors)
+  // device tilt comes from the shared gyro stream (permission is requested app-
+  // wide on the first tap); the card and the logo mark move from the same source.
   useEffect(() => {
     if (!interactive || reduce) return;
-    const D = window.DeviceOrientationEvent as DOE | undefined;
-    if (D && typeof D.requestPermission === "function") return; // iOS → wait for tap
-    window.addEventListener("deviceorientation", onOrient);
-    setGyroReady(true);
-    return () => window.removeEventListener("deviceorientation", onOrient);
+    return subscribeGyro((g) => { px.set(g.x); py.set(g.y); });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interactive, reduce]);
-  useEffect(() => () => window.removeEventListener("deviceorientation", onOrient), []); // cleanup gyro from tap-enable
 
   return (
     <motion.div
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={reset}
-      onPointerDown={enableGyro}
+      onPointerDown={() => void startGyro()}
       className="relative w-full select-none overflow-hidden"
       style={{
         aspectRatio: "1.586 / 1", borderRadius: RADIUS, transformPerspective: 900,
