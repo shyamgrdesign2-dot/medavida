@@ -4,9 +4,10 @@ import { PhoneFrame } from "./components/PhoneFrame";
 import { Splash } from "./screens/Splash";
 import { Onboarding } from "./screens/Onboarding";
 import { SignIn } from "./screens/SignIn";
+import { AccountCreate } from "./screens/AccountCreate";
 import { AppShell } from "./app/AppShell";
 
-type Screen = "splash" | "onboarding" | "signin" | "app";
+type Screen = "splash" | "onboarding" | "signin" | "account" | "app";
 
 // Dev harness: ?screen=onboarding jumps straight there; ?hold=1 freezes the
 // splash so it can be inspected. Keeps verification deterministic.
@@ -27,12 +28,17 @@ export function App() {
         )}
         {screen === "onboarding" && (
           <motion.div key="onboarding" className="h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-            <Onboarding onStart={() => setScreen("signin")} onSignin={() => setScreen("signin")} />
+            <Onboarding onStart={() => setScreen("account")} onSignin={() => setScreen("signin")} />
           </motion.div>
         )}
         {screen === "signin" && (
           <motion.div key="signin" className="h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-            <SignIn onDone={() => setScreen("app")} onCreate={() => setScreen("app")} />
+            <SignIn onDone={() => setScreen("app")} onCreate={() => setScreen("account")} />
+          </motion.div>
+        )}
+        {screen === "account" && (
+          <motion.div key="account" className="h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+            <AccountCreate onDone={() => setScreen("app")} onSignin={() => setScreen("signin")} />
           </motion.div>
         )}
         {screen === "app" && (

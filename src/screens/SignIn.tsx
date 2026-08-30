@@ -16,7 +16,7 @@ const fmt = (d: string) => {
   return `(${n.slice(0, 3)}) ${n.slice(3, 6)}-${n.slice(6)}`;
 };
 
-export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }) {
+export function SignIn({ onDone, onCreate }: { onDone: () => void; onCreate?: () => void }) {
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -129,9 +129,16 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
           transition={{ type: "spring", stiffness: 400, damping: 40 }}
         >
           {step === "phone" ? (
-            <NeoPopButton onClick={() => { if (digits.length === 10) { haptic("tap"); setStep("otp"); } }} className="w-full" faceClassName={"px-5 py-4 text-[15px] font-medium " + (digits.length === 10 ? "" : "opacity-50")}>
-              Send code <ArrowRight2 size={18} variant="Linear" color="currentColor" />
-            </NeoPopButton>
+            <>
+              <NeoPopButton onClick={() => { if (digits.length === 10) { haptic("tap"); setStep("otp"); } }} className="w-full" faceClassName={"px-5 py-4 text-[15px] font-medium " + (digits.length === 10 ? "" : "opacity-50")}>
+                Send code <ArrowRight2 size={18} variant="Linear" color="currentColor" />
+              </NeoPopButton>
+              {onCreate && (
+                <button onClick={() => { haptic("tap"); onCreate(); }} className="mt-3.5 w-full text-center text-[12.5px] text-dim">
+                  New to Zeva? <span className="font-semibold text-teal-2">Create an account</span>
+                </button>
+              )}
+            </>
           ) : (
             <div className="text-center text-[11px] text-faint">Enter the code to continue</div>
           )}
