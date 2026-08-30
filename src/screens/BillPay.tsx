@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Add, TickCircle, ArrowRight2 } from "iconsax-react";
+import { Add, TickCircle, ArrowRight2, ArrowLeft2 } from "iconsax-react";
 import { Icon, Chip, SectionTitle } from "@/components/ui";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { BottomSheet } from "@/components/BottomSheet";
@@ -16,7 +16,7 @@ const chipFor = (s: BillStatus) =>
   s === "paid" ? <Chip tone="pos"><TickCircle size={10} variant="Bulk" color="currentColor" />Paid</Chip> :
   <Chip tone="neutral">Scheduled</Chip>;
 
-export function BillPay() {
+export function BillPay({ onBack }: { onBack?: () => void } = {}) {
   const [paid, setPaid] = useState<Record<string, boolean>>({});
   const [sel, setSel] = useState<Bill | null>(null);
   const [cardIdx, setCardIdx] = useState(0);
@@ -39,9 +39,14 @@ export function BillPay() {
     <div className="no-scrollbar h-full overflow-y-auto px-5 pb-28 pt-4">
       {/* header + total due */}
       <div className="flex items-start justify-between">
-        <div>
-          <div className="font-display text-[22px] font-semibold tracking-tight text-ink">Bill Pay</div>
-          <div className="text-[12px] text-dim">{bills.filter((b) => b.status !== "paid").length} bills this cycle</div>
+        <div className="flex items-center gap-3">
+          {onBack && (
+            <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
+          )}
+          <div>
+            <div className="font-display text-[22px] font-semibold tracking-tight text-ink">Bill Pay</div>
+            <div className="text-[12px] text-dim">{bills.filter((b) => b.status !== "paid").length} bills this cycle</div>
+          </div>
         </div>
         <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => openNew()}><Add size={15} variant="Linear" color="currentColor" /> Add</NeoPopButton>
       </div>

@@ -21,16 +21,16 @@ import { Receipts } from "@/screens/Receipts";
 import { AccountingExport } from "@/screens/AccountingExport";
 import { Vendors1099 } from "@/screens/Vendors1099";
 
-type Overlay = null | "transactions" | "send" | "add" | "move" | "collect" | "approvals" | "trust" | "settlement" | "memberships" | "invoices" | "staff" | "reserves" | "receipts" | "accounting" | "vendors";
+type Overlay = null | "bills" | "send" | "add" | "move" | "collect" | "approvals" | "trust" | "settlement" | "memberships" | "invoices" | "staff" | "reserves" | "receipts" | "accounting" | "vendors";
 
 export function AppShell() {
   const [tab, setTab] = useState<Tab>("home");
   const [overlay, setOverlay] = useState<Overlay>(null);
 
-  const onSeeAll = useCallback(() => setOverlay("transactions"), []);
+  const onSeeAll = useCallback(() => setTab("activity"), []);
   const onQuick = useCallback((k: string) => {
     if (k === "cards") setTab("cards");
-    else if (k === "bills") setTab("pay");
+    else if (k === "bills") setOverlay("bills");
     else if (k === "insights") setTab("insights");
     else if (k === "more") setTab("more");
     else if (k === "send") setOverlay("send");
@@ -61,7 +61,7 @@ export function AppShell() {
         <div key={tab} className="h-full" style={{ transform: "translateZ(0)" }}>
           {tab === "home" && <Home onSeeAll={onSeeAll} onOpenTxn={onSeeAll} onQuick={onQuick} />}
           {tab === "cards" && <Cards />}
-          {tab === "pay" && <BillPay />}
+          {tab === "activity" && <Transactions />}
           {tab === "insights" && <Insights />}
           {tab === "more" && <More onOpen={onQuick} />}
         </div>
@@ -79,7 +79,7 @@ export function AppShell() {
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 360, damping: 40 }}
           >
-            {overlay === "transactions" && <Transactions onBack={() => setOverlay(null)} />}
+            {overlay === "bills" && <BillPay onBack={() => setOverlay(null)} />}
             {overlay === "collect" && <CollectPayment onBack={() => setOverlay(null)} />}
             {overlay === "approvals" && <Approvals onBack={() => setOverlay(null)} />}
             {overlay === "trust" && <TrustSecurity onBack={() => setOverlay(null)} />}

@@ -3,13 +3,13 @@ import { Home2, Cards as CardsIcon, ArrowSwapHorizontal, Chart21, Category, type
 import { haptic } from "@/lib/haptics";
 import { useAnySheetOpen } from "@/lib/sheetStore";
 
-export type Tab = "home" | "cards" | "pay" | "insights" | "more";
+export type Tab = "home" | "cards" | "activity" | "insights" | "more";
 
 // iconsax duotone set — Bulk (filled) when active, Linear (outline) when not.
 const TABS: { id: Tab; label: string; icon: IconsaxIcon }[] = [
   { id: "home", label: "Home", icon: Home2 },
   { id: "cards", label: "Cards", icon: CardsIcon },
-  { id: "pay", label: "Pay", icon: ArrowSwapHorizontal },
+  { id: "activity", label: "Activity", icon: ArrowSwapHorizontal },
   { id: "insights", label: "Insights", icon: Chart21 },
   { id: "more", label: "More", icon: Category },
 ];
