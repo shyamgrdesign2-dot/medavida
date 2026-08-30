@@ -131,7 +131,7 @@ export function PayNewBill({ open, onClose, onPaid, startCategory }: { open: boo
         {/* success */}
         {step === "done" && cat && (
           <motion.div key="done" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-6">
-            <motion.div className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.5 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 380, damping: 20 }}><Check size={32} strokeWidth={3} /></motion.div>
+            <motion.div className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.5 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 380, damping: 34 }}><Check size={32} strokeWidth={3} /></motion.div>
             <div className="mt-4 font-display text-[20px] font-semibold text-ink">Paid {money(cat.due)}</div>
             <div className="mt-1 text-[12.5px] text-dim">to {biller} · settled instantly</div>
           </motion.div>

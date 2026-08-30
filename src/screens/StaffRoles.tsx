@@ -1,4 +1,6 @@
-import { motion, type Variants } from "motion/react";
+import { useState } from "react";
+import { motion } from "motion/react";
+import type { Variants } from "motion/react";
 import { ChevronLeft, UserPlus, CreditCard, Check } from "lucide-react";
 import { Chip, PatternAvatar } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
@@ -27,6 +29,7 @@ const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0
 const item: Variants = { hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 32 } } };
 
 export function StaffRoles({ onBack }: { onBack: () => void }) {
+  const [toast, setToast] = useState<string | null>(null);
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
@@ -74,10 +77,16 @@ export function StaffRoles({ onBack }: { onBack: () => void }) {
       </motion.div>
 
       <div className="flex-none px-5 pb-8 pt-2">
-        <NeoPopButton onClick={() => haptic("tap")} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
+        <NeoPopButton onClick={() => { haptic("success"); setToast("Invite link copied — share with your team"); setTimeout(() => setToast(null), 1900); }} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
           <UserPlus size={17} strokeWidth={2.4} /> Invite a team member
         </NeoPopButton>
       </div>
+
+      {toast && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pointer-events-none fixed inset-x-0 bottom-24 z-50 flex justify-center px-6">
+          <div className="rounded-full border border-border bg-surface px-4 py-2.5 text-center text-[12.5px] font-semibold text-ink" style={{ boxShadow: "var(--shadow-card)" }}>{toast}</div>
+        </motion.div>
+      )}
     </div>
   );
 }

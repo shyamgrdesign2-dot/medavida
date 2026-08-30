@@ -1,4 +1,6 @@
-import { motion, type Variants } from "motion/react";
+import { useState } from "react";
+import { motion } from "motion/react";
+import type { Variants } from "motion/react";
 import { ChevronLeft, Plus, TrendingUp, RefreshCw, AlertTriangle, ChevronRight, Repeat } from "lucide-react";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { money, money0 } from "@/lib/data";
@@ -16,6 +18,8 @@ const MRR = PLANS.reduce((s, p) => s + p.price * p.members, 0);
 const MEMBERS = PLANS.reduce((s, p) => s + p.members, 0);
 
 export function Memberships({ onBack }: { onBack: () => void }) {
+  const [toast, setToast] = useState<string | null>(null);
+  const flash = (m: string) => { haptic("tap"); setToast(m); setTimeout(() => setToast(null), 1900); };
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center justify-between px-5 pt-4">
@@ -70,10 +74,16 @@ export function Memberships({ onBack }: { onBack: () => void }) {
       </motion.div>
 
       <div className="flex-none px-5 pb-8 pt-2">
-        <NeoPopButton onClick={() => haptic("tap")} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
+        <NeoPopButton onClick={() => flash("New plan — set price & enroll members")} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
           <Plus size={17} strokeWidth={2.4} /> New plan
         </NeoPopButton>
       </div>
+
+      {toast && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pointer-events-none fixed inset-x-0 bottom-24 z-50 flex justify-center px-6">
+          <div className="rounded-full border border-border bg-surface px-4 py-2.5 text-center text-[12.5px] font-semibold text-ink" style={{ boxShadow: "var(--shadow-card)" }}>{toast}</div>
+        </motion.div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, type Variants } from "motion/react";
-import { Bell, ChevronUp, CalendarClock, Zap, TrendingUp, Activity, BadgeCheck, type LucideIcon } from "lucide-react";
-import { Send2, Receipt2, Cards as CardsIcon, MoneyRecive } from "iconsax-react";
+import { Bell, ChevronUp, BadgeCheck } from "lucide-react";
+import { Send2, Receipt2, Cards as CardsIcon, MoneyRecive, Flash, Health, Calendar, Chart2, type Icon as IconsaxIcon } from "iconsax-react";
 import { CardWallet } from "@/components/CardWallet";
 import { Squircle } from "@/lib/squircle";
 import { QuickAction, SectionTitle, TxnRow, Chip, PatternAvatar } from "@/components/ui";
@@ -12,18 +12,18 @@ const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0
 const item: Variants = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 34 } } };
 
 // real product signals — clean gradient-tint cards, each opens a destination
-const HIGHLIGHTS: { icon: LucideIcon; tint: string; title: string; sub: string; go: string }[] = [
-  { icon: Zap, tint: "#2fd07a", title: "Instant payout", sub: "128 settled today", go: "settlement" },
-  { icon: Activity, tint: "#23ffed", title: "GLP-1 +14%", sub: "74 members", go: "memberships" },
-  { icon: CalendarClock, tint: "#f7b955", title: "Rent · $6,200", sub: "Due Sep 1", go: "bills" },
-  { icon: TrendingUp, tint: "#6ea8ff", title: "Net +$11,628", sub: "This month", go: "insights" },
+const HIGHLIGHTS: { icon: IconsaxIcon; tint: string; title: string; sub: string; go: string }[] = [
+  { icon: Flash, tint: "#2fd07a", title: "Instant payout", sub: "128 settled today", go: "settlement" },
+  { icon: Health, tint: "#23ffed", title: "GLP-1 +14%", sub: "74 members", go: "memberships" },
+  { icon: Calendar, tint: "#f7b955", title: "Rent · $6,200", sub: "Due Sep 1", go: "bills" },
+  { icon: Chart2, tint: "#6ea8ff", title: "Net +$11,628", sub: "This month", go: "insights" },
 ];
 
 /** Clean gradient-tint highlight card (no coupon notches). */
-function Highlight({ icon: Icon, tint, title, sub, onClick }: { icon: LucideIcon; tint: string; title: string; sub: string; onClick?: () => void }) {
+function Highlight({ icon: Icon, tint, title, sub, onClick }: { icon: IconsaxIcon; tint: string; title: string; sub: string; onClick?: () => void }) {
   return (
     <motion.button
-      whileTap={{ scale: 0.97 }}
+      whileTap={{ scale: 0.96 }}
       onClick={() => { haptic("tap"); onClick?.(); }}
       className="flex w-[172px] flex-none items-center gap-3 rounded-[14px] p-3 text-left"
       style={{
@@ -32,7 +32,7 @@ function Highlight({ icon: Icon, tint, title, sub, onClick }: { icon: LucideIcon
         boxShadow: "var(--shadow-card)",
       }}
     >
-      <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[11px]" style={{ background: `color-mix(in oklab, ${tint} 24%, transparent)`, color: tint }}><Icon size={17} strokeWidth={2.3} /></span>
+      <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[11px]" style={{ background: `color-mix(in oklab, ${tint} 24%, transparent)` }}><Icon size={18} variant="Bulk" color={tint} /></span>
       <span className="min-w-0">
         <span className="block truncate text-[12.5px] font-bold text-ink">{title}</span>
         <span className="block truncate text-[10.5px] text-dim">{sub}</span>
@@ -104,7 +104,7 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
             {TXNS.slice(0, 8).map((t, i) => (
               <div key={t.id} className={i > 0 ? "border-t border-border-soft" : ""}>
                 <TxnRow
-                  iconName={t.icon}
+                  category={t.category}
                   title={t.title}
                   sub={t.sub}
                   amount={money(t.amount)}

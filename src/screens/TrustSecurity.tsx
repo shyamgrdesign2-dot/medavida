@@ -6,7 +6,7 @@ const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0
 const item: Variants = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 32 } } };
 
 const SECTIONS = [
-  { icon: Landmark, title: "FDIC-insured deposits", body: "Zeva is a financial technology company, not a bank. Banking services are provided by Meridian Trust Bank, N.A., Member FDIC. Your clinic's balances are held at the sponsor bank and eligible for pass-through FDIC insurance up to $250,000." },
+  { icon: Landmark, title: "FDIC-insured deposits", body: "Zeva is a financial technology company, not a bank. Banking services are provided by Anchor Trust Bank, N.A., Member FDIC. Your clinic's balances are held at the sponsor bank and eligible for pass-through FDIC insurance up to $250,000." },
   { icon: Lock, title: "Card & payment security", body: "Patient cards on file are tokenized and stored to PCI-DSS Level 1 standards — Zeva never holds raw card numbers. All traffic is protected with 256-bit TLS encryption, at rest and in transit." },
   { icon: HeartPulse, title: "HIPAA-aligned handling", body: "Because payment memos reference patient IDs and medications, protected health information is encrypted, access-logged, and handled under a Business Associate Agreement (BAA) available to your practice." },
   { icon: ScanFace, title: "Fraud & access controls", body: "Real-time fraud monitoring auto-freezes a card on suspicious activity. Face ID / PIN unlock, per-user roles, and payment approvals keep every dollar under sign-off." },
@@ -55,7 +55,7 @@ export function TrustSecurity({ onBack }: { onBack: () => void }) {
         </div>
 
         <motion.div variants={item} className="mt-4 text-center text-[10.5px] leading-relaxed text-faint">
-          Deposits held at Meridian Trust Bank, N.A., Member FDIC. Zeva is a technology company and not a bank. Card issuance and processing by MetaPay. This is a prototype for demonstration.
+          Deposits held at Anchor Trust Bank, N.A., Member FDIC. Zeva is a technology company and not a bank. Card issuance and processing by MetaPay. This is a prototype for demonstration.
         </motion.div>
       </motion.div>
     </div>

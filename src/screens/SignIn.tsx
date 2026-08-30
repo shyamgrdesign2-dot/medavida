@@ -91,7 +91,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
             <motion.div key="otp" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.28 }}>
               {verifying ? (
                 <div className="flex flex-col items-center">
-                  <motion.div className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 380, damping: 20 }}>
+                  <motion.div className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 380, damping: 34 }}>
                     <Check size={32} strokeWidth={3} />
                   </motion.div>
                   <div className="mt-4 font-display text-[20px] font-semibold text-ink">Verified</div>

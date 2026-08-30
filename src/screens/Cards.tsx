@@ -35,6 +35,9 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
   const [sheet, setSheet] = useState<Sheet>(null);
   const [issueName, setIssueName] = useState("");
   const [issued, setIssued] = useState(false);
+  const [autoFreeze, setAutoFreeze] = useState(true);
+  const [toast, setToast] = useState<string | null>(null);
+  const flash = (m: string) => { haptic("success"); setToast(m); setTimeout(() => setToast(null), 1800); };
   const scroller = useRef<HTMLDivElement>(null);
 
   const onScroll = () => {
@@ -85,7 +88,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
       <div className="mx-5 mt-5 grid grid-cols-4 gap-2">
         <CardAction icon={Snowflake} label={isFrozen ? "Unfreeze" : "Freeze"} active={isFrozen} onClick={toggleFreeze} />
         <CardAction icon={ReceiptText} label="Statements" onClick={() => { haptic("tap"); setSheet("statements"); }} />
-        <CardAction icon={Wallet} label="Add to Pay" onClick={() => haptic("tap")} />
+        <CardAction icon={Wallet} label="Add to Pay" onClick={() => flash("Added to Apple Wallet")} />
         <CardAction icon={ShieldAlert} label="Dispute" onClick={() => { haptic("tap"); setSheet("dispute"); }} />
       </div>
 
@@ -124,7 +127,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
         <div className="border-t border-border-soft" />
         <ControlRow title="Spend controls" sub="Limits, merchant & category rules" onClick={() => haptic("tap")} trailing={<Settings2 size={17} strokeWidth={2} className="text-dim" />} />
         <div className="border-t border-border-soft" />
-        <ControlRow title="Freeze on suspicious activity" sub="Auto-freeze if fraud detected" trailing={<Toggle on onChange={() => {}} />} />
+        <ControlRow title="Freeze on suspicious activity" sub="Auto-freeze if fraud detected" trailing={<Toggle on={autoFreeze} onChange={setAutoFreeze} />} />
       </div>
 
       {/* statements & support */}
@@ -217,6 +220,12 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
           </button>
         </div>
       </BottomSheet>
+
+      {toast && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="pointer-events-none fixed inset-x-0 bottom-24 z-50 flex justify-center px-6">
+          <div className="rounded-full border border-border bg-surface px-4 py-2.5 text-[12.5px] font-semibold text-ink" style={{ boxShadow: "var(--shadow-card)" }}>{toast}</div>
+        </motion.div>
+      )}
     </div>
   );
 }

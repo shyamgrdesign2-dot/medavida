@@ -61,7 +61,7 @@ function FeatureCard({ icon: Icon, tint, title, onClick }: { icon: typeof FileTe
   return (
     <motion.button
       variants={item}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.96 }}
       onClick={() => { haptic("tap"); onClick?.(); }}
       className="flex flex-col items-center gap-2 rounded-[15px] px-2 py-3.5"
       style={{

@@ -75,12 +75,12 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
       </div>
 
       {/* list */}
-      <div className="mx-5 mt-2 rounded-[10px] border border-border bg-surface px-3.5">
+      <div className="mx-5 mt-2 rounded-[12px] border border-border bg-surface px-3.5">
         {list.length === 0 && <div className="py-10 text-center text-[13px] text-dim">No transactions match.</div>}
         {list.map((t, i) => (
           <div key={t.id} className={i > 0 ? "border-t border-border-soft" : ""}>
             <TxnRow
-              iconName={t.icon}
+              category={t.category}
               title={t.title}
               sub={`${t.sub} · ${t.when}`}
               amount={money(t.amount)}
@@ -115,8 +115,8 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
               )}
             </div>
 
-            <div className="mt-3 divide-y divide-border-soft rounded-[10px] border border-border bg-surface-2 px-4">
-              <Row k="Date" v={`Sep 3, 2026 · ${sel.when}`} />
+            <div className="mt-3 divide-y divide-border-soft rounded-[12px] border border-border bg-surface-2 px-4">
+              <Row k="Date" v={/AM|PM/.test(sel.when) ? `Aug 30, 2026 · ${sel.when}` : sel.when === "Yesterday" ? "Aug 29, 2026" : `${sel.when}, 2026`} />
               {sel.category === "patient" && <Row k="Patient ID" v={sel.title.replace("Patient · ", "")} mono />}
               {sel.category === "patient" && <Row k="Medication" v={sel.sub} />}
               <Row k="Category" v={cap(sel.category)} />

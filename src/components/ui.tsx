@@ -5,7 +5,18 @@ import {
   HeartPulse, Pill, Zap, Users, Truck, Building2, Wallet, Send, FileText, CreditCard, Wifi, Droplet,
   ArrowDownLeft, ArrowUpRight, Plus, ChevronRight, type LucideIcon,
 } from "lucide-react";
-import type { Icon as IconsaxIcon } from "iconsax-react";
+import { Health, Box, Profile2User, Flash, Building, Card as CardIcon, MoneyChange, type Icon as IconsaxIcon } from "iconsax-react";
+
+// transaction category → iconsax Bulk icon + accent (varied, not all-green)
+const CAT: Record<string, { Icon: IconsaxIcon; tint: string }> = {
+  patient: { Icon: Health, tint: "#23ffed" },
+  supplier: { Icon: Box, tint: "#6ea8ff" },
+  payroll: { Icon: Profile2User, tint: "#2fd07a" },
+  utility: { Icon: Flash, tint: "#f7b955" },
+  rent: { Icon: Building, tint: "#a78bff" },
+  loan: { Icon: MoneyChange, tint: "#7de0c0" },
+  fee: { Icon: CardIcon, tint: "#9aa0aa" },
+};
 
 // string → icon map (TXNS/data reference icons by name)
 export const ICONS: Record<string, LucideIcon> = {
@@ -136,26 +147,27 @@ export function QuickAction({ icon: I, label, onClick }: { icon: IconsaxIcon; la
   );
 }
 
-/** Transaction / list row. dir controls the +/- coloring. */
-export function TxnRow({ iconName, title, sub, amount, dir, chip, onClick }: {
-  iconName: string; title: string; sub: string; amount: string; dir: "in" | "out"; chip?: ReactNode; onClick?: () => void;
+/** Transaction / list row. Category drives the iconsax Bulk glyph + accent. */
+export function TxnRow({ iconName, category, title, sub, amount, dir, chip, onClick }: {
+  iconName?: string; category?: string; title: string; sub: string; amount: string; dir: "in" | "out"; chip?: ReactNode; onClick?: () => void;
 }) {
+  const c = CAT[category ?? ""] ?? { Icon: CardIcon, tint: dir === "in" ? "#2fd07a" : "#9aa0aa" };
+  void iconName;
   return (
     <motion.button
       onClick={onClick}
       whileTap={{ scale: 0.96 }}
-      className="flex w-full items-center gap-3 py-2.5 text-left"
+      className="flex w-full items-center gap-3 py-3 text-left"
     >
-      <span className={"flex h-10 w-10 flex-none items-center justify-center rounded-[9px] " + (dir === "in" ? "bg-go/12 text-go" : "bg-surface-2 text-ink")}>
-        <Icon name={iconName} size={17} />
+      <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full" style={{ background: `color-mix(in oklab, ${c.tint} 15%, transparent)` }}>
+        <c.Icon size={19} variant="Bulk" color={c.tint} />
       </span>
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[13.5px] font-semibold text-ink">{title}</span>
         <span className="block truncate text-[11.5px] text-dim">{sub}</span>
       </span>
       <span className="flex flex-none flex-col items-end gap-1">
-        <span className={"tnum flex items-center gap-1 text-[13.5px] font-bold " + (dir === "in" ? "text-go" : "text-ink")}>
-          {dir === "in" ? <ArrowDownLeft size={12} strokeWidth={2.6} /> : <ArrowUpRight size={12} strokeWidth={2.6} className="text-dim" />}
+        <span className={"tnum text-[14px] font-bold " + (dir === "in" ? "text-go" : "text-ink")}>
           {dir === "in" ? "+" : "−"}{amount}
         </span>
         {chip}

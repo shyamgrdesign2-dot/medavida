@@ -72,7 +72,7 @@ export function CardWallet({ width = 320, onCardTap }: { width?: number; onCardT
               dragConstraints={{ top: 0, bottom: 0 }}
               dragElastic={0.5}
               dragSnapToOrigin
-              onDragEnd={(_, info) => { if (info.offset.y < -46 || info.velocity.y < -400) cycle(); }}
+              onDragEnd={(_, info) => { if (info.offset.y < -26 || info.velocity.y < -180) cycle(); }}
               onTap={() => { if (isFront) handleTap(idx); }}
             >
               <div className="pointer-events-none absolute -inset-x-1 bottom-0 top-2 rounded-[12px]" style={{ boxShadow: isFront ? "0 18px 30px -18px rgba(0,0,0,0.8)" : "none" }} />

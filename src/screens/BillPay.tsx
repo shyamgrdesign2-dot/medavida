@@ -47,7 +47,7 @@ export function BillPay() {
       </div>
 
       {/* due summary card with animated gradient */}
-      <div className="relative mt-4 overflow-hidden rounded-[10px] border border-border bg-surface p-4">
+      <div className="relative mt-4 overflow-hidden rounded-[12px] border border-border bg-surface p-4">
         <AnimatedGradient tone="teal" opacity={0.85} />
         <div className="relative text-[10.5px] font-bold uppercase tracking-[0.14em] text-faint">Due this cycle</div>
         <div className="tnum relative mt-1 font-display text-[28px] font-semibold text-ink">{money(totalDue)}</div>
@@ -61,7 +61,7 @@ export function BillPay() {
           <motion.button
             key={c.id}
             onClick={() => openNew(c.id)}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
             className="flex flex-col items-center gap-1.5 rounded-[14px] p-2.5"
             style={{
               background: "linear-gradient(160deg, var(--glass-hi), transparent 46%), var(--glass-bg)",
@@ -78,7 +78,7 @@ export function BillPay() {
 
       {/* bill list */}
       <SectionTitle>Recurring bills</SectionTitle>
-      <div className="rounded-[10px] border border-border bg-surface px-3.5">
+      <div className="rounded-[12px] border border-border bg-surface px-3.5">
         {bills.map((b, i) => (
           <motion.button
             key={b.id}
