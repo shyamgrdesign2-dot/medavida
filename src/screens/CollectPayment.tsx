@@ -33,8 +33,9 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
     setAmount((a) => {
       if (k === "del") return a.length <= 1 ? "0" : a.slice(0, -1);
       if (k === ".") return a.includes(".") ? a : a + ".";
-      if (a === "0") return k;
+      if (a === "0") return k === "." ? "0." : k;
       if (a.includes(".") && a.split(".")[1].length >= 2) return a;
+      if (!a.includes(".") && a.length >= 7) return a; // cap whole-dollar digits so the amount never overflows
       return a + k;
     });
   };
@@ -114,7 +115,9 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
       {/* amount + live fee breakdown */}
       <div className="flex flex-1 flex-col items-center justify-center">
         <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">{link ? <><Link2 size={13} strokeWidth={2.2} />Request via link</> : <><CreditCard size={13} strokeWidth={2.2} />Charge card on file</>}</div>
-        <div className="tnum mt-2 font-display text-[52px] font-semibold leading-none text-ink">{money(val).replace(".00", "")}</div>
+        {(() => { const d = money(val).replace(".00", ""); const fs = d.length > 9 ? 38 : d.length > 7 ? 44 : 52; return (
+          <div className="tnum mt-2 font-display font-semibold leading-none text-ink" style={{ fontSize: fs }}>{d}</div>
+        ); })()}
         {val > 0 && (
           <div className="mt-3 flex items-center gap-1.5 rounded-full bg-teal/10 px-3 py-1.5 text-[11.5px] font-medium text-teal-2">
             <Zap size={13} strokeWidth={2.4} /> Net {money(net).replace(".00", "")} instantly · 2% fee

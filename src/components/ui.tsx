@@ -5,11 +5,11 @@ import {
   HeartPulse, Pill, Zap, Users, Truck, Building2, Wallet, Send, FileText, CreditCard, Wifi, Droplet,
   ArrowDownLeft, ArrowUpRight, Plus, ChevronRight, type LucideIcon,
 } from "lucide-react";
-import { Health, Box, Profile2User, Flash, Building, Card as CardIcon, MoneyChange, type Icon as IconsaxIcon } from "iconsax-react";
+import { Profile, Box, Profile2User, Flash, Building, Card as CardIcon, MoneyChange, type Icon as IconsaxIcon } from "iconsax-react";
 
 // transaction category → iconsax Bulk icon + accent (varied, not all-green)
 const CAT: Record<string, { Icon: IconsaxIcon; tint: string }> = {
-  patient: { Icon: Health, tint: "#23ffed" },
+  patient: { Icon: Profile, tint: "#23ffed" },
   supplier: { Icon: Box, tint: "#6ea8ff" },
   payroll: { Icon: Profile2User, tint: "#2fd07a" },
   utility: { Icon: Flash, tint: "#f7b955" },

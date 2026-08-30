@@ -52,8 +52,9 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
     setAmount((a) => {
       if (k === "del") return a.length <= 1 ? "0" : a.slice(0, -1);
       if (k === ".") return a.includes(".") ? a : a + ".";
-      if (a === "0") return k;
+      if (a === "0") return k === "." ? "0." : k;
       if (a.includes(".") && a.split(".")[1].length >= 2) return a;
+      if (!a.includes(".") && a.length >= 7) return a; // cap whole-dollar digits so the amount never overflows
       return a + k;
     });
   };
@@ -98,7 +99,9 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
       {/* amount */}
       <div className="flex flex-1 flex-col items-center justify-center">
         <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">{mode === "add" ? "Add to" : "To"} {(targets[target] as any).name}</div>
-        <div className="tnum mt-2 font-display text-[52px] font-semibold leading-none text-ink">{money(val).replace(".00", "")}</div>
+        {(() => { const d = money(val).replace(".00", ""); const fs = d.length > 9 ? 38 : d.length > 7 ? 44 : 52; return (
+          <div className="tnum mt-2 font-display font-semibold leading-none text-ink" style={{ fontSize: fs }}>{d}</div>
+        ); })()}
         {hasSource && (
           <>
             <motion.button
