@@ -14,11 +14,11 @@ const RADIUS = 10;
 type PatternKind = "waves" | "hatch" | "rings";
 const VARIANT: Record<
   ZCard["variant"],
-  { base: string; ink: string; line: string; markTone: "teal" | "mono"; pattern: PatternKind; sheen: string; ring: string }
+  { base: string; ink: string; line: string; markTone: "card" | "mono"; pattern: PatternKind; sheen: string; ring: string }
 > = {
   teal: {
     base: "linear-gradient(145deg, #1c2725 0%, #0f1817 38%, #060d0c 68%, #0b1614 100%)",
-    ink: "#eafffb", line: "rgba(35,255,237,0.10)", markTone: "teal", pattern: "waves",
+    ink: "#eafffb", line: "rgba(35,255,237,0.10)", markTone: "card", pattern: "waves",
     sheen: "rgba(120,255,240,0.16)", ring: "rgba(35,255,237,0.18)",
   },
   graphite: {
@@ -28,7 +28,7 @@ const VARIANT: Record<
   },
   credit: {
     base: "linear-gradient(145deg, #103029 0%, #08160f 44%, #04120d 72%, #073f36 122%)",
-    ink: "#eafffb", line: "rgba(35,255,237,0.12)", markTone: "teal", pattern: "rings",
+    ink: "#eafffb", line: "rgba(35,255,237,0.12)", markTone: "card", pattern: "rings",
     sheen: "rgba(120,255,240,0.2)", ring: "rgba(35,255,237,0.24)",
   },
 };

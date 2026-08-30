@@ -5,19 +5,27 @@ import { motion } from "motion/react";
 const TOP = "M28.0327 0L0 0L12.0931 9.90433L0 29.6089L28.0327 0Z";
 const BOTTOM = "M2.85399 30.8438L30.8867 30.8437L18.7936 20.9394L30.8867 1.23489L2.85399 30.8438Z";
 
-/** Static mark — teal metallic fill. Use in headers, cards, chips. */
-export function ZevaMark({ size = 40, tone = "teal" }: { size?: number; tone?: "teal" | "ink" | "mono" }) {
+/**
+ * Static mark. `teal` uses a theme-aware gradient (bright in dark, darker in
+ * light so it stays visible on white). `card` is always the bright metallic
+ * teal — for the always-dark card face. `ink`/`mono` are solid.
+ */
+export function ZevaMark({ size = 40, tone = "teal" }: { size?: number; tone?: "teal" | "card" | "ink" | "mono" }) {
   const id = "zg" + tone;
-  const fill =
-    tone === "ink" ? "var(--color-ink)" : tone === "mono" ? "#ffffff" : `url(#${id})`;
+  const grad = tone === "teal" || tone === "card";
+  const fill = tone === "ink" ? "var(--color-ink)" : tone === "mono" ? "#ffffff" : `url(#${id})`;
+  // card = always bright; teal = theme tokens so it survives a white background
+  const stops = tone === "card"
+    ? ["#5cffef", "#23ffed", "#0fd8c8"]
+    : ["var(--mark-1)", "var(--mark-2)", "var(--mark-3)"];
   return (
     <svg width={size} height={size} viewBox="0 0 31 31" fill="none" aria-label="Zeva">
-      {tone === "teal" && (
+      {grad && (
         <defs>
           <linearGradient id={id} x1="0" y1="0" x2="31" y2="31" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#5cffef" />
-            <stop offset="0.55" stopColor="#23ffed" />
-            <stop offset="1" stopColor="#0fd8c8" />
+            <stop stopColor={stops[0]} />
+            <stop offset="0.55" stopColor={stops[1]} />
+            <stop offset="1" stopColor={stops[2]} />
           </linearGradient>
         </defs>
       )}

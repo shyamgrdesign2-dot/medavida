@@ -80,7 +80,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
                   autoFocus
                   inputMode="tel"
                   value={fmt(phone)}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
                   placeholder="(555) 012-3456"
                   className="w-full bg-transparent font-mono text-[16px] font-medium tracking-wide text-ink placeholder:text-faint focus:outline-none"
                 />

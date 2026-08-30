@@ -80,6 +80,8 @@
   --acc-violet: #a78bff;
   --acc-mint: #7de0c0;
   --acc-slate: #9aa0aa;
+  /* brand mark gradient — theme-aware so the teal Z stays visible on white */
+  --mark-1: #5cffef; --mark-2: #23ffed; --mark-3: #0fd8c8;
 }
 
 /* the light palette — refined: neutral page ground, white cards, soft shadows,
@@ -93,12 +95,13 @@
     --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
     --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
     --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
-    --aurora-1: rgba(8,169,155,0.12); --aurora-2: rgba(70,120,220,0.06);
-    --bg-glow: rgba(12,185,168,0.13); --bg-glow-2: rgba(80,130,225,0.07); --rays-op: 0.16; --waves-op: 0.4;
+    --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
+    --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
     --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
-    --body-mesh: radial-gradient(120% 78% at 50% -12%, rgba(12,185,168,0.10), transparent 56%), radial-gradient(90% 60% at 92% 112%, rgba(80,130,225,0.06), transparent 60%);
+    --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
     --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
+    --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
   }
 }
 :root[data-theme="light"] {
@@ -109,12 +112,13 @@
   --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
   --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
   --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
-  --aurora-1: rgba(8,169,155,0.12); --aurora-2: rgba(70,120,220,0.06);
-  --bg-glow: rgba(12,185,168,0.13); --bg-glow-2: rgba(80,130,225,0.07); --rays-op: 0.16; --waves-op: 0.4;
+  --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
+  --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
   --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
-  --body-mesh: radial-gradient(120% 78% at 50% -12%, rgba(12,185,168,0.10), transparent 56%), radial-gradient(90% 60% at 92% 112%, rgba(80,130,225,0.06), transparent 60%);
+  --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
   --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
   --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
+    --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
 }
 
 /* kill the transition smear when the theme flips */
