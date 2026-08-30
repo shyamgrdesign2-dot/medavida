@@ -41,7 +41,7 @@ export function AnimatedBackground({
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden bg-bg">
       {variant === "waves" ? (
-        <div className="absolute inset-0" style={{ opacity: 0.9 * intensity }}>
+        <div className="absolute inset-0" style={{ opacity: `calc(${0.9 * intensity} * var(--waves-op, 1))` }}>
           <GradientWaves opacity={0.95} brightness={0.95} tilt={1.2} speed={0.3} mouseInteraction />
         </div>
       ) : (

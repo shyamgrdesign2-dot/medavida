@@ -94,7 +94,7 @@
     --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
     --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
     --aurora-1: rgba(8,169,155,0.12); --aurora-2: rgba(70,120,220,0.06);
-    --bg-glow: rgba(12,185,168,0.13); --bg-glow-2: rgba(80,130,225,0.07); --rays-op: 0.16;
+    --bg-glow: rgba(12,185,168,0.13); --bg-glow-2: rgba(80,130,225,0.07); --rays-op: 0.16; --waves-op: 0.4;
     --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
     --body-mesh: radial-gradient(120% 78% at 50% -12%, rgba(12,185,168,0.10), transparent 56%), radial-gradient(90% 60% at 92% 112%, rgba(80,130,225,0.06), transparent 60%);
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
@@ -110,7 +110,7 @@
   --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
   --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
   --aurora-1: rgba(8,169,155,0.12); --aurora-2: rgba(70,120,220,0.06);
-  --bg-glow: rgba(12,185,168,0.13); --bg-glow-2: rgba(80,130,225,0.07); --rays-op: 0.16;
+  --bg-glow: rgba(12,185,168,0.13); --bg-glow-2: rgba(80,130,225,0.07); --rays-op: 0.16; --waves-op: 0.4;
   --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
   --body-mesh: radial-gradient(120% 78% at 50% -12%, rgba(12,185,168,0.10), transparent 56%), radial-gradient(90% 60% at 92% 112%, rgba(80,130,225,0.06), transparent 60%);
   --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
