@@ -21,15 +21,15 @@ const ACCOUNTS = [
 
 // the product features — surfaced as a compact 3-up grid, not buried in settings
 const MANAGE: { k: string; icon: IconsaxIcon; tint: string; title: string }[] = [
-  { k: "invoices", icon: DocumentText, tint: "#23ffed", title: "Invoices" },
-  { k: "memberships", icon: Repeat, tint: "#6ea8ff", title: "Memberships" },
-  { k: "settlement", icon: Flash, tint: "#2fd07a", title: "Settlement" },
-  { k: "reserves", icon: Bank, tint: "#f7b955", title: "Reserves" },
-  { k: "receipts", icon: ReceiptText, tint: "#7de0c0", title: "Receipts" },
-  { k: "accounting", icon: Book1, tint: "#6ea8ff", title: "Books" },
-  { k: "staff", icon: Profile2User, tint: "#2fd07a", title: "Team" },
-  { k: "vendors", icon: Calculator, tint: "#f7b955", title: "1099" },
-  { k: "trust", icon: ShieldSecurity, tint: "#23ffed", title: "Security" },
+  { k: "invoices", icon: DocumentText, tint: "var(--acc-teal)", title: "Invoices" },
+  { k: "memberships", icon: Repeat, tint: "var(--acc-blue)", title: "Memberships" },
+  { k: "settlement", icon: Flash, tint: "var(--acc-green)", title: "Settlement" },
+  { k: "reserves", icon: Bank, tint: "var(--acc-amber)", title: "Reserves" },
+  { k: "receipts", icon: ReceiptText, tint: "var(--acc-mint)", title: "Receipts" },
+  { k: "accounting", icon: Book1, tint: "var(--acc-blue)", title: "Books" },
+  { k: "staff", icon: Profile2User, tint: "var(--acc-green)", title: "Team" },
+  { k: "vendors", icon: Calculator, tint: "var(--acc-amber)", title: "1099" },
+  { k: "trust", icon: ShieldSecurity, tint: "var(--acc-teal)", title: "Security" },
 ];
 
 const THEMES: { id: ThemePref; label: string; icon: IconsaxIcon }[] = [

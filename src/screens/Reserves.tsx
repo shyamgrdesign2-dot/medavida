@@ -7,10 +7,10 @@ import { haptic } from "@/lib/haptics";
 
 interface Bucket { id: string; name: string; job: string; pct: number; bal: number; tint: string }
 const BUCKETS: Bucket[] = [
-  { id: "operating", name: "Operating", job: "Day-to-day spend", pct: 50, bal: 128450.2, tint: "#23ffed" },
-  { id: "payroll", name: "Payroll", job: "Staff wages", pct: 20, bal: 41200, tint: "#6ea8ff" },
-  { id: "supplies", name: "Rx supply float", job: "Fullscript · Rupa · McKesson", pct: 15, bal: 9860, tint: "#f7b955" },
-  { id: "tax", name: "Tax reserve", job: "Set aside for the IRS", pct: 15, bal: 14730, tint: "#2fd07a" },
+  { id: "operating", name: "Operating", job: "Day-to-day spend", pct: 50, bal: 128450.2, tint: "var(--acc-teal)" },
+  { id: "payroll", name: "Payroll", job: "Staff wages", pct: 20, bal: 41200, tint: "var(--acc-blue)" },
+  { id: "supplies", name: "Rx supply float", job: "Fullscript · Rupa · McKesson", pct: 15, bal: 9860, tint: "var(--acc-amber)" },
+  { id: "tax", name: "Tax reserve", job: "Set aside for the IRS", pct: 15, bal: 14730, tint: "var(--acc-green)" },
 ];
 const TODAY_NET = 8075.2; // from settlement — what auto-split today
 

@@ -9,13 +9,13 @@ import {
 
 // transaction category → iconsax Bulk icon + accent (varied, not all-green)
 const CAT: Record<string, { Icon: IconsaxIcon; tint: string }> = {
-  patient: { Icon: Profile, tint: "#23ffed" },
-  supplier: { Icon: Box, tint: "#6ea8ff" },
-  payroll: { Icon: Profile2User, tint: "#2fd07a" },
-  utility: { Icon: Flash, tint: "#f7b955" },
-  rent: { Icon: Building, tint: "#a78bff" },
-  loan: { Icon: MoneyChange, tint: "#7de0c0" },
-  fee: { Icon: CardIcon, tint: "#9aa0aa" },
+  patient: { Icon: Profile, tint: "var(--acc-teal)" },
+  supplier: { Icon: Box, tint: "var(--acc-blue)" },
+  payroll: { Icon: Profile2User, tint: "var(--acc-green)" },
+  utility: { Icon: Flash, tint: "var(--acc-amber)" },
+  rent: { Icon: Building, tint: "var(--acc-violet)" },
+  loan: { Icon: MoneyChange, tint: "var(--acc-mint)" },
+  fee: { Icon: CardIcon, tint: "var(--acc-slate)" },
 };
 
 // string → iconsax icon map (TXNS/data reference icons by name)
@@ -152,7 +152,7 @@ export function QuickAction({ icon: I, label, onClick }: { icon: IconsaxIcon; la
 export function TxnRow({ iconName, category, title, sub, amount, dir, chip, onClick }: {
   iconName?: string; category?: string; title: string; sub: string; amount: string; dir: "in" | "out"; chip?: ReactNode; onClick?: () => void;
 }) {
-  const c = CAT[category ?? ""] ?? { Icon: CardIcon, tint: dir === "in" ? "#2fd07a" : "#9aa0aa" };
+  const c = CAT[category ?? ""] ?? { Icon: CardIcon, tint: dir === "in" ? "var(--acc-green)" : "var(--acc-slate)" };
   void iconName;
   return (
     <motion.button

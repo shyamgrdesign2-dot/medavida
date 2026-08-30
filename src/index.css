@@ -70,6 +70,16 @@
   --rays-op: 0.5;
   --star: rgba(255,255,255,1);
   --bg-vignette: rgba(4,5,6,0.7);
+  /* categorical accents — used as BOTH icon color and (15–24% diluted) tile bg.
+     Dark = bright so the icon pops on dark surfaces. Light overrides go darker
+     so the full-strength icon stays legible against its own pale tint. */
+  --acc-teal: #23ffed;
+  --acc-blue: #6ea8ff;
+  --acc-green: #2fd07a;
+  --acc-amber: #f7b955;
+  --acc-violet: #a78bff;
+  --acc-mint: #7de0c0;
+  --acc-slate: #9aa0aa;
 }
 
 /* the light palette — refined: neutral page ground, white cards, soft shadows,
@@ -85,6 +95,8 @@
     --aurora-1: rgba(8,169,155,0.10); --aurora-2: rgba(8,169,155,0.05);
     --bg-glow: rgba(8,169,155,0.05); --bg-glow-2: rgba(8,169,155,0.03);
     --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
+    --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
+    --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
   }
 }
 :root[data-theme="light"] {
@@ -97,6 +109,8 @@
   --aurora-1: rgba(8,169,155,0.10); --aurora-2: rgba(8,169,155,0.05);
   --bg-glow: rgba(8,169,155,0.05); --bg-glow-2: rgba(8,169,155,0.03); --rays-op: 0.12;
   --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
+  --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
+  --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
 }
 
 /* kill the transition smear when the theme flips */

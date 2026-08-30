@@ -10,9 +10,9 @@ const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0
 const item: Variants = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 32 } } };
 
 const PLANS = [
-  { id: "glp1", name: "GLP-1 Weight Management", price: 299, members: 42, next: "Sep 1", tint: "#23ffed" },
-  { id: "peptide", name: "Peptide Therapy", price: 189, members: 18, next: "Sep 5", tint: "#6ea8ff" },
-  { id: "labs", name: "Functional Labs membership", price: 99, members: 14, next: "Sep 1", tint: "#2fd07a" },
+  { id: "glp1", name: "GLP-1 Weight Management", price: 299, members: 42, next: "Sep 1", tint: "var(--acc-teal)" },
+  { id: "peptide", name: "Peptide Therapy", price: 189, members: 18, next: "Sep 5", tint: "var(--acc-blue)" },
+  { id: "labs", name: "Functional Labs membership", price: 99, members: 14, next: "Sep 1", tint: "var(--acc-green)" },
 ];
 const MRR = PLANS.reduce((s, p) => s + p.price * p.members, 0);
 const MEMBERS = PLANS.reduce((s, p) => s + p.members, 0);

@@ -20,19 +20,19 @@ const CASH = [
 const MAX = 46;
 
 const CATS = [
-  { name: "Suppliers & Rx", value: 12400, color: "#23ffed" },
-  { name: "Payroll", value: 9820, color: "#0fd8c8" },
-  { name: "Rent", value: 6200, color: "#3c78ff" },
-  { name: "Labs (Rupa)", value: 1850, color: "#2fd07a" },
-  { name: "Utilities", value: 980, color: "#f7b955" },
+  { name: "Suppliers & Rx", value: 12400, color: "var(--acc-teal)" },
+  { name: "Payroll", value: 9820, color: "var(--acc-mint)" },
+  { name: "Rent", value: 6200, color: "var(--acc-blue)" },
+  { name: "Labs (Rupa)", value: 1850, color: "var(--acc-green)" },
+  { name: "Utilities", value: 980, color: "var(--acc-amber)" },
 ];
 const CAT_TOTAL = CATS.reduce((s, c) => s + c.value, 0);
 
 const PROGRAMS = [
-  { name: "GLP-1 program", value: 18540, color: "#23ffed" },
-  { name: "Peptide therapy", value: 6200, color: "#6ea8ff" },
-  { name: "Labs & panels", value: 3900, color: "#2fd07a" },
-  { name: "Consults", value: 2100, color: "#f7b955" },
+  { name: "GLP-1 program", value: 18540, color: "var(--acc-teal)" },
+  { name: "Peptide therapy", value: 6200, color: "var(--acc-blue)" },
+  { name: "Labs & panels", value: 3900, color: "var(--acc-green)" },
+  { name: "Consults", value: 2100, color: "var(--acc-amber)" },
 ];
 const PROG_MAX = Math.max(...PROGRAMS.map((p) => p.value));
 
@@ -64,10 +64,10 @@ export function Insights() {
   const collected = 38240 * m, spent = 26612 * m, net = collected - spent;
 
   const KPIS: { icon: IconsaxIcon; tint: string; label: string; value: string }[] = [
-    { icon: MoneyRecive, tint: "#2fd07a", label: "Collected", value: money0(collected) },
-    { icon: MoneySend, tint: "#9aa0aa", label: "Spent", value: money0(spent) },
-    { icon: Wallet, tint: "#23ffed", label: "Net", value: money0(net) },
-    { icon: Activity, tint: "#6ea8ff", label: "Avg / visit", value: money0(312) },
+    { icon: MoneyRecive, tint: "var(--acc-green)", label: "Collected", value: money0(collected) },
+    { icon: MoneySend, tint: "var(--acc-slate)", label: "Spent", value: money0(spent) },
+    { icon: Wallet, tint: "var(--acc-teal)", label: "Net", value: money0(net) },
+    { icon: Activity, tint: "var(--acc-blue)", label: "Avg / visit", value: money0(312) },
   ];
 
   return (

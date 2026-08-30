@@ -13,10 +13,10 @@ const item: Variants = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0
 
 // real product signals — clean gradient-tint cards, each opens a destination
 const HIGHLIGHTS: { icon: IconsaxIcon; tint: string; title: string; sub: string; go: string }[] = [
-  { icon: Flash, tint: "#2fd07a", title: "Instant payout", sub: "128 settled today", go: "settlement" },
-  { icon: Health, tint: "#23ffed", title: "GLP-1 +14%", sub: "74 members", go: "memberships" },
-  { icon: Calendar, tint: "#f7b955", title: "Rent · $6,200", sub: "Due Sep 1", go: "bills" },
-  { icon: Chart2, tint: "#6ea8ff", title: "Net +$11,628", sub: "This month", go: "insights" },
+  { icon: Flash, tint: "var(--acc-green)", title: "Instant payout", sub: "128 settled today", go: "settlement" },
+  { icon: Health, tint: "var(--acc-teal)", title: "GLP-1 +14%", sub: "74 members", go: "memberships" },
+  { icon: Calendar, tint: "var(--acc-amber)", title: "Rent · $6,200", sub: "Due Sep 1", go: "bills" },
+  { icon: Chart2, tint: "var(--acc-blue)", title: "Net +$11,628", sub: "This month", go: "insights" },
 ];
 
 /** Clean gradient-tint highlight card (no coupon notches). */
