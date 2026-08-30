@@ -360,17 +360,22 @@ export function Onboarding({ onStart, onSignin }: { onStart: () => void; onSigni
         <span className="font-display text-[15px] font-semibold lowercase tracking-tight text-ink">{APP_NAME}</span>
       </div>
 
-      {/* swipe + tap navigation layer (loops) */}
+      {/* swipe + tap navigation layer (loops). Spans from just below the brand row
+          down to just above the CTA so a left/right swipe anywhere on the slide —
+          hero OR copy — drives it. The hero/copy layers are pointer-events-none so
+          they never swallow the gesture. touch-action lets vertical scroll pass
+          through while this owns the horizontal drag (mobile). */}
       <motion.div
         ref={dragRef}
-        className="absolute inset-x-0 top-[92px] bottom-[128px] z-10"
+        className="absolute inset-x-0 top-[84px] bottom-[104px] z-30"
+        style={{ touchAction: "pan-y" }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.12}
         dragSnapToOrigin
         onDragEnd={(_, info) => {
-          if (info.offset.x < -55) go(1);
-          else if (info.offset.x > 55) go(-1);
+          if (info.offset.x < -55 || info.velocity.x < -400) go(1);
+          else if (info.offset.x > 55 || info.velocity.x > 400) go(-1);
         }}
         onTap={(_, info) => {
           const r = dragRef.current?.getBoundingClientRect();
