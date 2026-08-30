@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, type Variants } from "motion/react";
 import { Notification, ArrowUp2, Verify } from "iconsax-react";
-import { Send2, Receipt2, Cards as CardsIcon, MoneyRecive, Flash, Health, Calendar, Chart2, type Icon as IconsaxIcon } from "iconsax-react";
+import { Send2, Receipt2, Cards as CardsIcon, MoneyRecive, Flash, Calendar, Chart2, type Icon as IconsaxIcon } from "iconsax-react";
+import { Injection } from "@/components/glyphs";
 import { CardWallet } from "@/components/CardWallet";
 import { Squircle } from "@/lib/squircle";
 import { QuickAction, SectionTitle, TxnRow, Chip, PatternAvatar } from "@/components/ui";
@@ -14,7 +15,7 @@ const item: Variants = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0
 // real product signals — clean gradient-tint cards, each opens a destination
 const HIGHLIGHTS: { icon: IconsaxIcon; tint: string; title: string; sub: string; go: string }[] = [
   { icon: Flash, tint: "var(--acc-green)", title: "Instant payout", sub: "128 settled today", go: "settlement" },
-  { icon: Health, tint: "var(--acc-teal)", title: "GLP-1 +14%", sub: "74 members", go: "memberships" },
+  { icon: Injection as unknown as IconsaxIcon, tint: "var(--acc-teal)", title: "GLP-1 +14%", sub: "74 members", go: "memberships" },
   { icon: Calendar, tint: "var(--acc-amber)", title: "Rent · $6,200", sub: "Due Sep 1", go: "bills" },
   { icon: Chart2, tint: "var(--acc-blue)", title: "Net +$11,628", sub: "This month", go: "insights" },
 ];

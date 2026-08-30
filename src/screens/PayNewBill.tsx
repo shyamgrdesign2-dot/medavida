@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Loader } from "lucide-react";
-import { Flash, Drop, Wifi, Flashy, Call, TickCircle, ArrowRight2, type Icon as IconsaxIcon } from "iconsax-react";
+import { Flash, Drop, Wifi, GasStation, Call, TickCircle, ArrowRight2, type Icon as IconsaxIcon } from "iconsax-react";
 import { BottomSheet } from "@/components/BottomSheet";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { InputField } from "@/components/ui";
@@ -13,7 +13,7 @@ export const CATEGORIES: Cat[] = [
   { id: "electricity", label: "Electricity", icon: Flash, billers: ["Austin Energy", "City of Austin Utilities", "CenterPoint Energy", "Oncor Electric"], due: 412.6 },
   { id: "water", label: "Water", icon: Drop, billers: ["Austin Water", "City of Austin Utilities"], due: 98.4 },
   { id: "internet", label: "Internet", icon: Wifi, billers: ["Google Fiber", "AT&T Fiber", "Spectrum Business"], due: 89.0 },
-  { id: "gas", label: "Gas", icon: Flashy, billers: ["Texas Gas Service", "Atmos Energy"], due: 64.2 },
+  { id: "gas", label: "Gas", icon: GasStation, billers: ["Texas Gas Service", "Atmos Energy"], due: 64.2 },
   { id: "phone", label: "Phone", icon: Call, billers: ["AT&T Business", "Verizon", "T-Mobile"], due: 220.0 },
 ];
 
