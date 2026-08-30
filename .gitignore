@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+
+# build output
+dist
+*.tsbuildinfo
+
+# local env / secrets
+.env
+.env.*
+.mcp.json
+.vercel
+
+# editor / OS
+.DS_Store
+
+# agent / skill tooling (not part of the app)
+.agents
+.claude
+skills-lock.json

@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   ZEVA — design tokens (Hybrid premium, dark-first "money" surfaces)
+   Teal #23FFED is a FILL-ONLY accent. Numerals use Satoshi tabular figures.
+   ========================================================================= */
+@theme {
+  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-tech: "Chakra Petch", var(--font-sans);
+
+  /* base surfaces */
+  --color-bg: #0a0b0d;
+  --color-surface: #131418;
+  --color-surface-2: #1a1c21;
+  --color-surface-3: #23262c;
+  --color-border: #26292f;
+  --color-border-soft: #1e2126;
+
+  /* text */
+  --color-ink: #f5f6f5;
+  --color-dim: #9a9ea4;
+  --color-faint: #63676d;
+
+  /* teal accent (fills only) */
+  --color-teal: #23ffed;
+  --color-teal-2: #0fd8c8;
+  --color-teal-deep: #06504a;
+  --color-on-teal: #04231f;
+  --color-teal-soft: #7fe9df; /* muted teal for secondary accents */
+  /* gradient variants of the primary — used to break up flat-teal monotony */
+  --grad-teal: linear-gradient(135deg, #5cffef 0%, #23ffed 45%, #0fd8c8 100%);
+  --grad-teal-blue: linear-gradient(135deg, #2bffe6 0%, #22e6d6 50%, #4aa8ff 120%);
+
+  /* stoplight status */
+  --color-go: #2fd07a;
+  --color-caution: #f7b955;
+  --color-stop: #ff5c5c;
+
+  /* radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-2xl: 38px;
+
+  /* motion */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =========================================================================
+   Theming — the app is DARK by default (tokens above). It adapts to the
+   system when set to light, and a toggle can force either via [data-theme].
+   Cards keep their own dark metallic finish in both themes (real cards).
+   ========================================================================= */
+:root {
+  --glass-bg: rgba(22, 24, 29, 0.55);
+  --glass-brd: rgba(255, 255, 255, 0.10);
+  --glass-hi: rgba(255, 255, 255, 0.14);
+  --hi: rgba(255, 255, 255, 0.08);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.35), 0 16px 36px -22px rgba(0,0,0,0.8);
+  --aurora-1: rgba(35,255,237,0.30);
+  --aurora-2: rgba(15,216,200,0.20);
+  --bg-glow: rgba(35,255,237,0.12);
+  --bg-glow-2: rgba(15,216,200,0.06);
+  --rays-op: 0.5;
+}
+
+/* the light palette — refined: neutral page ground, white cards, soft shadows,
+   frosted-glass gloss, and quiet teal washes (shared by system-light + toggle) */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg: #eef0f3; --color-surface: #ffffff; --color-surface-2: #f6f7f9; --color-surface-3: #eaecf0;
+    --color-border: #e5e7ec; --color-border-soft: #eef0f3;
+    --color-ink: #16191e; --color-dim: #5e6572; --color-faint: #98a0ac; --color-teal-2: #08a99b;
+    --glass-bg: rgba(255,255,255,0.72); --glass-brd: rgba(16,24,40,0.07); --glass-hi: rgba(255,255,255,0.95);
+    --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
+    --shadow-card: inset 0 1px 0 rgba(255,255,255,0.7);
+    --aurora-1: rgba(8,169,155,0.10); --aurora-2: rgba(8,169,155,0.05);
+    --bg-glow: rgba(8,169,155,0.05); --bg-glow-2: rgba(8,169,155,0.03);
+  }
+}
+:root[data-theme="light"] {
+  --color-bg: #eef0f3; --color-surface: #ffffff; --color-surface-2: #f6f7f9; --color-surface-3: #eaecf0;
+  --color-border: #e5e7ec; --color-border-soft: #eef0f3;
+  --color-ink: #16191e; --color-dim: #5e6572; --color-faint: #98a0ac; --color-teal-2: #08a99b;
+  --glass-bg: rgba(255,255,255,0.72); --glass-brd: rgba(16,24,40,0.07); --glass-hi: rgba(255,255,255,0.95);
+  --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
+  --shadow-card: inset 0 1px 0 rgba(255,255,255,0.7);
+  --aurora-1: rgba(8,169,155,0.10); --aurora-2: rgba(8,169,155,0.05);
+  --bg-glow: rgba(8,169,155,0.05); --bg-glow-2: rgba(8,169,155,0.03); --rays-op: 0.12;
+}
+
+/* kill the transition smear when the theme flips */
+.theme-swapping, .theme-swapping *, .theme-swapping *::before, .theme-swapping *::after {
+  transition: none !important;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+/* tabular numerals everywhere money is shown */
+.tnum { font-feature-settings: "tnum" 1, "ss01" 1; font-variant-numeric: tabular-nums; }
+
+/* hide scrollbars inside the phone screen */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* teal fill glow used sparingly on primary money moments */
+.teal-glow { box-shadow: 0 0 0 1px rgba(35,255,237,.12), 0 8px 40px -12px rgba(35,255,237,.35); }
+
+/* fine grain/noise for premium depth (SVG data-uri, very subtle) */
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* slow drift for the card's contour-line pattern (seamless: travels one tile) */
+@keyframes cardDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* animated aurora gradient for section cards (premium, GPU-cheap) */
+@keyframes auroraShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.anim-aurora { background-size: 300% 300%; animation: auroraShift 9s ease-in-out infinite; }
+
+/* embossed / letterpress card text — pressed into the metal */
+.emboss { text-shadow: 0 1px 0 rgba(0,0,0,0.55), 0 -0.5px 0 rgba(255,255,255,0.12); }
+.emboss-strong { text-shadow: 0 1.5px 0 rgba(0,0,0,0.6), 0 -0.75px 0 rgba(255,255,255,0.18); }
+
+/* =========================================================================
+   NeoPop plunk button — faithful to CRED's neopop-web. A flat face plus two
+   skewed edge blocks (bottom + right) extrude a boxy 3D button; pressing
+   plunks the face down-right onto its base. Sharp corners = boxy.
+   ========================================================================= */
+.np {
+  --e: 6px;                    /* edge depth */
+  --face: var(--color-teal);
+  --edge: #0a9d90;             /* darker face for the 3D sides */
+  position: relative; display: inline-flex; border: 0; padding: 0; margin: 0;
+  background: transparent; cursor: pointer; overflow: hidden;
+  user-select: none; -webkit-tap-highlight-color: transparent; font-family: var(--font-sans);
+}
+.np-face {
+  position: relative; z-index: 2; width: 100%;
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  background: var(--face); color: var(--np-ink, var(--color-on-teal));
+  margin: 0 var(--e) var(--e) 0; letter-spacing: -0.01em;
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1); will-change: transform;
+}
+.np-edge { position: absolute; transform-origin: 0% 0%; transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1); background: var(--edge); }
+.np-edge.right { top: 0; right: 0; width: var(--e); height: calc(100% - var(--e)); transform: skewY(45deg); z-index: 2; }
+.np-edge.bottom { left: 0; bottom: 0; height: var(--e); width: calc(100% - var(--e)); transform: skewX(45deg); z-index: 2; }
+.np:active .np-face { transform: translate3d(var(--e), var(--e), 0); }
+.np:active .np-edge.right { transform: translate3d(var(--e), var(--e), 0) skewY(45deg); }
+.np:active .np-edge.bottom { transform: translate3d(var(--e), var(--e), 0) skewX(45deg); }
+
+.np-primary { --face: var(--grad-teal); --edge: #0a9d90; --np-ink: var(--color-on-teal); }
+.np-dark { --face: var(--color-surface-2); --edge: #050506; --np-ink: var(--color-ink); }
+.np-dark .np-face { box-shadow: inset 0 0 0 1px var(--color-border); }
+
+/* =========================================================================
+   Grid pattern — subtle NeoPop-style substrate for depth behind heroes.
+   ========================================================================= */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.grid-pattern-teal {
+  background-image:
+    linear-gradient(rgba(35, 255, 237, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 255, 237, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
