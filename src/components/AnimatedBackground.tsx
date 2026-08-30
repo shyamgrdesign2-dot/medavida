@@ -69,15 +69,15 @@ export function AnimatedBackground({
         stars.map((s) => (
           <motion.span
             key={s.id}
-            className="absolute rounded-full bg-white"
-            style={{ top: `${s.top}%`, left: `${s.left}%`, width: s.size, height: s.size }}
+            className="absolute rounded-full"
+            style={{ top: `${s.top}%`, left: `${s.left}%`, width: s.size, height: s.size, background: "var(--star)" }}
             animate={reduce ? { opacity: 0.4 } : { opacity: [0.15, 0.8, 0.15] }}
             transition={{ duration: s.dur, repeat: Infinity, delay: s.delay, ease: "easeInOut" }}
           />
         ))}
 
       {/* vignette + grain for depth */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(120% 120% at 50% 25%, transparent 45%, rgba(4,5,6,0.7) 100%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(120% 120% at 50% 25%, transparent 45%, var(--bg-vignette) 100%)" }} />
       <div className="grain absolute inset-0" />
     </div>
   );
