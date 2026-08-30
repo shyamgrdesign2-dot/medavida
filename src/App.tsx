@@ -28,14 +28,18 @@ export function App() {
         )}
         {screen === "onboarding" && (
           <motion.div key="onboarding" className="h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-            <Onboarding onStart={() => setScreen("account")} onSignin={() => setScreen("signin")} />
+            <Onboarding onStart={() => setScreen("signin")} onSignin={() => setScreen("signin")} />
           </motion.div>
         )}
         {screen === "signin" && (
           <motion.div key="signin" className="h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-            <SignIn onDone={() => setScreen("app")} onCreate={() => setScreen("account")} />
+            <SignIn onDone={() => setScreen("app")} />
           </motion.div>
         )}
+        {/* Sign-up flow is built but hidden for now — reachable only via ?screen=account.
+            To re-enable: route Onboarding onStart to "account", pass
+            onCreate={() => setScreen("account")} to SignIn, and restore the
+            "Create an account" link in SignIn + the "Sign in" link in Onboarding. */}
         {screen === "account" && (
           <motion.div key="account" className="h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
             <AccountCreate onDone={() => setScreen("app")} onSignin={() => setScreen("signin")} />

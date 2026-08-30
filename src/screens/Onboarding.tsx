@@ -412,9 +412,6 @@ export function Onboarding({ onStart, onSignin }: { onStart: () => void; onSigni
           Get started
           <ArrowRight2 size={18} variant="Linear" color="currentColor" />
         </NeoPopButton>
-        <button onClick={onSignin} className="mt-3.5 w-full text-center text-[12.5px] text-dim">
-          Already have an account? <span className="font-semibold text-teal-2">Sign in</span>
-        </button>
       </div>
     </div>
   );
