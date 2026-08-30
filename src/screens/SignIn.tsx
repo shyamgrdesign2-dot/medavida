@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronRight, ChevronLeft, Check } from "lucide-react";
+import { ArrowRight2, ArrowLeft2, TickCircle } from "iconsax-react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { LightRays } from "@/components/backgrounds/LightRays";
 import { NeoPopButton } from "@/components/NeoPopButton";
@@ -60,7 +60,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
       <div className="relative z-10 flex flex-none items-center gap-2.5 px-6 pt-5">
         {step === "otp" && (
           <button onClick={() => { haptic("tap"); setStep("phone"); }} className="mr-1 flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink">
-            <ChevronLeft size={18} strokeWidth={2} />
+            <ArrowLeft2 size={18} variant="Linear" color="currentColor" />
           </button>
         )}
         <ZevaMark size={30} tone="teal" />
@@ -92,7 +92,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
               {verifying ? (
                 <div className="flex flex-col items-center">
                   <motion.div className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 380, damping: 34 }}>
-                    <Check size={32} strokeWidth={3} />
+                    <TickCircle size={32} variant="Bulk" color="var(--color-go)" />
                   </motion.div>
                   <div className="mt-4 font-display text-[20px] font-semibold text-ink">Verified</div>
                   <div className="mt-1 text-[12.5px] text-dim">Signing you in…</div>
@@ -130,7 +130,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
         >
           {step === "phone" ? (
             <NeoPopButton onClick={() => { if (digits.length === 10) { haptic("tap"); setStep("otp"); } }} className="w-full" faceClassName={"px-5 py-4 text-[15px] font-medium " + (digits.length === 10 ? "" : "opacity-50")}>
-              Send code <ChevronRight size={18} strokeWidth={2.2} />
+              Send code <ArrowRight2 size={18} variant="Linear" color="currentColor" />
             </NeoPopButton>
           ) : (
             <div className="text-center text-[11px] text-faint">Enter the code to continue</div>

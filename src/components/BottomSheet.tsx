@@ -1,6 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, X } from "lucide-react";
+import { X } from "lucide-react";
+import { ArrowLeft2 } from "iconsax-react";
 import { haptic } from "@/lib/haptics";
 import { sheetStore } from "@/lib/sheetStore";
 
@@ -66,7 +67,7 @@ export function BottomSheet({ open, onClose, children, title, onBack, size = "au
                     aria-label="Back"
                     className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-border bg-surface-2 text-ink"
                   >
-                    <ChevronLeft size={17} strokeWidth={2.4} />
+                    <ArrowLeft2 size={17} variant="Linear" color="currentColor" />
                   </motion.button>
                 ) : (
                   <span className="w-1" />

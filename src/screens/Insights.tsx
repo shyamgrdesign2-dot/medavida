@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowDownLeft, ArrowUpRight, TrendingUp, Wallet, Users, Activity } from "lucide-react";
+import { MoneyRecive, MoneySend, TrendUp, Wallet, Profile2User, Activity, type Icon as IconsaxIcon } from "iconsax-react";
 import { Squircle } from "@/lib/squircle";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { money, money0 } from "@/lib/data";
@@ -63,9 +63,9 @@ export function Insights() {
   const m = MULT[p];
   const collected = 38240 * m, spent = 26612 * m, net = collected - spent;
 
-  const KPIS = [
-    { icon: ArrowDownLeft, tint: "#2fd07a", label: "Collected", value: money0(collected) },
-    { icon: ArrowUpRight, tint: "#9aa0aa", label: "Spent", value: money0(spent) },
+  const KPIS: { icon: IconsaxIcon; tint: string; label: string; value: string }[] = [
+    { icon: MoneyRecive, tint: "#2fd07a", label: "Collected", value: money0(collected) },
+    { icon: MoneySend, tint: "#9aa0aa", label: "Spent", value: money0(spent) },
     { icon: Wallet, tint: "#23ffed", label: "Net", value: money0(net) },
     { icon: Activity, tint: "#6ea8ff", label: "Avg / visit", value: money0(312) },
   ];
@@ -86,7 +86,7 @@ export function Insights() {
       <div className="mt-4 grid grid-cols-2 gap-2.5">
         {KPIS.map((k) => (
           <Squircle key={k.label} radius={13} className="border border-border bg-surface p-3.5">
-            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-dim"><k.icon size={13} strokeWidth={2.4} style={{ color: k.tint }} />{k.label}</div>
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-dim"><k.icon size={14} variant="Bulk" color={k.tint} />{k.label}</div>
             <div className="tnum mt-1 text-[18px] font-bold text-ink">{k.value}</div>
           </Squircle>
         ))}
@@ -95,7 +95,7 @@ export function Insights() {
       {/* net cashflow narrative */}
       <Squircle radius={16} className="relative mt-3 overflow-hidden border border-border bg-surface p-4">
         <AnimatedGradient tone="teal" opacity={0.6} />
-        <div className="relative flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-faint"><TrendingUp size={13} strokeWidth={2.4} />Net cashflow · {PERIODS[p].toLowerCase()}</div>
+        <div className="relative flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-faint"><TrendUp size={14} variant="Bulk" color="currentColor" />Net cashflow · {PERIODS[p].toLowerCase()}</div>
         <div className="tnum relative mt-1 font-display text-[28px] font-semibold text-go">+{money0(net)}</div>
         <div className="relative mt-1 text-[11.5px] text-dim">Up <span className="font-semibold text-go">{DELTA[p]}%</span> vs the prior {p === 0 ? "month" : p === 1 ? "quarter" : "year"}</div>
       </Squircle>
@@ -160,7 +160,7 @@ export function Insights() {
 
       {/* insight callouts */}
       <Squircle radius={16} className="mt-3 flex items-center gap-3 border border-teal/20 bg-teal/8 p-4">
-        <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-teal/15 text-teal-2"><Users size={18} strokeWidth={2.2} /></span>
+        <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-teal/15"><Profile2User size={19} variant="Bulk" color="var(--color-teal-2)" /></span>
         <div className="text-[12.5px] leading-snug text-ink">Patient revenue is up <span className="font-bold text-teal-2">14%</span> — driven by the GLP-1 program (42 new patients).</div>
       </Squircle>
     </div>

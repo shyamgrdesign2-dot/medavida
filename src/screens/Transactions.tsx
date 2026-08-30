@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { Search, ChevronLeft, Check } from "lucide-react";
+import { SearchNormal1, ArrowLeft2, TickCircle } from "iconsax-react";
 import { TxnRow, Chip, Icon } from "@/components/ui";
 import { BottomSheet } from "@/components/BottomSheet";
 import { TXNS, money, type Txn } from "@/lib/data";
@@ -40,7 +40,7 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
         <div className="flex items-center gap-3">
           {onBack && (
             <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink">
-              <ChevronLeft size={18} strokeWidth={2} />
+              <ArrowLeft2 size={18} variant="Linear" color="currentColor" />
             </button>
           )}
           <div className="font-display text-[22px] font-semibold tracking-tight text-ink">Activity</div>
@@ -48,7 +48,7 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
 
         {/* search */}
         <div className="mt-3 flex items-center gap-2 rounded-[9px] border border-border bg-surface px-3 py-2.5">
-          <Search size={16} strokeWidth={2} className="text-faint" />
+          <SearchNormal1 size={16} variant="Linear" color="var(--color-faint)" />
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
@@ -110,7 +110,7 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
               <div className="text-[12px] text-dim">{sel.sub}</div>
               {sel.status === "instant" && (
                 <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-go/15 px-3 py-1 text-[11px] font-bold text-go">
-                  <Check size={13} strokeWidth={2.4} /> Settled instantly
+                  <TickCircle size={13} variant="Bulk" color="var(--color-go)" /> Settled instantly
                 </div>
               )}
             </div>

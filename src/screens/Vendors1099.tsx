@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ChevronLeft, Check, AlertTriangle, Send, FileText, CalendarClock } from "lucide-react";
+import { ArrowLeft2, TickCircle, Danger, Send2, DocumentText, CalendarTick } from "iconsax-react";
 import { Chip } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { money, money0 } from "@/lib/data";
@@ -35,13 +35,13 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
 
   const statusChip = (v: Vendor) =>
     !v.eligible ? <Chip tone="neutral">Under $600</Chip> :
-    v.w9 ? <Chip tone="pos"><Check size={10} strokeWidth={3} />Ready</Chip> :
+    v.w9 ? <Chip tone="pos"><TickCircle size={10} variant="Bulk" color="currentColor" />Ready</Chip> :
     <Chip tone="neg">W-9 needed</Chip>;
 
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">1099 &amp; vendors</div>
           <div className="text-[11.5px] text-dim">Contractor payments for tax time</div>
@@ -55,14 +55,14 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
           <div className="tnum mt-1 font-display text-[28px] font-semibold text-ink">{money(reportable)}</div>
           <div className="mt-1 text-[11.5px] text-dim">{eligible.length} vendors need a 1099-NEC</div>
           <div className="mt-3 flex items-center gap-2 rounded-[9px] bg-surface-2 px-3 py-2 text-[11.5px] text-dim">
-            <CalendarClock size={14} className="flex-none text-teal-2" strokeWidth={2.2} /> 1099-NEC due to contractors &amp; IRS by <span className="font-semibold text-ink">Jan 31, 2027</span>
+            <CalendarTick size={14} variant="Linear" color="var(--color-teal-2)" className="flex-none" /> 1099-NEC due to contractors &amp; IRS by <span className="font-semibold text-ink">Jan 31, 2027</span>
           </div>
         </motion.div>
 
         {/* missing W-9 alert */}
         {missingW9.length > 0 && (
           <motion.div variants={item} className="mt-3 flex items-center gap-3 rounded-[14px] border border-caution/30 bg-caution/8 p-3.5">
-            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-caution/15 text-caution"><AlertTriangle size={18} strokeWidth={2.2} /></span>
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-caution/15 text-caution"><Danger size={18} variant="Bulk" color="currentColor" /></span>
             <span className="flex-1">
               <span className="block text-[13px] font-semibold text-ink">{missingW9.length} W-9 missing</span>
               <span className="block text-[11.5px] text-dim">Collect before filing to avoid backup withholding</span>
@@ -76,7 +76,7 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
           {vendors.map((v, i) => (
             <div key={v.id} className={"py-3 " + (i > 0 ? "border-t border-border-soft" : "")}>
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-surface-2 text-ink"><FileText size={17} strokeWidth={2} /></span>
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-surface-2 text-ink"><DocumentText size={17} variant="Linear" color="currentColor" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[13.5px] font-semibold text-ink">{v.name}</span>
                   <span className="block truncate text-[11.5px] text-dim">{v.cat} · {money0(v.ytd)} paid</span>
@@ -85,7 +85,7 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
               </div>
               {v.eligible && !v.w9 && (
                 <button onClick={() => requestW9(v.id)} className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-[10px] border border-teal/40 py-2.5 text-[12px] font-semibold text-teal-2">
-                  <Send size={13} strokeWidth={2.4} /> Request W-9
+                  <Send2 size={13} variant="Linear" color="currentColor" /> Request W-9
                 </button>
               )}
             </div>
@@ -99,7 +99,7 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
 
       <div className="flex-none px-5 pb-8 pt-2">
         <NeoPopButton onClick={() => ping(`${eligible.length} 1099-NEC forms prepared`)} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
-          <FileText size={17} strokeWidth={2.4} /> Prepare 1099-NEC filing
+          <DocumentText size={17} variant="Linear" color="currentColor" /> Prepare 1099-NEC filing
         </NeoPopButton>
       </div>
 

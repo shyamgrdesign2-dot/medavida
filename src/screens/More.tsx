@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ChevronRight } from "lucide-react";
+import { ArrowRight2 } from "iconsax-react";
 import {
   Notification, ShieldTick, ShieldSecurity, Bank, MessageQuestion, Logout, Verify,
   Sun, Moon, Monitor, DocumentText, Repeat, Flash, ReceiptText, Book1, Profile2User, Calculator,
@@ -96,7 +96,7 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
             </div>
             <div className="text-[12px] text-dim">Owner · {CLINIC.owner}</div>
           </div>
-          <ChevronRight size={18} className="text-faint" />
+          <ArrowRight2 size={18} variant="Linear" color="var(--color-faint)" />
         </Squircle>
       </motion.div>
 
@@ -108,7 +108,7 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
           <span className="block text-[11.5px] text-dim">Payments waiting on your sign-off</span>
         </span>
         <span className="rounded-full bg-caution px-2 py-0.5 text-[11px] font-bold text-[#1a1205]">3</span>
-        <ChevronRight size={17} className="text-faint" />
+        <ArrowRight2 size={17} variant="Linear" color="var(--color-faint)" />
       </motion.button>
 
       {/* manage — bento grid of features */}
@@ -146,9 +146,9 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
           <div className="border-t border-border-soft" />
           <ControlRow title="Face ID & PIN" sub="Unlock with biometrics" trailing={<Toggle on={biometric} onChange={setBiometric} />} />
           <div className="border-t border-border-soft" />
-          <ControlRow title="Statements & tax docs" onClick={() => haptic("tap")} trailing={<ChevronRight size={17} className="text-faint" />} />
+          <ControlRow title="Statements & tax docs" onClick={() => haptic("tap")} trailing={<ArrowRight2 size={17} variant="Linear" color="var(--color-faint)" />} />
           <div className="border-t border-border-soft" />
-          <ControlRow title="Help & support" onClick={() => haptic("tap")} trailing={<ChevronRight size={17} className="text-faint" />} />
+          <ControlRow title="Help & support" onClick={() => haptic("tap")} trailing={<ArrowRight2 size={17} variant="Linear" color="var(--color-faint)" />} />
         </Squircle>
       </motion.div>
 

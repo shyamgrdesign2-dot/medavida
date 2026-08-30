@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ChevronLeft, Check, Delete, ChevronDown, Wallet } from "lucide-react";
+import { Delete } from "lucide-react";
+import { ArrowLeft2, TickCircle, ArrowDown2, Wallet } from "iconsax-react";
 import { PatternAvatar, Icon } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { BottomSheet } from "@/components/BottomSheet";
@@ -64,7 +65,7 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
     return (
       <div className="flex h-full w-full flex-col items-center justify-center bg-bg px-6">
         <motion.div className="flex h-20 w-20 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 360, damping: 40 }}>
-          <Check size={40} strokeWidth={3} />
+          <TickCircle size={40} variant="Bulk" color="var(--color-go)" />
         </motion.div>
         <div className="mt-5 font-display text-[24px] font-semibold text-ink">{money(val)} {mode === "add" ? "added" : mode === "move" ? "moved" : "sent"}</div>
         <div className="mt-1 text-[13px] text-dim">{hasSource ? `from ${from.name} ` : ""}{mode === "send" ? "to" : "into"} {(targets[target] as any).name} · instantly</div>
@@ -75,7 +76,7 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div className="font-display text-[18px] font-semibold text-ink">{title}</div>
       </div>
 
@@ -110,7 +111,7 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
               aria-label="Change funding account"
               className={"mt-3 flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[12px] font-semibold transition-colors " + (insufficient || sameAccount ? "border-stop/40 bg-stop/8 text-stop" : "border-border bg-surface text-dim")}
             >
-              From {from.name} · {money(from.bal).replace(".00", "")} <ChevronDown size={13} strokeWidth={2.4} />
+              From {from.name} · {money(from.bal).replace(".00", "")} <ArrowDown2 size={13} variant="Linear" color="currentColor" />
             </motion.button>
             <div className="mt-1.5 h-4 text-[11px] font-semibold text-stop">
               {sameAccount ? "Pick a different source account" : insufficient ? "Not enough in this account" : ""}
@@ -150,14 +151,14 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
                 disabled={isDest}
                 className={"flex w-full items-center gap-3 rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface") + (isDest ? " opacity-40" : "")}
               >
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-surface-2 text-teal-2"><Wallet size={18} strokeWidth={2.2} /></span>
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-surface-2 text-teal-2"><Wallet size={18} variant="Bulk" color="var(--color-teal-2)" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[14px] font-semibold text-ink">{a.name}</span>
                   <span className={"block text-[11.5px] " + (low ? "text-stop" : "text-dim")}>
                     {money(a.bal).replace(".00", "")} available{isDest ? " · destination" : low ? " · too low" : ""}
                   </span>
                 </span>
-                {on && <Check size={18} strokeWidth={3} className="flex-none text-teal-2" />}
+                {on && <TickCircle size={18} variant="Bulk" color="var(--color-teal-2)" className="flex-none" />}
               </button>
             );
           })}

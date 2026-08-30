@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, animate, useMotionValue, useTransform, useReducedMotion } from "motion/react";
-import { ChevronRight, Zap, Check, ArrowDownLeft, ArrowUpRight, Building2, Wifi } from "lucide-react";
+import { ArrowRight2, Flash, TickCircle, ArrowDown, ArrowUp, Building, Wifi } from "iconsax-react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { ZevaMark } from "@/components/ZevaMark";
 import { ZevaCard } from "@/components/ZevaCard";
@@ -74,7 +74,7 @@ function HeroFlow() {
         {/* inflow (falls into the balance) */}
         <div className="absolute inset-x-0 top-3 flex justify-center">
           <span className="inline-flex items-center gap-1 rounded-full bg-go/12 px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-[0.1em] text-go">
-            <ArrowDownLeft size={12} strokeWidth={2.6} /> Money in
+            <ArrowDown size={12} variant="Bulk" color="currentColor" /> Money in
           </span>
         </div>
         <FlowPill text="+$340" tone="in" delay={0} from={-86} to={-8} />
@@ -98,7 +98,7 @@ function HeroFlow() {
         <FlowPill text="−$412" tone="out" delay={2.25} from={8} to={86} />
         <div className="absolute inset-x-0 bottom-3 flex justify-center">
           <span className="inline-flex items-center gap-1 rounded-full bg-surface-3 px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-[0.1em] text-dim">
-            Money out <ArrowUpRight size={12} strokeWidth={2.6} />
+            Money out <ArrowUp size={12} variant="Linear" color="currentColor" />
           </span>
         </div>
       </div>
@@ -149,7 +149,7 @@ function HeroInstant() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 40 }}
             >
-              <Check size={13} strokeWidth={3} /> Settled to Operating · instantly
+              <TickCircle size={13} variant="Bulk" color="currentColor" /> Settled to Operating · instantly
             </motion.div>
           )}
         </AnimatePresence>
@@ -159,7 +159,7 @@ function HeroInstant() {
         <div>
           <div className="mb-1 flex items-center justify-between text-[11px] font-semibold">
             <span className="flex items-center gap-1.5 text-teal-2"><ZevaMark size={13} tone="teal" />{APP_NAME}</span>
-            <span className="flex items-center gap-1 text-go"><Check size={13} strokeWidth={3} />Instant</span>
+            <span className="flex items-center gap-1 text-go"><TickCircle size={13} variant="Bulk" color="currentColor" />Instant</span>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-surface-2">
             <motion.div className="h-full rounded-full bg-teal" initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }} />
@@ -203,8 +203,8 @@ function HeroCard() {
 }
 
 const BILLS = [
-  { icon: Building2, name: "Downtown Wellness Suite", sub: "Rent · Suite 4B", amt: "$6,200", chip: "Upcoming", tone: "warn" as const, pulse: false },
-  { icon: Zap, name: "City of Austin", sub: "Electricity · autopay", amt: "$412", chip: "Autopay on", tone: "pos" as const, pulse: true },
+  { icon: Building, name: "Downtown Wellness Suite", sub: "Rent · Suite 4B", amt: "$6,200", chip: "Upcoming", tone: "warn" as const, pulse: false },
+  { icon: Flash, name: "City of Austin", sub: "Electricity · autopay", amt: "$412", chip: "Autopay on", tone: "pos" as const, pulse: true },
   { icon: Wifi, name: "Google Fiber", sub: "Internet · biz 1-gig", amt: "$89", chip: "Scheduled", tone: "neutral" as const, pulse: false },
 ];
 const CHIP: Record<string, string> = {
@@ -242,7 +242,7 @@ function HeroBills() {
               transition={{ delay: 0.15 + i * 0.12, type: "spring", stiffness: 300, damping: 26 }}
             >
               <div className={"flex h-8 w-8 flex-none items-center justify-center rounded-[9px] " + ICONWRAP[b.tone]}>
-                <b.icon size={15} strokeWidth={2} />
+                <b.icon size={15} variant="Bulk" color="currentColor" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="truncate text-[12px] font-semibold text-ink">{b.name}</div>
@@ -410,7 +410,7 @@ export function Onboarding({ onStart, onSignin }: { onStart: () => void; onSigni
       <div className="relative z-20 px-6 pb-8 pt-1">
         <NeoPopButton onClick={onStart} className="w-full" faceClassName="px-5 py-4 text-[15.5px] font-medium">
           Get started
-          <ChevronRight size={18} strokeWidth={2.2} />
+          <ArrowRight2 size={18} variant="Linear" color="currentColor" />
         </NeoPopButton>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import { ChevronRight, Check } from "lucide-react";
+import { ArrowRight2, TickCircle } from "iconsax-react";
 import {
   Lock1, Eye, Shop, Speedometer, Add, CloudSnow, ReceiptText, WalletAdd,
   Danger, RefreshCircle, MessageQuestion, Headphone, TrendUp, DocumentText, Setting2,
@@ -150,7 +150,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
       <BottomSheet open={sheet === "issue"} onClose={() => setSheet(null)} title={issued ? undefined : "Issue a virtual card"}>
         {issued ? (
           <div className="flex flex-col items-center py-6">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go"><Check size={32} strokeWidth={3} /></span>
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15"><TickCircle size={34} variant="Bulk" color="var(--color-go)" /></span>
             <div className="mt-4 font-display text-[20px] font-semibold text-ink">Card issued</div>
             <div className="mt-1 text-[12.5px] text-dim">Ready to use instantly · •••• 6120</div>
           </div>
@@ -166,7 +166,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
               </div>
             </div>
             <NeoPopButton onClick={() => { haptic("success"); setIssued(true); }} className="mt-2 w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
-              Issue card <ChevronRight size={18} strokeWidth={2.2} />
+              Issue card <ArrowRight2 size={18} variant="Linear" color="currentColor" />
             </NeoPopButton>
           </div>
         )}
@@ -197,7 +197,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
                 <span className="block text-[11.5px] text-dim">{t.d}</span>
               </span>
               <span className="tnum text-[13.5px] font-bold text-ink">{money(t.a)}</span>
-              <ChevronRight size={16} className="text-faint" />
+              <ArrowRight2 size={16} variant="Linear" color="var(--color-faint)" />
             </button>
           ))}
           <div className="rounded-[10px] bg-surface-2 px-3.5 py-3 text-[11.5px] text-faint">Most disputes are resolved in 3–5 business days. Provisional credit may apply.</div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, Check, X, ShieldCheck, Clock } from "lucide-react";
+import { X } from "lucide-react";
+import { ArrowLeft2, TickCircle, ShieldTick, Clock } from "iconsax-react";
 import { Icon } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { money } from "@/lib/data";
@@ -33,7 +34,7 @@ export function Approvals({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">Approvals</div>
           <div className="text-[11.5px] text-dim">{queue.length ? `${queue.length} pending · ${money(total)}` : "Nothing waiting"}</div>
@@ -62,17 +63,17 @@ export function Approvals({ onBack }: { onBack: () => void }) {
               </div>
 
               <div className="mt-3 flex items-center gap-2 rounded-[9px] bg-caution/8 px-3 py-2">
-                <ShieldCheck size={14} className="flex-none text-caution" strokeWidth={2.2} />
+                <ShieldTick size={14} className="flex-none" variant="Bulk" color="var(--color-caution)" />
                 <span className="text-[11px] text-dim">{p.rule}</span>
               </div>
-              <div className="mt-2 flex items-center gap-1.5 text-[11px] text-faint"><Clock size={12} strokeWidth={2} /> Requested by {p.requester}</div>
+              <div className="mt-2 flex items-center gap-1.5 text-[11px] text-faint"><Clock size={12} variant="Linear" color="currentColor" /> Requested by {p.requester}</div>
 
               <div className="mt-3.5 flex gap-2.5">
                 <button onClick={() => act(p.id, false)} className="flex flex-1 items-center justify-center gap-1.5 rounded-[11px] border border-border py-3 text-[13.5px] font-semibold text-dim">
                   <X size={15} strokeWidth={2.4} /> Reject
                 </button>
                 <NeoPopButton onClick={() => act(p.id, true)} className="flex-1" faceClassName="px-4 py-3 text-[13.5px] font-semibold">
-                  <Check size={15} strokeWidth={2.6} /> Approve
+                  <TickCircle size={15} variant="Bulk" color="currentColor" /> Approve
                 </NeoPopButton>
               </div>
             </motion.div>
@@ -81,7 +82,7 @@ export function Approvals({ onBack }: { onBack: () => void }) {
 
         {queue.length === 0 && (
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center py-16">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go"><Check size={32} strokeWidth={3} /></span>
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go"><TickCircle size={32} variant="Bulk" color="var(--color-go)" /></span>
             <div className="mt-4 font-display text-[19px] font-semibold text-ink">All caught up</div>
             <div className="mt-1 text-[12.5px] text-dim">No payments waiting on you</div>
           </motion.div>

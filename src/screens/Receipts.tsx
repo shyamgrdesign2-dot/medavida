@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ChevronLeft, Camera, Check, Paperclip, AlertTriangle } from "lucide-react";
+import { ArrowLeft2, Camera, TickCircle, Paperclip, Danger } from "iconsax-react";
 import { Icon } from "@/components/ui";
 import { money } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
@@ -34,7 +34,7 @@ export function Receipts({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">Receipts</div>
           <div className="text-[11.5px] text-dim">Snap once · auto-matched to spend</div>
@@ -45,7 +45,7 @@ export function Receipts({ onBack }: { onBack: () => void }) {
         {/* missing alert */}
         {missing.length > 0 && (
           <motion.div variants={item} className="flex items-center gap-3 rounded-[14px] border border-caution/30 bg-caution/8 p-3.5">
-            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-caution/15 text-caution"><AlertTriangle size={18} strokeWidth={2.2} /></span>
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-caution/15 text-caution"><Danger size={18} variant="Bulk" color="currentColor" /></span>
             <span className="flex-1">
               <span className="block text-[13px] font-semibold text-ink">{missing.length} missing receipts</span>
               <span className="block text-[11.5px] text-dim">{money(missing.reduce((s, r) => s + r.amount, 0))} needs a receipt for the books</span>
@@ -54,7 +54,7 @@ export function Receipts({ onBack }: { onBack: () => void }) {
         )}
         {missing.length === 0 && (
           <motion.div variants={item} className="flex items-center gap-3 rounded-[14px] border border-go/30 bg-go/8 p-3.5">
-            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-go/15 text-go"><Check size={20} strokeWidth={2.6} /></span>
+            <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-go/15 text-go"><TickCircle size={20} variant="Bulk" color="var(--color-go)" /></span>
             <span className="text-[13px] font-semibold text-ink">All spend has receipts</span>
           </motion.div>
         )}
@@ -71,9 +71,9 @@ export function Receipts({ onBack }: { onBack: () => void }) {
               </span>
               <span className="tnum flex-none text-[13.5px] font-bold text-ink">{money(r.amount)}</span>
               {r.has ? (
-                <span className="flex flex-none items-center gap-1 rounded-full bg-go/12 px-2 py-1 text-[10.5px] font-bold text-go"><Paperclip size={11} strokeWidth={2.4} />Receipt</span>
+                <span className="flex flex-none items-center gap-1 rounded-full bg-go/12 px-2 py-1 text-[10.5px] font-bold text-go"><Paperclip size={11} variant="Linear" color="currentColor" />Receipt</span>
               ) : (
-                <button onClick={() => add(r.id)} className="flex flex-none items-center gap-1 rounded-full border border-teal/40 px-2.5 py-1 text-[10.5px] font-bold text-teal-2"><Camera size={12} strokeWidth={2.4} />Add</button>
+                <button onClick={() => add(r.id)} className="flex flex-none items-center gap-1 rounded-full border border-teal/40 px-2.5 py-1 text-[10.5px] font-bold text-teal-2"><Camera size={12} variant="Linear" color="currentColor" />Add</button>
               )}
             </div>
           ))}

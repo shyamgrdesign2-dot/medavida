@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ChevronLeft, Check, RefreshCw, Download, Plug, ChevronRight, ArrowRight, Loader } from "lucide-react";
+import { Loader } from "lucide-react";
+import { ArrowLeft2, TickCircle, RefreshCircle, DocumentDownload, Link21, ArrowRight2 } from "iconsax-react";
 import { Toggle } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { haptic } from "@/lib/haptics";
@@ -49,7 +50,7 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">Accounting export</div>
           <div className="text-[11.5px] text-dim">Keep your books in sync</div>
@@ -60,9 +61,9 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
         {/* connection */}
         <motion.div variants={item} className="rounded-[16px] border border-teal/25 bg-teal/8 p-4">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[12px] bg-teal/15 text-teal-2"><Plug size={20} strokeWidth={2.2} /></span>
+            <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[12px] bg-teal/15 text-teal-2"><Link21 size={20} variant="Bulk" color="currentColor" /></span>
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-1.5 text-[14px] font-semibold text-ink">QuickBooks Online <Check size={14} className="text-go" strokeWidth={3} /></div>
+              <div className="flex items-center gap-1.5 text-[14px] font-semibold text-ink">QuickBooks Online <TickCircle size={14} variant="Bulk" color="var(--color-go)" /></div>
               <div className="truncate text-[11.5px] text-dim">Meridian Functional Health · synced 9:12 AM</div>
             </div>
           </div>
@@ -91,7 +92,7 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
           {MAP.map((m, i) => (
             <button key={m.from} onClick={() => haptic("tap")} className={"flex w-full items-center gap-2 py-3 text-left " + (i > 0 ? "border-t border-border-soft" : "")}>
               <span className="flex-1 truncate text-[12.5px] font-semibold text-ink">{m.from}</span>
-              <ArrowRight size={13} className="flex-none text-faint" />
+              <ArrowRight2 size={13} variant="Linear" color="var(--color-faint)" className="flex-none" />
               <span className="flex-1 truncate text-right text-[12px] text-dim">{m.to}</span>
             </button>
           ))}
@@ -101,15 +102,15 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
         <motion.div variants={item} className="mb-2 mt-6 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Other destinations</motion.div>
         <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
           <button onClick={() => haptic("tap")} className="flex w-full items-center gap-3 py-3 text-left">
-            <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[9px] bg-surface-2 text-ink"><Plug size={16} strokeWidth={2} /></span>
+            <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[9px] bg-surface-2 text-ink"><Link21 size={16} variant="Linear" color="currentColor" /></span>
             <span className="flex-1"><span className="block text-[13px] font-semibold text-ink">Xero</span><span className="block text-[11px] text-dim">Not connected</span></span>
             <span className="rounded-full border border-teal/40 px-2.5 py-1 text-[11px] font-bold text-teal-2">Connect</span>
           </button>
           <div className="border-t border-border-soft" />
           <button onClick={() => { haptic("tap"); setToast("CSV exported to Files"); setTimeout(() => setToast(null), 1900); }} className="flex w-full items-center gap-3 py-3 text-left">
-            <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[9px] bg-surface-2 text-ink"><Download size={16} strokeWidth={2} /></span>
+            <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[9px] bg-surface-2 text-ink"><DocumentDownload size={16} variant="Linear" color="currentColor" /></span>
             <span className="flex-1"><span className="block text-[13px] font-semibold text-ink">Export CSV</span><span className="block text-[11px] text-dim">This month · 342 transactions</span></span>
-            <ChevronRight size={16} className="text-faint" />
+            <ArrowRight2 size={16} variant="Linear" color="var(--color-faint)" />
           </button>
         </motion.div>
 
@@ -118,7 +119,7 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
         <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
           {SYNCS.map((s, i) => (
             <div key={s.when} className={"flex items-center gap-3 py-3 " + (i > 0 ? "border-t border-border-soft" : "")}>
-              <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-go/12 text-go"><Check size={15} strokeWidth={2.6} /></span>
+              <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-go/12 text-go"><TickCircle size={15} variant="Bulk" color="currentColor" /></span>
               <span className="flex-1 text-[12.5px] font-medium text-ink">{s.when}</span>
               <span className="text-[11.5px] text-dim">{s.n} synced</span>
             </div>
@@ -128,7 +129,7 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
 
       <div className="flex-none px-5 pb-8 pt-2">
         <NeoPopButton onClick={sync} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
-          {syncing ? <><motion.span animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="inline-flex"><Loader size={17} strokeWidth={2.4} /></motion.span> Syncing…</> : <><RefreshCw size={17} strokeWidth={2.4} /> Sync now</>}
+          {syncing ? <><motion.span animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="inline-flex"><Loader size={17} strokeWidth={2.4} /></motion.span> Syncing…</> : <><RefreshCircle size={17} variant="Linear" color="currentColor" /> Sync now</>}
         </NeoPopButton>
       </div>
 

@@ -2,10 +2,10 @@ import { ReactNode } from "react";
 import { motion } from "motion/react";
 import { haptic } from "@/lib/haptics";
 import {
-  HeartPulse, Pill, Zap, Users, Truck, Building2, Wallet, Send, FileText, CreditCard, Wifi, Droplet,
-  ArrowDownLeft, ArrowUpRight, Plus, ChevronRight, type LucideIcon,
-} from "lucide-react";
-import { Profile, Box, Profile2User, Flash, Building, Card as CardIcon, MoneyChange, type Icon as IconsaxIcon } from "iconsax-react";
+  Profile, Box, Profile2User, Flash, Building, Card as CardIcon, MoneyChange,
+  Activity, Health, Truck, Wifi, Wallet, Send2, DocumentText, Drop,
+  type Icon as IconsaxIcon,
+} from "iconsax-react";
 
 // transaction category → iconsax Bulk icon + accent (varied, not all-green)
 const CAT: Record<string, { Icon: IconsaxIcon; tint: string }> = {
@@ -18,13 +18,14 @@ const CAT: Record<string, { Icon: IconsaxIcon; tint: string }> = {
   fee: { Icon: CardIcon, tint: "#9aa0aa" },
 };
 
-// string → icon map (TXNS/data reference icons by name)
-export const ICONS: Record<string, LucideIcon> = {
-  HeartPulse, Pill, Zap, Users, Truck, Building2, Wallet, Send, FileText, CreditCard, Wifi, Droplet,
+// string → iconsax icon map (TXNS/data reference icons by name)
+export const ICONS: Record<string, IconsaxIcon> = {
+  HeartPulse: Activity, Pill: Health, Zap: Flash, Users: Profile2User, Truck, Building2: Building,
+  Wallet, Send: Send2, FileText: DocumentText, CreditCard: CardIcon, Wifi, Droplet: Drop,
 };
 export const Icon = ({ name, size = 16, ...p }: { name: string; size?: number } & Record<string, unknown>) => {
-  const C = ICONS[name] ?? FileText;
-  return <C size={size} strokeWidth={2} {...p} />;
+  const C = ICONS[name] ?? DocumentText;
+  return <C size={size} variant="Bulk" color="currentColor" {...p} />;
 };
 
 /** Profile avatar — refined monogram badge (muted graphite-teal, subtle sheen). */
@@ -175,5 +176,3 @@ export function TxnRow({ iconName, category, title, sub, amount, dir, chip, onCl
     </motion.button>
   );
 }
-
-export { ArrowDownLeft, ArrowUpRight, Plus, ChevronRight, Wallet, Send, FileText, CreditCard, Users };

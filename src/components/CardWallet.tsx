@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
-import { ChevronUp } from "lucide-react";
+import { ArrowUp2 } from "iconsax-react";
 import { ZevaCard } from "./ZevaCard";
 import { CARDS } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
@@ -35,7 +35,7 @@ export function CardWallet({ width = 320, onCardTap }: { width?: number; onCardT
       {multi && (
         <div className="pointer-events-none absolute left-0 top-1/2 flex -translate-y-1/2 flex-col items-center" style={{ width: GUT }}>
           <motion.div className="flex flex-col items-center" animate={{ y: [0, -3, 0], opacity: [0.45, 1, 0.45] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
-            <ChevronUp size={13} strokeWidth={2.8} style={{ color: "var(--color-teal-2)" }} />
+            <ArrowUp2 size={13} variant="Linear" color="var(--color-teal-2)" />
             <span className="mt-1 font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-faint" style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>swipe</span>
           </motion.div>
         </div>

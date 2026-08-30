@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Plus, Check, ChevronRight } from "lucide-react";
+import { Add, TickCircle, ArrowRight2 } from "iconsax-react";
 import { Icon, Chip, SectionTitle } from "@/components/ui";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { BottomSheet } from "@/components/BottomSheet";
@@ -13,7 +13,7 @@ const chipFor = (s: BillStatus) =>
   s === "upcoming" ? <Chip tone="warn">Upcoming</Chip> :
   s === "autopay" ? <Chip tone="pos">Autopay on</Chip> :
   s === "approval" ? <Chip tone="neg">Needs approval</Chip> :
-  s === "paid" ? <Chip tone="pos"><Check size={10} strokeWidth={3} />Paid</Chip> :
+  s === "paid" ? <Chip tone="pos"><TickCircle size={10} variant="Bulk" color="currentColor" />Paid</Chip> :
   <Chip tone="neutral">Scheduled</Chip>;
 
 export function BillPay() {
@@ -43,7 +43,7 @@ export function BillPay() {
           <div className="font-display text-[22px] font-semibold tracking-tight text-ink">Bill Pay</div>
           <div className="text-[12px] text-dim">{bills.filter((b) => b.status !== "paid").length} bills this cycle</div>
         </div>
-        <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => openNew()}><Plus size={15} strokeWidth={2.4} /> Add</NeoPopButton>
+        <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => openNew()}><Add size={15} variant="Linear" color="currentColor" /> Add</NeoPopButton>
       </div>
 
       {/* due summary card with animated gradient */}
@@ -55,7 +55,7 @@ export function BillPay() {
       </div>
 
       {/* category tiles — up front (research: category grid, not a hidden entry) */}
-      <SectionTitle action={<button onClick={() => openNew()} className="flex items-center gap-0.5 text-[11px] font-semibold text-teal-2">More <ChevronRight size={13} strokeWidth={2.4} /></button>}>Pay a new bill</SectionTitle>
+      <SectionTitle action={<button onClick={() => openNew()} className="flex items-center gap-0.5 text-[11px] font-semibold text-teal-2">More <ArrowRight2 size={13} variant="Linear" color="currentColor" /></button>}>Pay a new bill</SectionTitle>
       <div className="grid grid-cols-5 gap-2">
         {CATEGORIES.map((c) => (
           <motion.button
@@ -70,7 +70,7 @@ export function BillPay() {
               boxShadow: "inset 0 1px 0 var(--glass-hi), inset 0 0 0 1px var(--glass-brd), var(--shadow-card)",
             }}
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal/12 text-teal-2"><c.icon size={16} strokeWidth={2} /></span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal/12 text-teal-2"><c.icon size={16} variant="Bulk" color="var(--color-teal-2)" /></span>
             <span className="text-[9.5px] font-semibold text-dim">{c.label}</span>
           </motion.button>
         ))}
@@ -106,7 +106,7 @@ export function BillPay() {
             {done ? (
               <motion.div key="done" className="flex flex-col items-center py-6" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
                 <motion.div className="flex h-16 w-16 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.5 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 400, damping: 40 }}>
-                  <Check size={30} strokeWidth={3} />
+                  <TickCircle size={30} variant="Bulk" color="var(--color-go)" />
                 </motion.div>
                 <div className="mt-4 font-display text-[20px] font-semibold text-ink">Paid {money(sel.amount)}</div>
                 <div className="mt-1 text-[12.5px] text-dim">{sel.name} · settled instantly</div>
@@ -135,14 +135,14 @@ export function BillPay() {
                           <span className="block text-[13px] font-semibold text-ink">{c.label}</span>
                           <span className="block font-mono text-[10.5px] text-dim">•••• {c.last4} · {c.type}</span>
                         </span>
-                        <span className={"flex h-5 w-5 items-center justify-center rounded-full border " + (on ? "border-teal bg-teal text-on-teal" : "border-border")}>{on && <Check size={12} strokeWidth={3} />}</span>
+                        <span className={"flex h-5 w-5 items-center justify-center rounded-full border " + (on ? "border-teal bg-teal text-on-teal" : "border-border")}>{on && <TickCircle size={12} variant="Bulk" color="currentColor" />}</span>
                       </button>
                     );
                   })}
                 </div>
 
                 <NeoPopButton onClick={pay} className="mt-5 w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
-                  Pay {money(sel.amount)} <ChevronRight size={18} strokeWidth={2.2} />
+                  Pay {money(sel.amount)} <ArrowRight2 size={18} variant="Linear" color="currentColor" />
                 </NeoPopButton>
               </motion.div>
             )}

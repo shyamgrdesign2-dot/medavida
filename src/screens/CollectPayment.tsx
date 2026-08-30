@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ChevronLeft, Check, Delete, Zap, CreditCard, Link2, MessageSquare } from "lucide-react";
+import { Delete } from "lucide-react";
+import { ArrowLeft2, TickCircle, Flash, Card, Link21, Message } from "iconsax-react";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { money } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
@@ -46,23 +47,23 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center bg-bg px-6">
         <motion.div className="flex h-20 w-20 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 360, damping: 40 }}>
-          {link ? <MessageSquare size={36} strokeWidth={2.4} /> : <Check size={40} strokeWidth={3} />}
+          {link ? <Message size={36} variant="Bulk" color="var(--color-go)" /> : <TickCircle size={40} variant="Bulk" color="var(--color-go)" />}
         </motion.div>
         <div className="mt-5 font-display text-[24px] font-semibold text-ink">{link ? "Link sent" : `${money(val)} collected`}</div>
         <div className="mt-1 text-[13px] text-dim">{who} · {PROGRAMS[prog]}</div>
         {link ? (
           <motion.div className="mt-6 w-full max-w-[300px] rounded-[14px] border border-teal/25 bg-teal/8 p-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <div className="flex items-center justify-between text-[12.5px]"><span className="text-dim">Requested</span><span className="tnum font-semibold text-ink">{money(val)}</span></div>
-            <div className="mt-2 flex items-center gap-1.5 text-[12px] text-dim"><MessageSquare size={13} strokeWidth={2.2} className="text-teal-2" /> Sent by SMS &amp; email · secure MetaPay page</div>
+            <div className="mt-2 flex items-center gap-1.5 text-[12px] text-dim"><Message size={13} variant="Linear" color="var(--color-teal-2)" /> Sent by SMS &amp; email · secure MetaPay page</div>
             <div className="my-2.5 border-t border-teal/20" />
-            <div className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Zap size={14} strokeWidth={2.4} />Net {money(net)} lands instantly when they pay</div>
+            <div className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Flash size={14} variant="Linear" color="currentColor" />Net {money(net)} lands instantly when they pay</div>
           </motion.div>
         ) : (
           <motion.div className="mt-6 w-full max-w-[300px] rounded-[14px] border border-teal/25 bg-teal/8 p-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <div className="flex items-center justify-between text-[12.5px]"><span className="text-dim">Collected</span><span className="tnum font-semibold text-ink">{money(val)}</span></div>
             <div className="mt-1.5 flex items-center justify-between text-[12.5px]"><span className="text-dim">MetaPay fee (2%)</span><span className="tnum font-semibold text-ink">−{money(fee)}</span></div>
             <div className="my-2.5 border-t border-teal/20" />
-            <div className="flex items-center justify-between"><span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Zap size={14} strokeWidth={2.4} />Disbursed instantly</span><span className="tnum font-display text-[16px] font-semibold text-ink">{money(net)}</span></div>
+            <div className="flex items-center justify-between"><span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Flash size={14} variant="Linear" color="currentColor" />Disbursed instantly</span><span className="tnum font-display text-[16px] font-semibold text-ink">{money(net)}</span></div>
             <div className="mt-1 text-[10.5px] text-faint">to Operating ···· 5528 · no reconciliation wait</div>
           </motion.div>
         )}
@@ -73,18 +74,18 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div className="font-display text-[18px] font-semibold text-ink">Collect payment</div>
       </div>
 
       {/* method toggle: charge card-on-file now vs. send a payment link */}
       <div className="mx-5 mt-4 grid grid-cols-2 gap-1 rounded-[12px] border border-border bg-surface-2 p-1">
-        {[{ k: false, label: "Charge now", icon: CreditCard }, { k: true, label: "Send link", icon: Link2 }].map((m) => {
+        {[{ k: false, label: "Charge now", icon: Card }, { k: true, label: "Send link", icon: Link21 }].map((m) => {
           const on = link === m.k;
           return (
             <button key={m.label} onClick={() => { haptic("select"); setLink(m.k); }} className="relative flex items-center justify-center gap-1.5 rounded-[9px] py-2.5">
               {on && <motion.span layoutId="collectpill" className="absolute inset-0 rounded-[9px] border border-teal/40 bg-teal/12" transition={{ type: "spring", stiffness: 420, damping: 38 }} />}
-              <m.icon size={14} strokeWidth={2.2} className={"relative " + (on ? "text-teal-2" : "text-dim")} />
+              <m.icon size={14} variant={on ? "Bulk" : "Linear"} color={on ? "var(--color-teal-2)" : "var(--color-dim)"} className="relative" />
               <span className={"relative text-[12.5px] font-semibold " + (on ? "text-ink" : "text-dim")}>{m.label}</span>
             </button>
           );
@@ -114,13 +115,13 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
 
       {/* amount + live fee breakdown */}
       <div className="flex flex-1 flex-col items-center justify-center">
-        <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">{link ? <><Link2 size={13} strokeWidth={2.2} />Request via link</> : <><CreditCard size={13} strokeWidth={2.2} />Charge card on file</>}</div>
+        <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">{link ? <><Link21 size={13} variant="Linear" color="currentColor" />Request via link</> : <><Card size={13} variant="Linear" color="currentColor" />Charge card on file</>}</div>
         {(() => { const d = money(val).replace(".00", ""); const fs = d.length > 9 ? 38 : d.length > 7 ? 44 : 52; return (
           <div className="tnum mt-2 font-display font-semibold leading-none text-ink" style={{ fontSize: fs }}>{d}</div>
         ); })()}
         {val > 0 && (
           <div className="mt-3 flex items-center gap-1.5 rounded-full bg-teal/10 px-3 py-1.5 text-[11.5px] font-medium text-teal-2">
-            <Zap size={13} strokeWidth={2.4} /> Net {money(net).replace(".00", "")} instantly · 2% fee
+            <Flash size={13} variant="Bulk" color="currentColor" /> Net {money(net).replace(".00", "")} instantly · 2% fee
           </div>
         )}
       </div>

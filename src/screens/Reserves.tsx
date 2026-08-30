@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ChevronLeft, Landmark, Zap, Info } from "lucide-react";
+import { ArrowLeft2, Bank, Flash, InfoCircle } from "iconsax-react";
 import { Toggle } from "@/components/ui";
 import { money, money0 } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
@@ -23,7 +23,7 @@ export function Reserves({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">Reserves</div>
           <div className="text-[11.5px] text-dim">Auto-split every dollar you collect</div>
@@ -34,7 +34,7 @@ export function Reserves({ onBack }: { onBack: () => void }) {
         {/* auto-split hero */}
         <motion.div variants={item} className="rounded-[16px] border border-border bg-surface p-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-[12.5px] font-semibold text-ink"><Zap size={15} className="text-teal-2" strokeWidth={2.4} />Auto-split</div>
+            <div className="flex items-center gap-1.5 text-[12.5px] font-semibold text-ink"><Flash size={15} variant="Bulk" color="var(--color-teal-2)" />Auto-split</div>
             <Toggle on={on} onChange={setOn} />
           </div>
           {/* stacked allocation bar */}
@@ -51,7 +51,7 @@ export function Reserves({ onBack }: { onBack: () => void }) {
             ))}
           </div>
           <div className="mt-3 flex items-center gap-1.5 rounded-[9px] bg-teal/8 px-3 py-2 text-[11px] text-dim">
-            <Info size={13} className="flex-none text-teal-2" strokeWidth={2.2} />
+            <InfoCircle size={13} variant="Linear" color="var(--color-teal-2)" className="flex-none" />
             {on ? <>Today <span className="font-semibold text-ink">{money(TODAY_NET)}</span> collected was auto-allocated across your reserves.</> : "Auto-split is off — collections land only in Operating."}
           </div>
         </motion.div>
@@ -62,7 +62,7 @@ export function Reserves({ onBack }: { onBack: () => void }) {
           {BUCKETS.map((b) => (
             <motion.button key={b.id} variants={item} onClick={() => haptic("tap")} className="w-full rounded-[14px] border border-border bg-surface p-4 text-left">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[11px]" style={{ background: `color-mix(in oklab, ${b.tint} 18%, transparent)`, color: b.tint }}><Landmark size={18} strokeWidth={2} /></span>
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[11px]" style={{ background: `color-mix(in oklab, ${b.tint} 18%, transparent)`, color: b.tint }}><Bank size={18} variant="Bulk" color="currentColor" /></span>
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-[14px] font-semibold text-ink">{b.name}</div>
                   <div className="truncate text-[11.5px] text-dim">{b.job}</div>

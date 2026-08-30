@@ -1,5 +1,5 @@
 import { motion, type Variants } from "motion/react";
-import { ChevronLeft, Zap, Download, TrendingUp, ChevronRight } from "lucide-react";
+import { ArrowLeft2, Flash, DocumentDownload, TrendUp, ArrowRight2 } from "iconsax-react";
 import { money, money0 } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
 
@@ -26,13 +26,13 @@ export function Settlement({ onBack }: { onBack: () => void }) {
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center justify-between px-5 pt-4">
         <div className="flex items-center gap-3">
-          <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+          <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
           <div>
             <div className="font-display text-[18px] font-semibold text-ink">Settlement</div>
             <div className="text-[11.5px] text-dim">MetaPay · instant disbursement</div>
           </div>
         </div>
-        <button onClick={() => haptic("tap")} aria-label="Download statement" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-dim"><Download size={16} strokeWidth={2} /></button>
+        <button onClick={() => haptic("tap")} aria-label="Download statement" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-dim"><DocumentDownload size={16} variant="Linear" color="currentColor" /></button>
       </div>
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
@@ -51,7 +51,7 @@ export function Settlement({ onBack }: { onBack: () => void }) {
           </div>
           <div className="my-3 border-t border-teal/20" />
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Zap size={15} strokeWidth={2.4} />Disbursed instantly</span>
+            <span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Flash size={15} variant="Bulk" color="currentColor" />Disbursed instantly</span>
             <span className="tnum font-display text-[20px] font-semibold text-ink">{money(TODAY.net)}</span>
           </div>
           <div className="mt-1.5 rounded-[9px] bg-teal/10 px-3 py-2 text-[11px] text-dim">A traditional processor would clear this in <span className="font-semibold text-ink">2–3 business days</span>. Zeva settled it to Operating ···· 5528 <span className="font-semibold text-teal-2">now</span>.</div>
@@ -69,17 +69,17 @@ export function Settlement({ onBack }: { onBack: () => void }) {
         </motion.div>
 
         {/* daily settlements */}
-        <motion.div variants={item} className="mb-2 mt-6 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-faint"><TrendingUp size={13} strokeWidth={2.4} />Daily settlements</motion.div>
+        <motion.div variants={item} className="mb-2 mt-6 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-faint"><TrendUp size={13} variant="Linear" color="currentColor" />Daily settlements</motion.div>
         <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
           {DAYS.map((d, i) => (
             <button key={d.d} onClick={() => haptic("tap")} className={"flex w-full items-center gap-3 py-3 text-left " + (i > 0 ? "border-t border-border-soft" : "")}>
-              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-teal/10 text-teal-2"><Zap size={15} strokeWidth={2.2} /></span>
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-teal/10 text-teal-2"><Flash size={15} variant="Bulk" color="currentColor" /></span>
               <span className="flex-1">
                 <span className="block text-[13px] font-semibold text-ink">{d.d}</span>
                 <span className="block text-[11px] text-dim">{d.count} payments · net</span>
               </span>
               <span className="tnum text-[13.5px] font-bold text-ink">{money(d.net)}</span>
-              <ChevronRight size={15} className="text-faint" />
+              <ArrowRight2 size={15} variant="Linear" color="var(--color-faint)" />
             </button>
           ))}
         </motion.div>

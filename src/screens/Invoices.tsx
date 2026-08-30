@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ChevronLeft, Plus, Check, Send, FileText } from "lucide-react";
+import { ArrowLeft2, Add, TickCircle, Send2, DocumentText } from "iconsax-react";
 import { Chip } from "@/components/ui";
 import { BottomSheet } from "@/components/BottomSheet";
 import { NeoPopButton } from "@/components/NeoPopButton";
@@ -20,7 +20,7 @@ const INVOICES: Invoice[] = [
 ];
 
 const chipFor = (s: Status) =>
-  s === "paid" ? <Chip tone="pos"><Check size={10} strokeWidth={3} />Paid</Chip> :
+  s === "paid" ? <Chip tone="pos"><TickCircle size={10} variant="Bulk" color="currentColor" />Paid</Chip> :
   s === "overdue" ? <Chip tone="neg">Overdue</Chip> :
   s === "viewed" ? <Chip tone="accent">Viewed</Chip> :
   s === "sent" ? <Chip tone="neutral">Sent</Chip> :
@@ -43,10 +43,10 @@ export function Invoices({ onBack }: { onBack: () => void }) {
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center justify-between px-5 pt-4">
         <div className="flex items-center gap-3">
-          <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+          <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
           <div className="font-display text-[18px] font-semibold text-ink">Invoices</div>
         </div>
-        <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => { haptic("tap"); setToast("New invoice — draft started"); setTimeout(() => setToast(null), 1800); }}><Plus size={15} strokeWidth={2.4} /> New</NeoPopButton>
+        <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => { haptic("tap"); setToast("New invoice — draft started"); setTimeout(() => setToast(null), 1800); }}><Add size={15} variant="Linear" color="currentColor" /> New</NeoPopButton>
       </div>
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
@@ -71,7 +71,7 @@ export function Invoices({ onBack }: { onBack: () => void }) {
         <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
           {INVOICES.map((inv, i) => (
             <button key={inv.id} onClick={() => { haptic("tap"); setSel(inv); }} className={"flex w-full items-center gap-3 py-3 text-left " + (i > 0 ? "border-t border-border-soft" : "")}>
-              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-surface-2 text-teal-2"><FileText size={17} strokeWidth={2} /></span>
+              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-surface-2 text-teal-2"><DocumentText size={17} variant="Bulk" color="currentColor" /></span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-[13.5px] font-semibold text-ink">{inv.patient} · {inv.id}</span>
                 <span className="block truncate text-[11.5px] text-dim">{inv.summary} · {inv.due}</span>
@@ -113,10 +113,10 @@ export function Invoices({ onBack }: { onBack: () => void }) {
             {sel.status !== "paid" && (
               <div className="mt-4 flex gap-2.5">
                 <button onClick={() => ping(`Reminder sent to ${sel.patient}`)} className="flex flex-1 items-center justify-center gap-1.5 rounded-[11px] border border-border py-3.5 text-[13.5px] font-semibold text-dim">
-                  <Send size={15} strokeWidth={2.2} /> Send reminder
+                  <Send2 size={15} variant="Linear" color="currentColor" /> Send reminder
                 </button>
                 <NeoPopButton onClick={() => ping(`${sel.id} marked paid`)} className="flex-1" faceClassName="px-4 py-3 text-[13.5px] font-semibold">
-                  <Check size={15} strokeWidth={2.6} /> Mark paid
+                  <TickCircle size={15} variant="Bulk" color="currentColor" /> Mark paid
                 </NeoPopButton>
               </div>
             )}

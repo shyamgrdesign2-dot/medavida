@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, Check, Building2, Mail, Phone, User, Hash } from "lucide-react";
+import { ArrowLeft2, ArrowRight2, TickCircle, Building, Sms, Call, Profile, Hashtag } from "iconsax-react";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { InputField } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
@@ -36,7 +36,7 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
       <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
         <AnimatedBackground variant="waves" intensity={1} />
         <motion.div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-go/15 text-go" initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 360, damping: 16 }}>
-          <Check size={40} strokeWidth={3} />
+          <TickCircle size={40} variant="Bulk" color="var(--color-go)" />
         </motion.div>
         <motion.div className="relative mt-5 font-display text-[24px] font-semibold text-ink" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.15 }}>Account ready</motion.div>
         <motion.div className="relative mt-1 text-[13px] text-dim" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.25 }}>Setting up {name}…</motion.div>
@@ -51,7 +51,7 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
       {/* progress + header */}
       <div className="relative z-10 flex flex-none items-center gap-3 px-5 pt-4">
         <button onClick={step === 0 ? onSignin : back} className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink">
-          <ChevronLeft size={18} strokeWidth={2} />
+          <ArrowLeft2 size={18} variant="Linear" color="currentColor" />
         </button>
         <div className="flex flex-1 gap-1.5">
           {Array.from({ length: total }).map((_, i) => (
@@ -73,8 +73,8 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
                   <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-teal-2">Step 1 of 3</div>
                   <h1 className="mt-1.5 font-display text-[26px] font-semibold leading-tight tracking-tight text-ink">Tell us about<br />your clinic</h1>
                 </div>
-                <InputField label="Clinic name" value={name} onChange={setName} prefix={<Building2 size={16} className="text-faint" strokeWidth={2} />} />
-                <InputField label="EIN" value={ein} onChange={setEin} placeholder="12-3456789" prefix={<Hash size={16} className="text-faint" strokeWidth={2} />} hint="We verify this instantly, no docs needed." />
+                <InputField label="Clinic name" value={name} onChange={setName} prefix={<Building size={16} variant="Linear" color="var(--color-faint)" />} />
+                <InputField label="EIN" value={ein} onChange={setEin} placeholder="12-3456789" prefix={<Hashtag size={16} variant="Linear" color="var(--color-faint)" />} hint="We verify this instantly, no docs needed." />
                 <div>
                   <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-dim">Clinic type</div>
                   <div className="flex flex-wrap gap-2">
@@ -91,9 +91,9 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
                   <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-teal-2">Step 2 of 3</div>
                   <h1 className="mt-1.5 font-display text-[26px] font-semibold leading-tight tracking-tight text-ink">Who owns<br />the practice?</h1>
                 </div>
-                <InputField label="Full name" value={owner} onChange={setOwner} prefix={<User size={16} className="text-faint" strokeWidth={2} />} />
-                <InputField label="Work email" value={email} onChange={setEmail} placeholder="you@clinic.com" type="email" prefix={<Mail size={16} className="text-faint" strokeWidth={2} />} />
-                <InputField label="Phone" value={phone} onChange={setPhone} placeholder="(512) 555-0142" type="tel" prefix={<Phone size={16} className="text-faint" strokeWidth={2} />} />
+                <InputField label="Full name" value={owner} onChange={setOwner} prefix={<Profile size={16} variant="Linear" color="var(--color-faint)" />} />
+                <InputField label="Work email" value={email} onChange={setEmail} placeholder="you@clinic.com" type="email" prefix={<Sms size={16} variant="Linear" color="var(--color-faint)" />} />
+                <InputField label="Phone" value={phone} onChange={setPhone} placeholder="(512) 555-0142" type="tel" prefix={<Call size={16} variant="Linear" color="var(--color-faint)" />} />
               </div>
             )}
             {step === 2 && (
@@ -112,7 +112,7 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
                           <span className="block text-[13.5px] font-semibold text-ink">{b.label}</span>
                           <span className="block text-[11px] text-dim">{b.sub}</span>
                         </span>
-                        <span className={"flex h-6 w-6 items-center justify-center rounded-full border " + (on ? "border-teal bg-teal text-on-teal" : "border-border")}>{on && <Check size={14} strokeWidth={3} />}</span>
+                        <span className={"flex h-6 w-6 items-center justify-center rounded-full border " + (on ? "border-teal bg-teal text-on-teal" : "border-border")}>{on && <TickCircle size={14} variant="Bulk" color="currentColor" />}</span>
                       </button>
                     );
                   })}
@@ -127,7 +127,7 @@ export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSign
       <div className="relative z-10 flex-none px-6 pb-8 pt-3">
         <NeoPopButton onClick={next} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
           {step < 2 ? "Continue" : "Create account"}
-          <ChevronRight size={18} strokeWidth={2.2} />
+          <ArrowRight2 size={18} variant="Linear" color="currentColor" />
         </NeoPopButton>
       </div>
     </div>

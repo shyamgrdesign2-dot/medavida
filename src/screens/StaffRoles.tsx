@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import type { Variants } from "motion/react";
-import { ChevronLeft, UserPlus, CreditCard, Check } from "lucide-react";
+import { ArrowLeft2, ProfileAdd, Card, TickCircle } from "iconsax-react";
 import { Chip, PatternAvatar } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { haptic } from "@/lib/haptics";
@@ -33,7 +33,7 @@ export function StaffRoles({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
-        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ChevronLeft size={18} strokeWidth={2} /></button>
+        <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
         <div>
           <div className="font-display text-[18px] font-semibold text-ink">Team &amp; permissions</div>
           <div className="text-[11.5px] text-dim">{MEMBERS.length} members · role-based access</div>
@@ -55,7 +55,7 @@ export function StaffRoles({ onBack }: { onBack: () => void }) {
                 <span className="mt-1.5 block text-[11.5px] leading-snug text-dim">{m.can}</span>
               </span>
               <span className="flex flex-none items-center gap-1 text-[10.5px] font-medium text-faint">
-                {m.card ? <><CreditCard size={13} strokeWidth={2} className="text-teal-2" />···{m.card}</> : "No card"}
+                {m.card ? <><Card size={13} variant="Linear" color="var(--color-teal-2)" />···{m.card}</> : "No card"}
               </span>
             </motion.button>
           ))}
@@ -66,7 +66,7 @@ export function StaffRoles({ onBack }: { onBack: () => void }) {
         <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
           {ROLES.map((r, i) => (
             <div key={r.role} className={"flex items-start gap-2.5 py-3 " + (i > 0 ? "border-t border-border-soft" : "")}>
-              <Check size={15} strokeWidth={2.6} className="mt-0.5 flex-none text-teal-2" />
+              <TickCircle size={15} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
               <span>
                 <span className="block text-[13px] font-semibold text-ink">{r.role}</span>
                 <span className="block text-[11.5px] text-dim">{r.desc}</span>
@@ -78,7 +78,7 @@ export function StaffRoles({ onBack }: { onBack: () => void }) {
 
       <div className="flex-none px-5 pb-8 pt-2">
         <NeoPopButton onClick={() => { haptic("success"); setToast("Invite link copied — share with your team"); setTimeout(() => setToast(null), 1900); }} className="w-full" faceClassName="px-5 py-4 text-[15px] font-medium">
-          <UserPlus size={17} strokeWidth={2.4} /> Invite a team member
+          <ProfileAdd size={17} variant="Linear" color="currentColor" /> Invite a team member
         </NeoPopButton>
       </div>
 

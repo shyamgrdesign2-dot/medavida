@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   motion, useMotionValue, useSpring, useTransform, useMotionTemplate, useReducedMotion,
 } from "motion/react";
-import { Wifi, Eye, EyeOff } from "lucide-react";
+import { Wifi, Eye, EyeSlash } from "iconsax-react";
 import type { ZCard } from "@/lib/data";
 import { money } from "@/lib/data";
 import { ZevaMark } from "./ZevaMark";
@@ -177,7 +177,7 @@ export function ZevaCard({ card, interactive = true }: { card: ZCard; interactiv
               </div>
             </div>
           </div>
-          <Wifi size={18} strokeWidth={2} className="rotate-90 opacity-60" />
+          <Wifi size={18} variant="Linear" color="currentColor" className="rotate-90 opacity-60" />
         </div>
 
         {/* balance — the card's own balance, maskable */}
@@ -194,7 +194,7 @@ export function ZevaCard({ card, interactive = true }: { card: ZCard; interactiv
             className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm"
             aria-label={hidden ? "Show balance" : "Hide balance"}
           >
-            {hidden ? <EyeOff size={14} strokeWidth={2} /> : <Eye size={14} strokeWidth={2} />}
+            {hidden ? <EyeSlash size={14} variant="Linear" color="currentColor" /> : <Eye size={14} variant="Linear" color="currentColor" />}
           </button>
         </div>
 
