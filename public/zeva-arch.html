@@ -3,78 +3,166 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zeva Reference Architecture</title>
+<title>Zeva Information Architecture</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
-  :root{ --bg:#0a0b0d; --ink:#f5f6f5; --dim:#9aa0aa; --teal:#23ffed; --line:#1c1f25; }
+  :root{
+    --bg:#eef1f5; --panel:#f6f8fb; --card:#ffffff; --item:#f5f7f9; --line:#e3e6ec; --line-soft:#eceff3;
+    --ink:#14171c; --dim:#5b6270; --faint:#98a0ac;
+    --teal:#07998c; --eyebrow:#0b8f84;
+    --in:#12965c; --out:#b07914; --cards:#6b46d9; --ins:#0b9a8c; --ops:#3563d6; --trust:#0e857a;
+    --shadow:0 1px 2px rgba(18,26,44,.05),0 12px 30px -16px rgba(18,26,44,.16);
+    --tint:11%;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#0a0b0d; --panel:#0d0f12; --card:#15171c; --item:#1a1d23; --line:#2a2d34; --line-soft:#202329;
+    --ink:#f5f6f5; --dim:#9aa0aa; --faint:#63676d;
+    --teal:#23ffed; --eyebrow:#63c8bd;
+    --in:#2fd07a; --out:#f7b955; --cards:#a78bff; --ins:#23ffed; --ops:#6ea8ff; --trust:#7de0c0;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 44px -24px rgba(0,0,0,.85);
+    --tint:16%;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0a0b0d; --panel:#0d0f12; --card:#15171c; --item:#1a1d23; --line:#2a2d34; --line-soft:#202329;
+    --ink:#f5f6f5; --dim:#9aa0aa; --faint:#63676d;
+    --teal:#23ffed; --eyebrow:#63c8bd;
+    --in:#2fd07a; --out:#f7b955; --cards:#a78bff; --ins:#23ffed; --ops:#6ea8ff; --trust:#7de0c0;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 20px 44px -24px rgba(0,0,0,.85);
+    --tint:16%;
+  }
   *{ box-sizing:border-box; }
   html,body{ margin:0; background:var(--bg); color:var(--ink);
-    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
-  .wrap{ width:100%; max-width:1720px; margin:0 auto; padding:clamp(20px,3vw,56px); }
-  header{ padding-bottom:20px; border-bottom:1px solid var(--line); }
+    font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap{ width:100%; max-width:1840px; margin:0 auto; padding:clamp(22px,3.2vw,64px); }
+
+  header.top{ padding-bottom:24px; border-bottom:1px solid var(--line); }
   h1{ font-family:"Sora",sans-serif; font-weight:800; letter-spacing:-.02em; margin:0;
-    font-size:clamp(24px,3vw,40px); }
+    font-size:clamp(28px,3.6vw,52px); line-height:1; }
   h1 .z{ color:var(--teal); }
-  .sub{ margin:.5rem 0 0; color:var(--dim); font-size:clamp(13px,1vw,15px); }
-  .sub a{ color:var(--teal); text-decoration:none; }
-  .legend{ margin-top:14px; display:flex; flex-wrap:wrap; gap:8px 18px;
+  .lead{ margin:.8rem 0 0; color:var(--dim); font-size:clamp(14px,1.1vw,17px); max-width:74ch; line-height:1.55; }
+  .lead a{ color:var(--teal); text-decoration:none; }
+  .stats{ margin-top:20px; display:flex; flex-wrap:wrap; gap:12px; }
+  .stat{ background:var(--card); border:1px solid var(--line); border-radius:13px; padding:12px 18px; box-shadow:var(--shadow); }
+  .stat b{ font-family:"Sora",sans-serif; font-weight:700; font-size:20px; display:block; }
+  .stat small{ color:var(--dim); font-size:12px; font-family:"IBM Plex Mono",monospace; letter-spacing:.03em; }
+
+  section{ margin-top:clamp(38px,4vw,68px); }
+  .eyebrow{ font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:12.5px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--eyebrow); margin:0 0 6px; display:flex; align-items:center; gap:12px; }
+  .eyebrow .n{ display:inline-grid; place-items:center; width:26px; height:26px; border-radius:8px;
+    background:color-mix(in oklab,var(--teal) 16%,transparent); color:var(--teal); }
+  .eyebrow .rule{ flex:1; height:1px; background:var(--line-soft); }
+  .sectitle{ font-family:"Sora",sans-serif; font-weight:700; font-size:clamp(20px,2vw,30px); margin:2px 0 6px; }
+  .sectnote{ color:var(--dim); font-size:14px; max-width:80ch; margin:0 0 22px; line-height:1.55; }
+
+  /* flowchart */
+  .chart{ width:100%; overflow-x:auto; background:var(--panel); border:1px solid var(--line);
+    border-radius:20px; padding:clamp(16px,2vw,34px); box-shadow:var(--shadow); }
+  .mermaid{ width:100%; min-height:520px; }
+  .mermaid svg{ width:100% !important; height:auto !important; max-width:none !important; }
+  .legend{ display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 16px;
     font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--dim); }
   .legend span{ display:inline-flex; align-items:center; gap:7px; }
   .dot{ width:9px; height:9px; border-radius:50%; }
-  .chart{ margin-top:26px; width:100%; overflow-x:auto; }
-  /* mermaid renders responsive; let it fill the width */
-  .mermaid{ width:100%; }
-  .mermaid svg{ width:100% !important; height:auto !important; max-width:none !important; }
-  .foot{ margin-top:34px; padding-top:16px; border-top:1px solid var(--line);
-    color:#63676d; font-family:"IBM Plex Mono",monospace; font-size:12px; }
-  .fallback{ color:var(--dim); font-size:13px; }
+
+  /* screen inventory */
+  .grid{ display:grid; gap:18px; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); }
+  .grp{ margin-top:26px; }
+  .grplabel{ font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--a,var(--teal)); margin:0 0 12px; display:flex; align-items:center; gap:9px; }
+  .grplabel .cd{ width:10px;height:10px;border-radius:50%;background:var(--a,var(--teal)); }
+  .grp.g-in{--a:var(--in);} .grp.g-out{--a:var(--out);} .grp.g-cards{--a:var(--cards);}
+  .grp.g-ins{--a:var(--ins);} .grp.g-ops{--a:var(--ops);} .grp.g-core{--a:var(--teal);} .grp.g-entry{--a:var(--trust);}
+  .scr{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow);
+    border-top:3px solid var(--a,var(--teal)); }
+  .scr h4{ font-family:"Sora",sans-serif; font-weight:700; font-size:16.5px; margin:0 0 2px; }
+  .scr .role{ color:var(--dim); font-size:13px; margin:0 0 12px; line-height:1.45; }
+  .scr .k{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--faint); margin:10px 0 5px; }
+  .scr ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:5px; }
+  .scr li{ font-size:13px; color:var(--ink); padding-left:15px; position:relative; line-height:1.4; }
+  .scr li::before{ content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%;
+    background:var(--a,var(--teal)); opacity:.75; }
+  .scr li.act{ color:var(--dim); }
+  .scr li.act::before{ border-radius:1px; background:var(--dim); opacity:.6; }
+
+  /* flows */
+  .flow{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px;
+    box-shadow:var(--shadow); margin-bottom:16px; }
+  .flow h4{ font-family:"Sora",sans-serif; font-weight:700; font-size:15.5px; margin:0 0 12px; display:flex; gap:9px; align-items:center; }
+  .flow h4 .cd{ width:9px;height:9px;border-radius:50%; }
+  .steps{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+  .step{ background:var(--item); border:1px solid var(--line-soft); border-radius:10px; padding:8px 13px; font-size:13px; font-weight:500; }
+  .arr{ color:var(--faint); font-weight:700; }
+
+  /* global systems */
+  .sys{ display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+  .syscard{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px; box-shadow:var(--shadow); }
+  .syscard h4{ font-family:"Sora",sans-serif; font-weight:700; font-size:15.5px; margin:0 0 6px; }
+  .syscard p{ margin:0; color:var(--dim); font-size:13px; line-height:1.5; }
+
+  .foot{ margin-top:52px; padding-top:20px; border-top:1px solid var(--line);
+    color:var(--faint); font-family:"IBM Plex Mono",monospace; font-size:12px; }
+  .fallback{ color:var(--dim); font-size:13px; padding:12px 0; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1><span class="z">Zeva</span> Reference Architecture</h1>
-      <p class="sub">The money layer for clinics — a MedaVida product. Live prototype:
-        <a href="https://zeva-medavida.vercel.app/">zeva-medavida.vercel.app</a></p>
-      <div class="legend">
-        <span><i class="dot" style="background:#2fd07a"></i>Money in · Zeva Pay</span>
-        <span><i class="dot" style="background:#f7b955"></i>Money out</span>
-        <span><i class="dot" style="background:#a78bff"></i>Cards</span>
-        <span><i class="dot" style="background:#23ffed"></i>Insights</span>
-        <span><i class="dot" style="background:#6ea8ff"></i>Operations</span>
-        <span><i class="dot" style="background:#7de0c0"></i>Trust &amp; platform</span>
-      </div>
-    </header>
+<div class="wrap">
 
+  <header class="top">
+    <h1><span class="z">Zeva</span> — Information Architecture</h1>
+    <p class="lead">The complete map of Zeva, the money layer for clinics — a MedaVida product. How the app is
+      structured, what lives on every screen, the tasks it's built around, and the systems that hold it together.
+      Live prototype: <a href="https://zeva-medavida.vercel.app/">zeva-medavida.vercel.app</a></p>
+    <div class="stats">
+      <div class="stat"><b>5</b><small>core tabs</small></div>
+      <div class="stat"><b>20+</b><small>screens &amp; sheets</small></div>
+      <div class="stat"><b>2</b><small>money directions</small></div>
+      <div class="stat"><b>5</b><small>key task flows</small></div>
+      <div class="stat"><b>Light + Dark</b><small>full theming</small></div>
+    </div>
+  </header>
+
+  <!-- 1 · STRUCTURE -->
+  <section>
+    <p class="eyebrow"><span class="n">1</span> Structure &amp; navigation <span class="rule"></span></p>
+    <h2 class="sectitle">The app as a flow</h2>
+    <p class="sectnote">Entry leads into the App Shell and its five bottom-nav tabs. Home fans out to the two money
+      directions; More opens the operations and trust surfaces. Every money path settles onto one platform foundation.</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--in)"></i>Money in · Zeva Pay</span>
+      <span><i class="dot" style="background:var(--out)"></i>Money out</span>
+      <span><i class="dot" style="background:var(--cards)"></i>Cards</span>
+      <span><i class="dot" style="background:var(--ins)"></i>Insights</span>
+      <span><i class="dot" style="background:var(--ops)"></i>Operations</span>
+      <span><i class="dot" style="background:var(--trust)"></i>Trust &amp; platform</span>
+    </div>
     <div class="chart">
       <pre class="mermaid">
 flowchart TB
   S(["Splash"]) --> O(["Onboarding · story"]) --> G(["Sign in · OTP"]) --> SH{{"App Shell — Bottom Nav"}}
-
   SH --> H["Home"]
   SH --> C["Cards"]
   SH --> AC["Activity"]
   SH --> I["Insights"]
   SH --> MR["More"]
-
   H --> MI
   H --> MO
   C --> CM
-  AC --> LG["Activity ledger<br/>search · filters"]
+  AC --> LG["Activity ledger<br/>search · filters · detail"]
   I --> IN
   MR --> OP
   MR --> TR
 
   subgraph MI["Money In · Zeva Pay"]
     direction TB
-    MI1["Collect payment<br/>card-on-file / pay-link"] --> MI2["Fee engine · 2%<br/>patient ID + Rx memo"] --> MI3["Instant disbursement"]
+    MI1["Collect payment"] --> MI2["Fee engine · 2%<br/>patient ID + Rx memo"] --> MI3["Instant disbursement"]
     MI4["Settlement"]
     MI5["Memberships · MRR"]
     MI6["Invoices"]
   end
-
   subgraph MO["Money Out"]
     direction TB
     MO1["Send / Move money"]
@@ -82,34 +170,29 @@ flowchart TB
     MO3["Reserves · auto-split"]
     MO4["Approvals"]
   end
-
   subgraph CM["Cards"]
     direction TB
     CM1["Debit · Credit · Virtual"]
     CM2["Freeze · spend controls"]
     CM3["Statements · disputes"]
   end
-
   subgraph IN["Insights"]
     direction TB
     IN1["KPIs · cashflow"]
     IN2["Revenue by program"]
   end
-
   subgraph OP["Operations &amp; Books"]
     direction TB
-    OP1["Receipts · auto-match"]
+    OP1["Receipts"]
     OP2["Accounting export"]
     OP3["1099 &amp; vendors"]
     OP4["Team &amp; roles"]
   end
-
   subgraph TR["Trust &amp; Compliance"]
     direction TB
     TR1["FDIC · sponsor bank"]
-    TR2["PCI-DSS L1 · HIPAA · SOC 2"]
+    TR2["PCI · HIPAA · SOC 2"]
   end
-
   MI --> PL
   MO --> PL
   CM --> PL
@@ -125,44 +208,153 @@ flowchart TB
   style SH fill:#0f2b28,stroke:#1f5a54,color:#23ffed
   style PL fill:#0f2b28,stroke:#1f5a54,color:#8fe6df
       </pre>
+      <p class="fallback" id="fb" hidden>Diagram couldn't load — see the screen map below.</p>
     </div>
-    <p class="fallback" id="fb" hidden>Diagram couldn't load. View the live prototype at zeva-medavida.vercel.app</p>
+  </section>
 
-    <p class="foot">Zeva · a MedaVida product · prototype: https://zeva-medavida.vercel.app/</p>
-  </div>
+  <!-- 2 · SCREEN INVENTORY -->
+  <section>
+    <p class="eyebrow"><span class="n">2</span> Screen inventory <span class="rule"></span></p>
+    <h2 class="sectitle">Every screen, what it holds, what it does</h2>
+    <p class="sectnote">Each surface with its role, the content on it, and the actions it supports — grouped by the
+      area of the app it belongs to.</p>
 
-  <script type="module">
-    try {
-      const mermaid = (await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')).default;
-      mermaid.initialize({
-        startOnLoad: false,
-        securityLevel: 'loose',
-        theme: 'base',
-        themeVariables: {
-          fontFamily: 'IBM Plex Sans, ui-sans-serif, sans-serif',
-          fontSize: '15px',
-          background: '#0a0b0d',
-          primaryColor: '#16181d',
-          primaryTextColor: '#eef0f1',
-          primaryBorderColor: '#2f333b',
-          secondaryColor: '#16181d',
-          tertiaryColor: '#0f1113',
-          lineColor: '#5a616b',
-          clusterBkg: '#0e1215',
-          clusterBorder: '#2a2f37',
-          titleColor: '#e7e9ea',
-          nodeTextColor: '#eef0f1',
-          edgeLabelBackground: '#0a0b0d'
-        },
-        flowchart: { htmlLabels: true, curve: 'basis', nodeSpacing: 34, rankSpacing: 60, padding: 14, useMaxWidth: true }
-      });
-      await mermaid.run({ querySelector: '.mermaid' });
-    } catch (e) {
-      console.error('mermaid failed', e);
-      const fb = document.getElementById('fb');
-      fb.hidden = false;
-      fb.textContent = 'Diagram error: ' + (e && e.message ? e.message : e);
-    }
-  </script>
+    <div class="grp g-entry">
+      <p class="grplabel"><i class="cd"></i>Entry &amp; onboarding</p>
+      <div class="grid">
+        <div class="scr"><h4>Splash</h4><p class="role">Branded load-in; hands off to onboarding.</p>
+          <div class="k">On screen</div><ul><li>Animated Zeva mark</li></ul></div>
+        <div class="scr"><h4>Onboarding</h4><p class="role">A swipeable story that frames the value.</p>
+          <div class="k">On screen</div><ul><li>Card, money-in/out, instant-payout, bill-pay slides</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Swipe / tap between slides · Get started</li></ul></div>
+        <div class="scr"><h4>Sign in</h4><p class="role">Passwordless entry.</p>
+          <div class="k">On screen</div><ul><li>Phone field · 6-digit OTP</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Send code · verify · sign in</li></ul></div>
+      </div>
+    </div>
+
+    <div class="grp g-core">
+      <p class="grplabel"><i class="cd"></i>Core tabs</p>
+      <div class="grid">
+        <div class="scr"><h4>Home</h4><p class="role">Card-first dashboard — the daily landing.</p>
+          <div class="k">On screen</div><ul><li>Card wallet (swipe · gyro tilt)</li><li>Available balance</li><li>Highlights: payout, GLP-1, rent, net</li><li>Recent activity feed</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Collect · Send · Bill Pay · Cards</li><li class="act">Notifications · profile · See all</li></ul></div>
+        <div class="scr"><h4>Cards</h4><p class="role">Manage the clinic's cards.</p>
+          <div class="k">On screen</div><ul><li>Card carousel (debit / credit)</li><li>Credit usage · cash back</li><li>Card controls list</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Issue · freeze · Add to Wallet · statements · dispute</li></ul></div>
+        <div class="scr"><h4>Activity</h4><p class="role">The full money ledger.</p>
+          <div class="k">On screen</div><ul><li>Search bar</li><li>Filters: in / out / patients / suppliers / bills</li><li>Itemized transactions</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Search · filter · open detail sheet</li></ul></div>
+        <div class="scr"><h4>Insights</h4><p class="role">How the clinic's money moves.</p>
+          <div class="k">On screen</div><ul><li>Period filter · KPIs</li><li>Cashflow in-vs-out chart</li><li>Revenue by program · spend donut</li></ul></div>
+        <div class="scr"><h4>More</h4><p class="role">Everything else — a feature hub.</p>
+          <div class="k">On screen</div><ul><li>Clinic profile · Approvals alert</li><li>Bento grid of features</li><li>Accounts · appearance · preferences</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Open any feature · switch theme · sign out</li></ul></div>
+      </div>
+    </div>
+
+    <div class="grp g-in">
+      <p class="grplabel"><i class="cd"></i>Money in · Zeva Pay</p>
+      <div class="grid">
+        <div class="scr"><h4>Collect payment</h4><p class="role">The core inflow — patient pays, clinic gets net instantly.</p>
+          <div class="k">On screen</div><ul><li>Charge-now / send-link toggle</li><li>Patient picker · program memo</li><li>Amount keypad · live 2% fee → net</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Charge card on file · send secure pay-link</li></ul></div>
+        <div class="scr"><h4>Settlement</h4><p class="role">Proof that money landed now, not in days.</p>
+          <div class="k">On screen</div><ul><li>Today's collected · fee · net</li><li>Instant vs 2–3 day comparison</li><li>Daily settlement history</li></ul></div>
+        <div class="scr"><h4>Memberships</h4><p class="role">Recurring patient programs.</p>
+          <div class="k">On screen</div><ul><li>Monthly recurring revenue</li><li>Active plans · member counts</li><li>Failed-charge dunning</li></ul>
+          <div class="k">Actions</div><ul><li class="act">New plan · retry failed charge</li></ul></div>
+        <div class="scr"><h4>Invoices</h4><p class="role">Bill patients and track it.</p>
+          <div class="k">On screen</div><ul><li>Outstanding · overdue · paid</li><li>Invoice list with status</li><li>Line-item detail sheet</li></ul>
+          <div class="k">Actions</div><ul><li class="act">New · send reminder · mark paid</li></ul></div>
+      </div>
+    </div>
+
+    <div class="grp g-out">
+      <p class="grplabel"><i class="cd"></i>Money out</p>
+      <div class="grid">
+        <div class="scr"><h4>Send / Move money</h4><p class="role">Pay out or shuffle between accounts.</p>
+          <div class="k">On screen</div><ul><li>Recipient / account picker</li><li>Amount keypad</li><li>Funding-account selector</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Send · move · guarded against overdraw</li></ul></div>
+        <div class="scr"><h4>Bill Pay</h4><p class="role">One hub for rent, utilities, vendors.</p>
+          <div class="k">On screen</div><ul><li>Due this cycle</li><li>Category tiles · recurring bills</li><li>Pay-new-bill flow (provider → fetch → pay)</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Pay · autopay · add a bill</li></ul></div>
+        <div class="scr"><h4>Reserves</h4><p class="role">Profit-First auto-split of every dollar.</p>
+          <div class="k">On screen</div><ul><li>Auto-split allocation bar</li><li>Operating · Payroll · Supplies · Tax</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Toggle auto-split · adjust buckets</li></ul></div>
+        <div class="scr"><h4>Approvals</h4><p class="role">Sign-off before big money leaves.</p>
+          <div class="k">On screen</div><ul><li>Pending payments · reason flags</li><li>Requested-by &amp; amount</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Approve · reject</li></ul></div>
+      </div>
+    </div>
+
+    <div class="grp g-ops">
+      <p class="grplabel"><i class="cd"></i>Operations &amp; books</p>
+      <div class="grid">
+        <div class="scr"><h4>Receipts</h4><p class="role">Close the paper gap.</p>
+          <div class="k">On screen</div><ul><li>Missing-receipt alert</li><li>Card &amp; supplier spend rows</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Snap · auto-match to a transaction</li></ul></div>
+        <div class="scr"><h4>Accounting export</h4><p class="role">Books stay in sync.</p>
+          <div class="k">On screen</div><ul><li>QuickBooks / Xero / CSV</li><li>Category-to-ledger mapping</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Sync on approval / creation / manual</li></ul></div>
+        <div class="scr"><h4>1099 &amp; vendors</h4><p class="role">Contractor tax, handled.</p>
+          <div class="k">On screen</div><ul><li>Reportable total · $600 threshold flags</li><li>W-9 status per vendor</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Request W-9 · prepare 1099-NEC</li></ul></div>
+        <div class="scr"><h4>Team &amp; roles</h4><p class="role">Who can touch the money.</p>
+          <div class="k">On screen</div><ul><li>Members · roles · card access</li><li>Owner / manager / front desk / bookkeeper</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Invite a team member</li></ul></div>
+        <div class="scr"><h4>Trust &amp; security</h4><p class="role">Bank-grade, healthcare-ready.</p>
+          <div class="k">On screen</div><ul><li>FDIC via sponsor bank</li><li>PCI-DSS L1 · HIPAA · SOC 2</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · FLOWS -->
+  <section>
+    <p class="eyebrow"><span class="n">3</span> Key task flows <span class="rule"></span></p>
+    <h2 class="sectitle">The jobs the app is built around</h2>
+    <p class="sectnote">The handful of end-to-end journeys the whole architecture serves.</p>
+    <div class="flow"><h4><i class="cd" style="background:var(--in)"></i>Collect a payment</h4>
+      <div class="steps"><span class="step">Home · Collect</span><span class="arr">→</span><span class="step">Pick patient</span><span class="arr">→</span><span class="step">Tag program</span><span class="arr">→</span><span class="step">Enter amount</span><span class="arr">→</span><span class="step">Charge / send link</span><span class="arr">→</span><span class="step">Net disbursed instantly</span></div></div>
+    <div class="flow"><h4><i class="cd" style="background:var(--out)"></i>Pay a bill</h4>
+      <div class="steps"><span class="step">Bill Pay</span><span class="arr">→</span><span class="step">Category</span><span class="arr">→</span><span class="step">Provider</span><span class="arr">→</span><span class="step">Fetch bill</span><span class="arr">→</span><span class="step">Choose card</span><span class="arr">→</span><span class="step">Pay</span></div></div>
+    <div class="flow"><h4><i class="cd" style="background:var(--out)"></i>Send money</h4>
+      <div class="steps"><span class="step">Home · Send</span><span class="arr">→</span><span class="step">Recipient</span><span class="arr">→</span><span class="step">From account</span><span class="arr">→</span><span class="step">Amount</span><span class="arr">→</span><span class="step">Send</span></div></div>
+    <div class="flow"><h4><i class="cd" style="background:var(--cards)"></i>Issue &amp; control a card</h4>
+      <div class="steps"><span class="step">Cards · Issue</span><span class="arr">→</span><span class="step">Restrict to vendors</span><span class="arr">→</span><span class="step">Set spend controls</span><span class="arr">→</span><span class="step">Freeze / dispute anytime</span></div></div>
+    <div class="flow"><h4><i class="cd" style="background:var(--ops)"></i>Close the books</h4>
+      <div class="steps"><span class="step">Receipts · snap</span><span class="arr">→</span><span class="step">Auto-match</span><span class="arr">→</span><span class="step">Map categories</span><span class="arr">→</span><span class="step">Export to QuickBooks / Xero</span></div></div>
+  </section>
+
+  <!-- 4 · GLOBAL SYSTEMS -->
+  <section>
+    <p class="eyebrow"><span class="n">4</span> Global systems <span class="rule"></span></p>
+    <h2 class="sectitle">Patterns that run app-wide</h2>
+    <p class="sectnote">The reusable models every screen inherits.</p>
+    <div class="sys">
+      <div class="syscard"><h4>Navigation</h4><p>Five persistent bottom-nav tabs (Home · Cards · Activity · Insights · More). Deeper surfaces open as full-screen pushed overlays; quick choices as drag-to-dismiss bottom sheets.</p></div>
+      <div class="syscard"><h4>Card system</h4><p>A metallic, gyroscope-reactive card is the hero object — it tilts to device motion. Variants: operating debit, credit, and instant virtual cards.</p></div>
+      <div class="syscard"><h4>Money model</h4><p>Two directions, one ledger: money in through Zeva Pay (2% · instant), money out through cards &amp; bill pay. Every dollar is tagged with patient ID + Rx.</p></div>
+      <div class="syscard"><h4>Theming</h4><p>A full light and dark system with theme-aware accents, elevation, and the brand mark — dark by default, switchable under More.</p></div>
+      <div class="syscard"><h4>Roles &amp; approvals</h4><p>Role-based access shapes what each member sees and does; high-value money movement routes to owner approval.</p></div>
+      <div class="syscard"><h4>States</h4><p>Every flow resolves to a clear success moment; empty, loading, and guarded (insufficient-funds, missing-W-9) states are designed, not afterthoughts.</p></div>
+    </div>
+  </section>
+
+  <p class="foot">Zeva · a MedaVida product · Information Architecture · prototype: https://zeva-medavida.vercel.app/</p>
+</div>
+
+<script type="module">
+  try{
+    const mermaid=(await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')).default;
+    mermaid.initialize({ startOnLoad:false, securityLevel:'loose', theme:'base',
+      themeVariables:{ fontFamily:'IBM Plex Sans, ui-sans-serif, sans-serif', fontSize:'15px',
+        background:'#0a0b0d', primaryColor:'#16181d', primaryTextColor:'#eef0f1', primaryBorderColor:'#2f333b',
+        secondaryColor:'#16181d', tertiaryColor:'#0f1113', lineColor:'#5a616b',
+        clusterBkg:'#0e1215', clusterBorder:'#2a2f37', titleColor:'#e7e9ea', nodeTextColor:'#eef0f1', edgeLabelBackground:'#0a0b0d' },
+      flowchart:{ htmlLabels:true, curve:'basis', nodeSpacing:36, rankSpacing:62, padding:16, useMaxWidth:true } });
+    await mermaid.run({ querySelector:'.mermaid' });
+  }catch(e){ console.error(e); document.getElementById('fb').hidden=false; }
+</script>
 </body>
 </html>
