@@ -90,9 +90,9 @@
    frosted-glass gloss, and quiet teal washes (shared by system-light + toggle) */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --color-bg: #edeff3; --color-surface: #ffffff; --color-surface-2: #f4f6f9; --color-surface-3: #e8ebf1;
+    --color-bg: #f7f9fc; --color-surface: #ffffff; --color-surface-2: #f5f7fa; --color-surface-3: #eceff4;
     --color-border: #e3e6ec; --color-border-soft: #eef1f5;
-    --color-ink: #14171c; --color-dim: #5b6270; --color-faint: #949cab; --color-teal-2: #07998c;
+    --color-ink: #0e0f11; --color-dim: #565d6b; --color-faint: #a2a6ad; --color-teal-2: #07998c;
     --color-go: #12a35f; --color-caution: #bd7d0a; --color-stop: #e5484d;
     --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
     --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
@@ -104,11 +104,14 @@
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
     --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
     --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
+    /* MedaVida brand: Poppins display + Inter body in light mode */
+    --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
     --chart-out: #cdd4de;
   }
 }
 :root[data-theme="light"] {
-  --color-bg: #edeff3; --color-surface: #ffffff; --color-surface-2: #f4f6f9; --color-surface-3: #e8ebf1;
+  --color-bg: #f7f9fc; --color-surface: #ffffff; --color-surface-2: #f5f7fa; --color-surface-3: #eceff4;
   --color-border: #e3e6ec; --color-border-soft: #eef1f5;
   --color-ink: #14171c; --color-dim: #5b6270; --color-faint: #949cab; --color-teal-2: #07998c;
   --color-go: #12a35f; --color-caution: #bd7d0a; --color-stop: #e5484d;
@@ -122,6 +125,9 @@
   --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
   --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
     --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
+    /* MedaVida brand: Poppins display + Inter body in light mode */
+    --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
     --chart-out: #cdd4de;
 }
 
@@ -206,6 +212,14 @@ body {
 .np-primary { --face: var(--grad-teal); --edge: #0a9d90; --np-ink: var(--color-on-teal); }
 .np-dark { --face: var(--color-surface-2); --edge: #050506; --np-ink: var(--color-ink); }
 .np-dark .np-face { box-shadow: inset 0 0 0 1px var(--color-border); }
+
+/* MedaVida brand — in LIGHT mode the primary CTA is black (teal stays the accent) */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) .np,
+  :root:not([data-theme="dark"]) .np-primary { --face: #121417; --edge: #000000; --np-ink: #ffffff; }
+}
+:root[data-theme="light"] .np,
+:root[data-theme="light"] .np-primary { --face: #121417; --edge: #000000; --np-ink: #ffffff; }
 
 /* =========================================================================
    Grid pattern — subtle NeoPop-style substrate for depth behind heroes.
