@@ -29,7 +29,7 @@ export function Settlement({ onBack }: { onBack: () => void }) {
           <button onClick={() => { haptic("tap"); onBack(); }} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-ink"><ArrowLeft2 size={18} variant="Linear" color="currentColor" /></button>
           <div>
             <div className="font-display text-[18px] font-semibold text-ink">Settlement</div>
-            <div className="text-[11.5px] text-dim">MetaPay · instant disbursement</div>
+            <div className="text-[11.5px] text-dim">Zeva Pay · instant disbursement</div>
           </div>
         </div>
         <button onClick={() => haptic("tap")} aria-label="Download statement" className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-dim"><DocumentDownload size={16} variant="Linear" color="currentColor" /></button>
@@ -45,7 +45,7 @@ export function Settlement({ onBack }: { onBack: () => void }) {
               <div className="tnum font-display text-[22px] font-semibold text-ink">{money(TODAY.gross)}</div>
             </div>
             <div className="text-right">
-              <div className="text-[11px] text-dim">MetaPay fee (2%)</div>
+              <div className="text-[11px] text-dim">Zeva Pay fee (2%)</div>
               <div className="tnum font-display text-[16px] font-semibold text-ink">−{money(TODAY.fee)}</div>
             </div>
           </div>

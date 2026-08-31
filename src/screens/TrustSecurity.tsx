@@ -55,7 +55,7 @@ export function TrustSecurity({ onBack }: { onBack: () => void }) {
         </div>
 
         <motion.div variants={item} className="mt-4 text-center text-[10.5px] leading-relaxed text-faint">
-          Deposits held at Anchor Trust Bank, N.A., Member FDIC. Zeva is a technology company and not a bank. Card issuance and processing by MetaPay. This is a prototype for demonstration.
+          Deposits held at Anchor Trust Bank, N.A., Member FDIC. Zeva is a technology company and not a bank. Card issuance and processing by Zeva Pay. This is a prototype for demonstration.
         </motion.div>
       </motion.div>
     </div>

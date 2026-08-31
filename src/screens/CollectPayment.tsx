@@ -7,7 +7,7 @@ import { money } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
 
 // Recent patients (card-on-file) + a "new" option. Inflow is the core value prop:
-// patient pays via MetaPay → ~2% fee → clinic gets net disbursed INSTANTLY.
+// patient pays via Zeva Pay → ~2% fee → clinic gets net disbursed INSTANTLY.
 const PATIENTS = [
   { id: "MFH-2831", initials: "AR" },
   { id: "MFH-2830", initials: "JT" },
@@ -54,14 +54,14 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
         {link ? (
           <motion.div className="mt-6 w-full max-w-[300px] rounded-[14px] border border-teal/25 bg-teal/8 p-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <div className="flex items-center justify-between text-[12.5px]"><span className="text-dim">Requested</span><span className="tnum font-semibold text-ink">{money(val)}</span></div>
-            <div className="mt-2 flex items-center gap-1.5 text-[12px] text-dim"><Message size={13} variant="Linear" color="var(--color-teal-2)" /> Sent by SMS &amp; email · secure MetaPay page</div>
+            <div className="mt-2 flex items-center gap-1.5 text-[12px] text-dim"><Message size={13} variant="Linear" color="var(--color-teal-2)" /> Sent by SMS &amp; email · secure Zeva Pay page</div>
             <div className="my-2.5 border-t border-teal/20" />
             <div className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Flash size={14} variant="Linear" color="currentColor" />Net {money(net)} lands instantly when they pay</div>
           </motion.div>
         ) : (
           <motion.div className="mt-6 w-full max-w-[300px] rounded-[14px] border border-teal/25 bg-teal/8 p-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <div className="flex items-center justify-between text-[12.5px]"><span className="text-dim">Collected</span><span className="tnum font-semibold text-ink">{money(val)}</span></div>
-            <div className="mt-1.5 flex items-center justify-between text-[12.5px]"><span className="text-dim">MetaPay fee (2%)</span><span className="tnum font-semibold text-ink">−{money(fee)}</span></div>
+            <div className="mt-1.5 flex items-center justify-between text-[12.5px]"><span className="text-dim">Zeva Pay fee (2%)</span><span className="tnum font-semibold text-ink">−{money(fee)}</span></div>
             <div className="my-2.5 border-t border-teal/20" />
             <div className="flex items-center justify-between"><span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-teal-2"><Flash size={14} variant="Linear" color="currentColor" />Disbursed instantly</span><span className="tnum font-display text-[16px] font-semibold text-ink">{money(net)}</span></div>
             <div className="mt-1 text-[10.5px] text-faint">to Operating ···· 5528 · no reconciliation wait</div>

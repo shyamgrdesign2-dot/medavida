@@ -35,6 +35,6 @@ Concrete patterns to apply across Zeva. Source: web research 2026-08-30.
 ## Gap analysis (2026-08-30) — prioritized build order
 Biggest gap = INFLOW/collection (the core value prop; money just "appeared" in the feed).
 P0: (1) Collect/Get-Paid hub, (2) **charge card-on-file [DONE — CollectPayment.tsx]**, (3) payment links + text-to-pay (SMS/QR, no-login pay page — highest ROI in healthcare), (4) invoices (itemized visit+labs+supplements, reminders, auto-match), (5) memberships/recurring (GLP-1 monthly subscriptions, auto-charge, dunning), (6) approvals flow (make "needs approval" chips real; separate approver from payer), (7) staff roles/multi-user (Owner/Bookkeeper/Front-desk), (8) trust/FDIC/sponsor-bank + HIPAA disclosure.
-P1: (9) QuickBooks/Xero export, (10) receipts+auto-memo on outflows, (11) 1099/vendor tax, (12) MetaPay settlement/reconciliation proof screen, (13) Rx supply orders (BOM tied to patient), (14) reserves/sub-accounts with jobs (Profit-First buckets).
+P1: (9) QuickBooks/Xero export, (10) receipts+auto-memo on outflows, (11) 1099/vendor tax, (12) Zeva Pay settlement/reconciliation proof screen, (13) Rx supply orders (BOM tied to patient), (14) reserves/sub-accounts with jobs (Profit-First buckets).
 P2: (15) instant-payout rewards/streaks, (16) proactive AI insight stream tied to actions, (17) limits/controls screen, (18) failed-payment dunning/retry.
 Competitors cited: Mercury/Ramp/Relay/Novo/Brex (business), CRED/Jupiter/Fi (polish), Rectangle Health/Tebra/mConsent (healthcare collection).
