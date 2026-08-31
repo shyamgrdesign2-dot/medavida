@@ -84,7 +84,7 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
                 {statusChip(v)}
               </div>
               {v.eligible && !v.w9 && (
-                <button onClick={() => requestW9(v.id)} className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-[10px] border border-teal/40 py-2.5 text-[12px] font-semibold text-teal-2">
+                <button onClick={() => requestW9(v.id)} className="sec-btn mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-[10px] border border-teal/40 py-2.5 text-[12px] font-semibold text-teal-2">
                   <Send2 size={13} variant="Linear" color="currentColor" /> Request W-9
                 </button>
               )}

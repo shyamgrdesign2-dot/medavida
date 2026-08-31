@@ -69,7 +69,7 @@ export function Approvals({ onBack }: { onBack: () => void }) {
               <div className="mt-2 flex items-center gap-1.5 text-[11px] text-faint"><Clock size={12} variant="Linear" color="currentColor" /> Requested by {p.requester}</div>
 
               <div className="mt-3.5 flex gap-2.5">
-                <button onClick={() => act(p.id, false)} className="flex flex-1 items-center justify-center gap-1.5 rounded-[11px] border border-border py-3 text-[13.5px] font-semibold text-dim">
+                <button onClick={() => act(p.id, false)} className="sec-btn flex flex-1 items-center justify-center gap-1.5 rounded-[11px] border border-border py-3 text-[13.5px] font-semibold text-dim">
                   <X size={15} strokeWidth={2.4} /> Reject
                 </button>
                 <NeoPopButton onClick={() => act(p.id, true)} className="flex-1" faceClassName="px-4 py-3 text-[13.5px] font-semibold">

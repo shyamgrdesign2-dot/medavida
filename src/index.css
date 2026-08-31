@@ -221,6 +221,13 @@ body {
 :root[data-theme="light"] .np,
 :root[data-theme="light"] .np-primary { --face: #121417; --edge: #000000; --np-ink: #ffffff; }
 
+/* MedaVida brand — secondary buttons are white with a black outline in LIGHT mode
+   (dark mode keeps their original teal/grey styling; no rule fires there). */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) .sec-btn{ background:#ffffff; border-color:#121417; color:#121417; }
+}
+:root[data-theme="light"] .sec-btn{ background:#ffffff; border-color:#121417; color:#121417; }
+
 /* =========================================================================
    Grid pattern — subtle NeoPop-style substrate for depth behind heroes.
    ========================================================================= */

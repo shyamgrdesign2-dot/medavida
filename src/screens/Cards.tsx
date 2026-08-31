@@ -217,7 +217,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
               <div className="mt-1 pl-[23px] text-[12px] leading-relaxed text-dim">{f.a}</div>
             </div>
           ))}
-          <button onClick={() => haptic("tap")} className="mt-1 flex items-center justify-center gap-1.5 rounded-[11px] bg-teal/10 py-3 text-[12.5px] font-semibold text-teal-2">
+          <button onClick={() => haptic("tap")} className="sec-btn mt-1 flex items-center justify-center gap-1.5 rounded-[11px] border border-transparent bg-teal/10 py-3 text-[12.5px] font-semibold text-teal-2">
             <Headphone size={16} variant="Bulk" color="currentColor" /> Still stuck? Chat with support
           </button>
         </div>
