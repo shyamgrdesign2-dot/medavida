@@ -35,14 +35,17 @@ Signature Zeva touches layered on top: a **metallic gyroscope card** that tilts 
 
 ---
 
-## App architecture
+## App architecture & information architecture
 
-**Interactive flowchart →** https://zeva-medavida.vercel.app/zeva-arch.html
-*(full-width, opens in any browser — no login)*
+**Full information architecture →** https://zeva-medavida.vercel.app/zeva-arch.html
+*(opens in any browser, full-width, no login)*
 
-![Zeva — App Architecture](zeva-architecture.svg)
+The complete map of the app: a structure flowchart, a screen-by-screen inventory (what's on
+each screen and what you can do), the key task flows, and the global systems.
 
-*Entry (Splash → Onboarding → Sign-in) leads into the App Shell and its five tabs. **Home** fans out to the two money directions — **Money In · Zeva Pay** and **Money Out** — while **More** houses **Operations & Books**. Everything settles onto the platform/trust foundation.*
+In short: entry (Splash → Onboarding → Sign-in) leads into the App Shell and its five tabs.
+**Home** fans out to the two money directions — **Money In · Zeva Pay** and **Money Out** —
+while **More** houses **Operations & Books**. Everything settles onto the platform/trust foundation.
 
 ---
 
