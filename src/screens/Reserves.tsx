@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
 import { ArrowLeft2, Bank, Flash, InfoCircle } from "iconsax-react";
-import { Toggle } from "@/components/ui";
+import { Toggle, Explainer } from "@/components/ui";
 import { money, money0 } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
 
@@ -32,12 +32,8 @@ export function Reserves({ onBack }: { onBack: () => void }) {
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
         {/* what this is — plain-language explainer */}
-        <motion.div variants={item} className="mb-4 flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
-          <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
-          <div>
-            <div className="text-[12.5px] font-semibold text-ink">What are reserves?</div>
-            <div className="mt-0.5 text-[11.5px] leading-snug text-dim">Reserves are set-aside pots inside your balance — for tax, payroll and supplies. With auto-split on, every dollar you collect is divided across them by the % below, so the money is ready before the bill is. Turn it off and everything lands in Operating; you move funds yourself. It's tracking only — no separate bank accounts.</div>
-          </div>
+        <motion.div variants={item}>
+          <Explainer title="What are reserves?">Reserves are set-aside pots inside your balance — for tax, payroll and supplies. With auto-split on, every dollar you collect is divided across them by the % below, so the money is ready before the bill is. Turn it off and everything lands in Operating; you move funds yourself. It's tracking only — no separate bank accounts.</Explainer>
         </motion.div>
 
         {/* auto-split hero */}

@@ -1,4 +1,5 @@
 import { motion, type Variants } from "motion/react";
+import { Explainer } from "@/components/ui";
 import { ArrowLeft2, Flash, DocumentDownload, TrendUp, ArrowRight2 , InfoCircle} from "iconsax-react";
 import { money, money0 } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
@@ -37,12 +38,8 @@ export function Settlement({ onBack }: { onBack: () => void }) {
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
         {/* what this is — plain-language explainer */}
-        <motion.div variants={item} className="mb-4 flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
-          <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
-          <div>
-            <div className="text-[12.5px] font-semibold text-ink">How settlement works</div>
-            <div className="mt-0.5 text-[11.5px] leading-snug text-dim">Patient card payments settle to your balance instantly — no 2–3 day wait. Zeva takes a small ~2% fee and disburses the net the moment they tap. Below is what settled today and your payout history.</div>
-          </div>
+        <motion.div variants={item}>
+          <Explainer title="How settlement works">Patient card payments settle to your balance instantly — no 2–3 day wait. Zeva takes a small ~2% fee and disburses the net the moment they tap. Below is what settled today and your payout history.</Explainer>
         </motion.div>
 
         {/* today hero — the value prop made concrete */}

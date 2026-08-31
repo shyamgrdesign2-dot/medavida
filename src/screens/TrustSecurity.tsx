@@ -1,4 +1,5 @@
 import { motion, type Variants } from "motion/react";
+import { Explainer } from "@/components/ui";
 import { ArrowLeft2, Bank, ShieldTick, Lock1, Health, Scan , InfoCircle} from "iconsax-react";
 import { haptic } from "@/lib/haptics";
 
@@ -24,12 +25,8 @@ export function TrustSecurity({ onBack }: { onBack: () => void }) {
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
         {/* what this is — plain-language explainer */}
-        <motion.div variants={item} className="mb-4 flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
-          <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
-          <div>
-            <div className="text-[12.5px] font-semibold text-ink">How Zeva keeps you safe</div>
-            <div className="mt-0.5 text-[11.5px] leading-snug text-dim">Your funds sit in FDIC-insured partner banks, card data is encrypted, and access is locked behind biometrics. Here's the protection working behind every payment.</div>
-          </div>
+        <motion.div variants={item}>
+          <Explainer title="How Zeva keeps you safe">Your funds sit in FDIC-insured partner banks, card data is encrypted, and access is locked behind biometrics. Here's the protection working behind every payment.</Explainer>
         </motion.div>
 
         {/* hero */}

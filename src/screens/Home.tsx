@@ -56,7 +56,7 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
           <div className="min-w-0 flex-1">
             <div className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-faint">Good morning</div>
             <div className="flex items-center gap-1.5">
-              <span className="truncate font-display text-[19px] font-semibold leading-tight text-ink">{CLINIC.short}</span>
+              <span className="truncate font-display text-[19px] font-semibold leading-tight text-ink">{CLINIC.owner}</span>
               <span className="flex-none"><Verify size={15} variant="Bulk" color="var(--color-teal-2)" /></span>
             </div>
           </div>

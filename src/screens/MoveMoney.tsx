@@ -3,7 +3,6 @@ import { motion } from "motion/react";
 import { Delete } from "lucide-react";
 import { ArrowLeft2, TickCircle, ArrowDown2, Bank, Card, Add, Building } from "iconsax-react";
 import { Icon, InputField } from "@/components/ui";
-import { CardNetwork } from "@/components/glyphs";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { BottomSheet } from "@/components/BottomSheet";
 import { CARDS, money } from "@/lib/data";
@@ -171,12 +170,12 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
               <button key={a.id} onClick={() => { if (!isDest) chooseFrom(i); }} disabled={isDest}
                 className={"flex w-full items-center gap-3 rounded-[12px] border p-3 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface") + (isDest ? " opacity-40" : "")}>
                 <span className="flex h-9 w-12 flex-none items-center justify-center rounded-md" style={{ background: a.type === "credit" ? "linear-gradient(135deg,#0c211d,#05423a)" : "linear-gradient(135deg,#16201f,#08130f)", boxShadow: "inset 0 0 0 1px rgba(35,255,237,0.2)" }}>
-                  <CardNetwork size={17} color="#eafff9" />
+                  <Bank size={16} variant="Bulk" color="#eafff9" />
                 </span>
                 <span className="min-w-0 flex-1 leading-tight">
                   <span className="block truncate text-[13.5px] font-semibold text-ink">{a.type === "credit" ? "Credit card" : "Debit card"}</span>
-                  <span className={"flex items-center gap-1.5 text-[11px] " + (low ? "text-stop" : "text-dim")}>
-                    <CardNetwork size={12} color="var(--color-teal-2)" /> •••• {a.last4} · {money(a.bal).replace(".00", "")}{isDest ? " · destination" : low ? " · too low" : ""}
+                  <span className={"block text-[11px] " + (low ? "text-stop" : "text-dim")}>
+                    •••• {a.last4} · {money(a.bal).replace(".00", "")}{isDest ? " · destination" : low ? " · too low" : ""}
                   </span>
                 </span>
                 {on && <TickCircle size={18} variant="Bulk" color="var(--color-teal-2)" className="flex-none" />}
@@ -206,7 +205,7 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
               return (
                 <button key={t.id} onClick={() => { haptic("tap"); setTarget(i); setPickTarget(false); }} className={"flex w-full items-center gap-3 rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface")}>
                   {isCard ? (
-                    <span className="flex h-9 w-12 flex-none items-center justify-center rounded-md" style={{ background: t.type === "credit" ? "linear-gradient(135deg,#0c211d,#05423a)" : "linear-gradient(135deg,#16201f,#08130f)", boxShadow: "inset 0 0 0 1px rgba(35,255,237,0.2)" }}><CardNetwork size={17} color="#eafff9" /></span>
+                    <span className="flex h-9 w-12 flex-none items-center justify-center rounded-md" style={{ background: t.type === "credit" ? "linear-gradient(135deg,#0c211d,#05423a)" : "linear-gradient(135deg,#16201f,#08130f)", boxShadow: "inset 0 0 0 1px rgba(35,255,237,0.2)" }}><Bank size={16} variant="Bulk" color="#eafff9" /></span>
                   ) : (
                     <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-surface-2 text-ink"><Icon name={t.icon} size={18} /></span>
                   )}

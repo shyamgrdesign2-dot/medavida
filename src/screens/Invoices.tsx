@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
 import { ArrowLeft2, Add, TickCircle, Send2, DocumentText , InfoCircle} from "iconsax-react";
-import { Chip } from "@/components/ui";
+import { Chip, Explainer } from "@/components/ui";
 import { BottomSheet } from "@/components/BottomSheet";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { money, money0 } from "@/lib/data";
@@ -51,12 +51,8 @@ export function Invoices({ onBack }: { onBack: () => void }) {
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
         {/* what this is — plain-language explainer */}
-        <motion.div variants={item} className="mb-4 flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
-          <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
-          <div>
-            <div className="text-[12.5px] font-semibold text-ink">What are invoices?</div>
-            <div className="mt-0.5 text-[11.5px] leading-snug text-dim">Send a patient a clean invoice by SMS or email. They pay on a secure Zeva Pay page and the money lands in your balance instantly — you can see who's viewed, paid, or is still due.</div>
-          </div>
+        <motion.div variants={item}>
+          <Explainer title="What are invoices?">Send a patient a clean invoice by SMS or email. They pay on a secure Zeva Pay page and the money lands in your balance instantly — you can see who's viewed, paid, or is still due.</Explainer>
         </motion.div>
 
         {/* summary */}

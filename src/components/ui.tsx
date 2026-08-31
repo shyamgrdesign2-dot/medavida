@@ -1,9 +1,10 @@
-import { ReactNode } from "react";
-import { motion } from "motion/react";
+import { ReactNode, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { X } from "lucide-react";
 import { haptic } from "@/lib/haptics";
 import {
   Profile, Box, Profile2User, Flash, Building, Card as CardIcon, MoneyChange,
-  Activity, Health, Truck, Wifi, Wallet, Send2, DocumentText, Drop,
+  Activity, Health, Truck, Wifi, Wallet, Send2, DocumentText, Drop, InfoCircle,
   type Icon as IconsaxIcon,
 } from "iconsax-react";
 
@@ -166,5 +167,46 @@ export function TxnRow({ iconName, category, title, sub, amount, dir, chip, onCl
         {chip}
       </span>
     </motion.button>
+  );
+}
+
+/**
+ * Collapsible "what is this" explainer. Shows a teal info card with a close (X);
+ * dismissing collapses it to a small "ⓘ What is this?" pill that re-expands on tap.
+ * Wrap in a motion.div at the call site if you want the staggered entrance.
+ */
+export function Explainer({ title, children }: { title: string; children: ReactNode }) {
+  const [open, setOpen] = useState(true);
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      {open ? (
+        <motion.div
+          key="card"
+          initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.2 }}
+          className="mb-4 overflow-hidden"
+        >
+          <div className="flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
+            <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
+            <div className="min-w-0 flex-1">
+              <div className="flex items-start justify-between gap-2">
+                <div className="text-[12.5px] font-semibold text-ink">{title}</div>
+                <button onClick={() => { haptic("tap"); setOpen(false); }} aria-label="Collapse" className="-mr-1 -mt-1 flex h-6 w-6 flex-none items-center justify-center rounded-full text-faint transition-colors hover:bg-teal/10"><X size={14} strokeWidth={2.2} /></button>
+              </div>
+              <div className="mt-0.5 text-[11.5px] leading-snug text-dim">{children}</div>
+            </div>
+          </div>
+        </motion.div>
+      ) : (
+        <motion.button
+          key="pill"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          onClick={() => { haptic("tap"); setOpen(true); }}
+          className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-teal/30 bg-teal/8 px-3 py-1.5 text-[11px] font-semibold text-teal-2"
+        >
+          <InfoCircle size={13} variant="Bulk" color="var(--color-teal-2)" /> What is this?
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }
