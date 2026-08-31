@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ArrowLeft2, TickCircle, Danger, Send2, DocumentText, CalendarTick } from "iconsax-react";
+import { ArrowLeft2, TickCircle, Danger, Send2, DocumentText, CalendarTick, InfoCircle } from "iconsax-react";
 import { Chip } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { money, money0 } from "@/lib/data";
@@ -49,6 +49,15 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
       </div>
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-28 pt-4">
+        {/* what this is — plain-language explainer */}
+        <motion.div variants={item} className="mb-4 flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
+          <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
+          <div>
+            <div className="text-[12.5px] font-semibold text-ink">What is 1099 &amp; vendors?</div>
+            <div className="mt-0.5 text-[11.5px] leading-snug text-dim">The IRS needs a 1099-NEC for every contractor you pay $600+ in a year. Zeva tallies each vendor's payments, flags who crosses the threshold, collects their W-9, and pre-fills the forms — so tax time is a click, not a scramble.</div>
+          </div>
+        </motion.div>
+
         {/* year summary */}
         <motion.div variants={item} className="card-lift rounded-[16px] border border-border bg-surface p-4">
           <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-faint">Tax year 2026 · reportable</div>

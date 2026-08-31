@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, type Variants } from "motion/react";
-import { ArrowLeft2, Camera, TickCircle, Paperclip, Danger } from "iconsax-react";
+import { ArrowLeft2, Camera, TickCircle, Paperclip, Danger , InfoCircle} from "iconsax-react";
 import { Icon } from "@/components/ui";
 import { money } from "@/lib/data";
 import { haptic } from "@/lib/haptics";
@@ -42,6 +42,15 @@ export function Receipts({ onBack }: { onBack: () => void }) {
       </div>
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-10 pt-4">
+        {/* what this is — plain-language explainer */}
+        <motion.div variants={item} className="mb-4 flex gap-3 rounded-[14px] border border-teal/25 bg-teal/8 p-3.5">
+          <InfoCircle size={20} variant="Bulk" color="var(--color-teal-2)" className="mt-0.5 flex-none" />
+          <div>
+            <div className="text-[12.5px] font-semibold text-ink">Why capture receipts?</div>
+            <div className="mt-0.5 text-[11.5px] leading-snug text-dim">Snap or forward a receipt and Zeva matches it to the card charge automatically — so every expense is documented for taxes and audits. Anything flagged is a charge still missing its receipt.</div>
+          </div>
+        </motion.div>
+
         {/* missing alert */}
         {missing.length > 0 && (
           <motion.div variants={item} className="flex items-center gap-3 rounded-[14px] border border-caution/30 bg-caution/8 p-3.5">
