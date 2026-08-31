@@ -27,7 +27,6 @@ The product's feel is drawn from the most tactile, trusted money apps in the wor
 
 | Reference | What we took |
 |---|---|
-| **CRED** (NeoPop) | Tactile, premium dark surfaces; plunk/press buttons; the "money feels like an object" language. |
 | **Jupiter** | Clean neobank flows, card-first home, friendly money storytelling. |
 | **Fi** | Insights and money-movement UX; calm information density. |
 | **Ramp** | Business spend controls, approvals, and accounting-grade rigor. |
@@ -38,42 +37,9 @@ Signature Zeva touches layered on top: a **metallic gyroscope card** that tilts 
 
 ## App architecture
 
-```mermaid
-flowchart TD
-  A[Splash] --> B[Onboarding<br/>swipeable story] --> C[Sign in<br/>mobile no. + OTP] --> S{{App Shell}}
+![Zeva — App Architecture](zeva-architecture.svg)
 
-  S --> H[Home]
-  S --> CA[Cards]
-  S --> AC[Activity]
-  S --> IN[Insights]
-  S --> MO[More]
-
-  H -->|Collect| MIN[Money In]
-  H -->|Send / Bill Pay| MOUT[Money Out]
-
-  subgraph MIN [Money In · Zeva Pay]
-    P1[Collect payment<br/>charge card-on-file / send link]
-    P2[Settlement<br/>instant disbursement]
-    P3[Memberships<br/>recurring revenue]
-    P4[Invoices]
-  end
-
-  subgraph MOUT [Money Out]
-    Q1[Send / Move money]
-    Q2[Bill Pay]
-    Q3[Reserves<br/>auto-split]
-    Q4[Approvals]
-  end
-
-  MO --> OPS[Operations]
-  subgraph OPS [Operations & Books]
-    R1[Receipts]
-    R2[Accounting export]
-    R3[1099 & vendors]
-    R4[Team & roles]
-    R5[Trust & security]
-  end
-```
+*Entry (Splash → Onboarding → Sign-in) leads into the App Shell and its five tabs. **Home** fans out to the two money directions — **Money In · Zeva Pay** and **Money Out** — while **More** houses **Operations & Books**.*
 
 ---
 

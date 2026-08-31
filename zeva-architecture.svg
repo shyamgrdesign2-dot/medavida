@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 760" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f2b28"/>
+      <stop offset="1" stop-color="#0c1a19"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4a4f57"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1040" height="760" rx="18" fill="#0a0b0d"/>
+
+  <!-- title -->
+  <text x="40" y="46" fill="#f5f6f5" font-size="22" font-weight="700">Zeva — App Architecture</text>
+  <text x="40" y="68" fill="#9a9ea4" font-size="13">The money layer for clinics · a MedaVida product</text>
+
+  <!-- ============ ENTRY FLOW ============ -->
+  <g font-size="13" font-weight="600" text-anchor="middle">
+    <rect x="300" y="92" width="130" height="38" rx="10" fill="#16181d" stroke="#2a2d34"/>
+    <text x="365" y="116" fill="#e7e9ea">Splash</text>
+    <rect x="455" y="92" width="150" height="38" rx="10" fill="#16181d" stroke="#2a2d34"/>
+    <text x="530" y="116" fill="#e7e9ea">Onboarding</text>
+    <rect x="630" y="92" width="160" height="38" rx="10" fill="#16181d" stroke="#2a2d34"/>
+    <text x="710" y="116" fill="#e7e9ea">Sign in · OTP</text>
+  </g>
+  <g stroke="#4a4f57" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
+    <line x1="430" y1="111" x2="452" y2="111"/>
+    <line x1="605" y1="111" x2="627" y2="111"/>
+    <line x1="710" y1="130" x2="710" y2="152"/>
+  </g>
+
+  <!-- ============ APP SHELL ============ -->
+  <rect x="40" y="156" width="960" height="46" rx="12" fill="url(#shell)" stroke="#1f5a54"/>
+  <text x="520" y="184" fill="#23ffed" font-size="15" font-weight="700" text-anchor="middle">APP SHELL</text>
+
+  <!-- shell -> tabs connectors -->
+  <g stroke="#4a4f57" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
+    <path d="M130 202 L130 232"/>
+    <path d="M325 202 L325 232"/>
+    <path d="M520 202 L520 232"/>
+    <path d="M715 202 L715 232"/>
+    <path d="M910 202 L910 232"/>
+  </g>
+
+  <!-- ============ TABS ============ -->
+  <g font-size="14" font-weight="700" text-anchor="middle">
+    <rect x="65" y="234" width="130" height="44" rx="11" fill="#101a19" stroke="#1f5a54"/>
+    <text x="130" y="261" fill="#5cffef">Home</text>
+    <rect x="260" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
+    <text x="325" y="261" fill="#e7e9ea">Cards</text>
+    <rect x="455" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
+    <text x="520" y="261" fill="#e7e9ea">Activity</text>
+    <rect x="650" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
+    <text x="715" y="261" fill="#e7e9ea">Insights</text>
+    <rect x="845" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
+    <text x="910" y="261" fill="#e7e9ea">More</text>
+  </g>
+
+  <!-- Home -> Money In / Money Out ; More -> Operations -->
+  <g stroke="#4a4f57" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
+    <path d="M110 278 L110 300 L185 300 L185 330"/>
+    <path d="M150 278 L150 314 L500 314 L500 330"/>
+    <path d="M910 278 L910 330"/>
+  </g>
+
+  <!-- ============ MONEY IN (Zeva Pay) ============ -->
+  <rect x="60" y="332" width="250" height="384" rx="14" fill="#0d1614" stroke="#1f5a54"/>
+  <rect x="60" y="332" width="250" height="40" rx="14" fill="#123028"/>
+  <circle cx="86" cy="352" r="5" fill="#2fd07a"/>
+  <text x="102" y="357" fill="#7be6b0" font-size="14" font-weight="700">MONEY IN · Zeva Pay</text>
+  <g font-size="12.5" fill="#e7e9ea">
+    <rect x="78" y="388" width="214" height="64" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="92" y="410" font-weight="600">Collect payment</text>
+    <text x="92" y="430" fill="#9a9ea4" font-size="11">Charge card-on-file / send link · 2% fee</text>
+    <text x="92" y="445" fill="#9a9ea4" font-size="11">→ net disbursed instantly</text>
+    <rect x="78" y="462" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="92" y="486" font-weight="600">Settlement <tspan fill="#9a9ea4" font-size="11" font-weight="400">· instant proof</tspan></text>
+    <rect x="78" y="512" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="92" y="536" font-weight="600">Memberships <tspan fill="#9a9ea4" font-size="11" font-weight="400">· recurring MRR</tspan></text>
+    <rect x="78" y="562" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="92" y="586" font-weight="600">Invoices <tspan fill="#9a9ea4" font-size="11" font-weight="400">· send &amp; track</tspan></text>
+  </g>
+
+  <!-- ============ MONEY OUT ============ -->
+  <rect x="335" y="332" width="250" height="384" rx="14" fill="#12100a" stroke="#5a4a1f"/>
+  <rect x="335" y="332" width="250" height="40" rx="14" fill="#2a2410"/>
+  <circle cx="361" cy="352" r="5" fill="#f7b955"/>
+  <text x="377" y="357" fill="#f2cf8c" font-size="14" font-weight="700">MONEY OUT</text>
+  <g font-size="12.5" fill="#e7e9ea">
+    <rect x="353" y="388" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="367" y="412" font-weight="600">Send / Move money <tspan fill="#9a9ea4" font-size="11" font-weight="400">· vendors, payroll</tspan></text>
+    <rect x="353" y="438" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="367" y="462" font-weight="600">Bill Pay <tspan fill="#9a9ea4" font-size="11" font-weight="400">· rent, utilities</tspan></text>
+    <rect x="353" y="488" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="367" y="512" font-weight="600">Reserves <tspan fill="#9a9ea4" font-size="11" font-weight="400">· auto-split</tspan></text>
+    <rect x="353" y="538" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="367" y="562" font-weight="600">Approvals <tspan fill="#9a9ea4" font-size="11" font-weight="400">· sign-off</tspan></text>
+  </g>
+
+  <!-- ============ OPERATIONS ============ -->
+  <rect x="690" y="332" width="290" height="384" rx="14" fill="#0d1119" stroke="#2a3a5a"/>
+  <rect x="690" y="332" width="290" height="40" rx="14" fill="#111a2a"/>
+  <circle cx="716" cy="352" r="5" fill="#6ea8ff"/>
+  <text x="732" y="357" fill="#aecaff" font-size="14" font-weight="700">OPERATIONS &amp; BOOKS</text>
+  <g font-size="12.5" fill="#e7e9ea">
+    <rect x="708" y="388" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="722" y="412" font-weight="600">Receipts <tspan fill="#9a9ea4" font-size="11" font-weight="400">· snap &amp; auto-match</tspan></text>
+    <rect x="708" y="438" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="722" y="462" font-weight="600">Accounting export <tspan fill="#9a9ea4" font-size="11" font-weight="400">· QuickBooks / Xero</tspan></text>
+    <rect x="708" y="488" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="722" y="512" font-weight="600">1099 &amp; vendors <tspan fill="#9a9ea4" font-size="11" font-weight="400">· W-9, 1099-NEC</tspan></text>
+    <rect x="708" y="538" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="722" y="562" font-weight="600">Team &amp; roles <tspan fill="#9a9ea4" font-size="11" font-weight="400">· role-based access</tspan></text>
+    <rect x="708" y="588" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
+    <text x="722" y="612" font-weight="600">Trust &amp; security <tspan fill="#9a9ea4" font-size="11" font-weight="400">· FDIC, PCI, HIPAA</tspan></text>
+  </g>
+
+  <!-- footer -->
+  <text x="40" y="742" fill="#63676d" font-size="11">Prototype: https://zeva-medavida.vercel.app/</text>
+</svg>
