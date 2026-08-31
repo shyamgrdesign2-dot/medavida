@@ -29,16 +29,7 @@ export function TabBar({ active, onChange }: { active: Tab; onChange: (t: Tab) =
       animate={{ y: hidden ? 120 : 0, opacity: hidden ? 0 : 1 }}
       transition={{ type: "spring", stiffness: 420, damping: 40 }}
     >
-      <div
-        className="pointer-events-auto flex items-center gap-0.5 rounded-full border p-1.5"
-        style={{
-          background: "var(--glass-bg)",
-          borderColor: "var(--glass-brd)",
-          backdropFilter: "blur(22px) saturate(1.4)",
-          WebkitBackdropFilter: "blur(22px) saturate(1.4)",
-          boxShadow: "0 10px 34px -8px rgba(0,0,0,0.35), inset 0 1px 0 var(--hi)",
-        }}
-      >
+      <div className="liquid-nav pointer-events-auto flex items-center gap-0.5 rounded-full p-1.5">
         {TABS.map((t) => {
           const on = active === t.id;
           return (

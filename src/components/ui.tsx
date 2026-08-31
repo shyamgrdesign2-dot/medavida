@@ -132,15 +132,7 @@ export function SectionTitle({ children, action }: { children: ReactNode; action
 export function QuickAction({ icon: I, label, onClick }: { icon: IconsaxIcon; label: string; onClick?: () => void }) {
   return (
     <motion.button whileTap={{ scale: 0.96 }} transition={{ type: "spring", duration: 0.3, bounce: 0 }} onClick={() => { haptic("tap"); onClick?.(); }} className="flex flex-col items-center gap-1.5">
-      <span
-        className="flex h-[54px] w-full items-center justify-center rounded-[15px]"
-        style={{
-          background: "linear-gradient(160deg, var(--glass-hi), transparent 46%), var(--glass-bg)",
-          backdropFilter: "blur(14px) saturate(1.3)",
-          WebkitBackdropFilter: "blur(14px) saturate(1.3)",
-          boxShadow: "inset 0 1px 0 var(--glass-hi), inset 0 0 0 1px var(--glass-brd), var(--shadow-card)",
-        }}
-      >
+      <span className="glass-tile flex h-[54px] w-full items-center justify-center rounded-[15px]">
         <I size={23} variant="Bulk" color="var(--color-teal-2)" />
       </span>
       <span className="text-[10.5px] font-medium text-dim">{label}</span>

@@ -67,13 +67,7 @@ export function BillPay({ onBack }: { onBack?: () => void } = {}) {
             key={c.id}
             onClick={() => openNew(c.id)}
             whileTap={{ scale: 0.96 }}
-            className="flex flex-col items-center gap-1.5 rounded-[14px] p-2.5"
-            style={{
-              background: "linear-gradient(160deg, var(--glass-hi), transparent 46%), var(--glass-bg)",
-              backdropFilter: "blur(14px) saturate(1.3)",
-              WebkitBackdropFilter: "blur(14px) saturate(1.3)",
-              boxShadow: "inset 0 1px 0 var(--glass-hi), inset 0 0 0 1px var(--glass-brd), var(--shadow-card)",
-            }}
+            className="glass-tile flex flex-col items-center gap-1.5 rounded-[14px] p-2.5"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal/12 text-teal-2"><c.icon size={16} variant="Bulk" color="var(--color-teal-2)" /></span>
             <span className="text-[9.5px] font-semibold text-dim">{c.label}</span>

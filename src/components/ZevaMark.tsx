@@ -88,12 +88,12 @@ function LiveMark({ size, tone }: { size: number; tone: Tone }) {
  */
 function ArrowSVG({ d, size }: { d: string; size: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 31 31" fill="none" style={{ overflow: "visible", display: "block", filter: "drop-shadow(0 0 8px rgba(35,255,237,0.6))" }}>
+    <svg width={size} height={size} viewBox="0 0 31 31" fill="none" style={{ overflow: "visible", display: "block", filter: "drop-shadow(0 0 8px var(--mark-glow, rgba(35,255,237,0.6)))" }}>
       <defs>
         <linearGradient id="zgSlash" x1="0" y1="0" x2="31" y2="31" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#8ffff4" />
-          <stop offset="0.5" stopColor="#23ffed" />
-          <stop offset="1" stopColor="#0fd8c8" />
+          <stop stopColor="var(--mark-1)" />
+          <stop offset="0.5" stopColor="var(--mark-2)" />
+          <stop offset="1" stopColor="var(--mark-3)" />
         </linearGradient>
       </defs>
       <path d={d} fill="url(#zgSlash)" />

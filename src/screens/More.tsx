@@ -65,13 +65,7 @@ function FeatureCard({ icon: Icon, tint, title, onClick }: { icon: IconsaxIcon; 
       variants={item}
       whileTap={{ scale: 0.96 }}
       onClick={() => { haptic("tap"); onClick?.(); }}
-      className="flex flex-col items-center gap-2 rounded-[15px] px-2 py-3.5"
-      style={{
-        background: "linear-gradient(160deg, var(--glass-hi), transparent 46%), var(--glass-bg)",
-        backdropFilter: "blur(14px) saturate(1.3)",
-        WebkitBackdropFilter: "blur(14px) saturate(1.3)",
-        boxShadow: "inset 0 1px 0 var(--glass-hi), inset 0 0 0 1px var(--glass-brd), var(--shadow-card)",
-      }}
+      className="glass-tile flex flex-col items-center gap-2 rounded-[15px] px-2 py-3.5"
     >
       <span className="flex h-11 w-11 items-center justify-center rounded-[13px]" style={{ background: `color-mix(in oklab, ${tint} 20%, transparent)` }}><Icon size={21} variant="Bulk" color={tint} /></span>
       <span className="w-full truncate text-center text-[11px] font-semibold text-ink">{title}</span>

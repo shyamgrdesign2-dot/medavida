@@ -61,6 +61,8 @@
   --glass-brd: rgba(255, 255, 255, 0.10);
   --glass-hi: rgba(255, 255, 255, 0.14);
   --hi: rgba(255, 255, 255, 0.08);
+  --glass-stroke: rgba(122, 176, 255, 0.16); --glass-shadow: rgba(0, 0, 0, 0.55);
+  --nav-bg: rgba(16, 18, 23, 0.52);
   --scrim: rgba(0, 0, 0, 0.55);
   --shadow-card: 0 1px 2px rgba(0,0,0,0.35), 0 16px 36px -22px rgba(0,0,0,0.8);
   --aurora-1: rgba(35,255,237,0.30);
@@ -81,7 +83,7 @@
   --acc-mint: #7de0c0;
   --acc-slate: #9aa0aa;
   /* brand mark gradient — theme-aware so the teal Z stays visible on white */
-  --mark-1: #5cffef; --mark-2: #23ffed; --mark-3: #0fd8c8;
+  --mark-1: #5cffef; --mark-2: #23ffed; --mark-3: #0fd8c8; --mark-glow: rgba(35, 255, 237, 0.6);
   /* muted "out"/comparison series in charts — visible on both grounds */
   --chart-out: #2e333b;
 }
@@ -96,6 +98,8 @@
     --color-go: #12a35f; --color-caution: #bd7d0a; --color-stop: #e5484d;
     --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
     --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
+  --glass-stroke: rgba(56,102,214,0.34); --glass-shadow: rgba(28,42,78,0.17);
+  --nav-bg: rgba(255,255,255,0.55);
     --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
     --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
     --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
@@ -103,7 +107,7 @@
     --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
     --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
-    --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
+    --mark-1: #0b8a7d; --mark-2: #076e60; --mark-3: #043f39; --mark-glow: rgba(4, 63, 57, 0.22);
     /* MedaVida brand: Poppins display + Inter body in light mode */
     --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
     --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -117,6 +121,8 @@
   --color-go: #12a35f; --color-caution: #bd7d0a; --color-stop: #e5484d;
   --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
   --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
+  --glass-stroke: rgba(56,102,214,0.34); --glass-shadow: rgba(28,42,78,0.17);
+  --nav-bg: rgba(255,255,255,0.55);
   --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
   --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
   --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
@@ -124,7 +130,7 @@
   --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
   --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
   --acc-violet: #6b46d9; --acc-mint: #109680; --acc-slate: #5e6572;
-    --mark-1: #16b3a3; --mark-2: #0b9a8c; --mark-3: #067a6e;
+    --mark-1: #0b8a7d; --mark-2: #076e60; --mark-3: #043f39; --mark-glow: rgba(4, 63, 57, 0.22);
     /* MedaVida brand: Poppins display + Inter body in light mode */
     --font-display: "Poppins", ui-sans-serif, system-ui, sans-serif;
     --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -212,6 +218,34 @@ body {
 .np-primary { --face: var(--grad-teal); --edge: #0a9d90; --np-ink: var(--color-on-teal); }
 .np-dark { --face: var(--color-surface-2); --edge: #050506; --np-ink: var(--color-ink); }
 .np-dark .np-face { box-shadow: inset 0 0 0 1px var(--color-border); }
+
+/* Rounded CTA corners (MedaVida brand) — face + depth edges kept in sync */
+.np-face { border-radius: 12px; }
+.np-edge.right { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+.np-edge.bottom { border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+
+/* Liquid-glass action tile — soft depth, blueish outer stroke, real blur */
+.glass-tile {
+  background: linear-gradient(158deg, var(--glass-hi), transparent 48%), var(--glass-bg);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow:
+    inset 0 1px 0 var(--glass-hi),
+    inset 0 0 0 1px var(--glass-stroke),
+    0 10px 26px -14px var(--glass-shadow);
+}
+
+/* Apple-style liquid-glass nav — transparent, heavy blur, thin blueish ring */
+.liquid-nav {
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(30px) saturate(1.9);
+  backdrop-filter: blur(30px) saturate(1.9);
+  border: 1px solid var(--glass-stroke) !important;
+  box-shadow:
+    0 14px 44px -12px rgba(0,0,0,0.30),
+    inset 0 1px 0 var(--glass-hi),
+    inset 0 -1px 0 rgba(255,255,255,0.05) !important;
+}
 
 /* MedaVida brand — in LIGHT mode the primary CTA is black (teal stays the accent) */
 @media (prefers-color-scheme: light){

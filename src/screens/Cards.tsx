@@ -236,17 +236,8 @@ function CardAction({ icon: Icon, label, onClick, active }: { icon: IconsaxIcon;
   return (
     <motion.button whileTap={{ scale: 0.96 }} onClick={onClick} className="flex flex-col items-center gap-1.5">
       <span
-        className="flex h-[54px] w-full items-center justify-center rounded-[15px]"
-        style={
-          active
-            ? { background: "var(--grad-teal)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), var(--shadow-card)" }
-            : {
-                background: "linear-gradient(160deg, var(--glass-hi), transparent 46%), var(--glass-bg)",
-                backdropFilter: "blur(14px) saturate(1.3)",
-                WebkitBackdropFilter: "blur(14px) saturate(1.3)",
-                boxShadow: "inset 0 1px 0 var(--glass-hi), inset 0 0 0 1px var(--glass-brd), var(--shadow-card)",
-              }
-        }
+        className={"flex h-[54px] w-full items-center justify-center rounded-[15px]" + (active ? "" : " glass-tile")}
+        style={active ? { background: "var(--grad-teal)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.3), var(--shadow-card)" } : undefined}
       >
         <Icon size={21} variant="Bulk" color={active ? "var(--color-on-teal)" : "var(--color-teal-2)"} />
       </span>
