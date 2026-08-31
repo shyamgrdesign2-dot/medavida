@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Delete } from "lucide-react";
-import { ArrowLeft2, TickCircle, ArrowDown2, Wallet } from "iconsax-react";
+import { ArrowLeft2, TickCircle, ArrowDown2, Wallet, Bank } from "iconsax-react";
 import { PatternAvatar, Icon } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
 import { BottomSheet } from "@/components/BottomSheet";
@@ -11,11 +11,11 @@ import { haptic } from "@/lib/haptics";
 type Mode = "send" | "move" | "add";
 
 const RECIPIENTS = [
-  { id: "fullscript", name: "Fullscript", sub: "Supplement vendor", icon: "Pill" },
-  { id: "mckesson", name: "McKesson Medical", sub: "Rx wholesaler", icon: "Truck" },
-  { id: "rupa", name: "Rupa Health", sub: "Lab partner", icon: "HeartPulse" },
-  { id: "payroll", name: "Staff payroll", sub: "4 employees", icon: "Users" },
-  { id: "rent", name: "Downtown Wellness", sub: "Landlord · rent", icon: "Building2" },
+  { id: "fullscript", name: "Fullscript", sub: "Supplement vendor", icon: "Pill", bank: "Chase Business", acct: "••4821", routing: "021000021" },
+  { id: "mckesson", name: "McKesson Medical", sub: "Rx wholesaler", icon: "Truck", bank: "Bank of America", acct: "••7014", routing: "026009593" },
+  { id: "rupa", name: "Rupa Health", sub: "Lab partner", icon: "HeartPulse", bank: "Wells Fargo", acct: "••3382", routing: "121000248" },
+  { id: "payroll", name: "Staff payroll", sub: "4 employees", icon: "Users", bank: "ACH batch", acct: "4 accounts", routing: "direct deposit" },
+  { id: "rent", name: "Downtown Wellness", sub: "Landlord · rent", icon: "Building2", bank: "Chase", acct: "••9920", routing: "021000021" },
 ];
 const ACCOUNTS = [
   { id: "operating", name: "Operating", bal: 128450.2 },
@@ -96,6 +96,27 @@ export function MoveMoney({ mode = "send", onBack }: { mode?: Mode; onBack: () =
           );
         })}
       </div>
+
+      {/* recipient bank details — you're sending an ACH transfer to their account */}
+      {mode === "send" && "acct" in (targets[target] as any) && (
+        <div className="mx-5 mt-3 rounded-[12px] border border-border bg-surface-2 p-3">
+          <div className="mb-2 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-faint">
+            <Bank size={12} variant="Bulk" color="var(--color-teal-2)" /> Deposits to their account · ACH
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { k: "Bank", v: (targets[target] as any).bank },
+              { k: "Account", v: (targets[target] as any).acct },
+              { k: "Routing", v: (targets[target] as any).routing },
+            ].map((f) => (
+              <div key={f.k} className="min-w-0">
+                <div className="text-[9px] font-bold uppercase tracking-wide text-faint">{f.k}</div>
+                <div className="tnum truncate text-[12px] font-semibold text-ink">{f.v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* amount */}
       <div className="flex flex-1 flex-col items-center justify-center">

@@ -2,10 +2,11 @@ import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight2, TickCircle } from "iconsax-react";
 import {
-  Lock1, Eye, Shop, Speedometer, Add, CloudSnow, ReceiptText, WalletAdd,
+  Lock1, Eye, Shop, Speedometer, Add, ReceiptText, WalletAdd,
   Danger, RefreshCircle, MessageQuestion, Headphone, TrendUp, DocumentText, Setting2,
   type Icon as IconsaxIcon,
 } from "iconsax-react";
+import { Snowflake } from "@/components/glyphs";
 import { ZevaCard } from "@/components/ZevaCard";
 import { Toggle, ControlRow, Chip, SectionTitle, InputField } from "@/components/ui";
 import { NeoPopButton } from "@/components/NeoPopButton";
@@ -88,7 +89,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
       </div>
       {/* quick-action row (research: actions directly under the card) */}
       <div className="mx-5 mt-5 grid grid-cols-4 gap-2">
-        <CardAction icon={CloudSnow} label={isFrozen ? "Unfreeze" : "Freeze"} active={isFrozen} onClick={toggleFreeze} />
+        <CardAction icon={Snowflake as unknown as IconsaxIcon} label={isFrozen ? "Unfreeze" : "Freeze"} active={isFrozen} onClick={toggleFreeze} />
         <CardAction icon={ReceiptText} label="Statements" onClick={() => { haptic("tap"); setSheet("statements"); }} />
         <CardAction icon={WalletAdd} label="Add to Pay" onClick={() => flash("Added to Apple Wallet")} />
         <CardAction icon={Danger} label="Dispute" onClick={() => { haptic("tap"); setSheet("dispute"); }} />
