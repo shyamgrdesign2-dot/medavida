@@ -113,8 +113,9 @@
 
   <header class="top">
     <h1><span class="z">Zeva</span> — Information Architecture</h1>
-    <p class="lead">The complete map of Zeva, the money layer for clinics — a MedaVida product. How the app is
-      structured, what lives on every screen, the tasks it's built around, and the systems that hold it together.
+    <p class="lead">The complete map of Zeva, the money layer for clinics — a MedaVida product, shown here for the
+      demo clinic <b>MyoClinic</b> (owner Dr. Shyam GR). How the app is structured, what lives on every screen, the
+      tasks it's built around, and the systems that hold it together.
       Live prototype: <a href="https://zeva-medavida.vercel.app/">zeva-medavida.vercel.app</a></p>
     <div class="stats">
       <div class="stat"><b>5</b><small>core tabs</small></div>
@@ -142,7 +143,7 @@
     <div class="chart">
       <pre class="mermaid">
 flowchart TB
-  S(["Splash"]) --> O(["Onboarding · story"]) --> G(["Sign in · OTP"]) --> SH{{"App Shell — Bottom Nav"}}
+  TP(["First-run · Dark / Light picker"]) --> S(["Splash"]) --> O(["Onboarding · story"]) --> G(["Sign in · OTP"]) --> SH{{"App Shell — Bottom Nav"}}
   SH --> H["Home"]
   SH --> C["Cards"]
   SH --> AC["Activity"]
@@ -165,14 +166,14 @@ flowchart TB
   end
   subgraph MO["Money Out"]
     direction TB
-    MO1["Send / Move money"]
+    MO1["Send money · from debit / credit card"]
     MO2["Bill Pay"]
-    MO3["Reserves · auto-split"]
+    MO3["Reserves · auto-split (tracking)"]
     MO4["Approvals"]
   end
   subgraph CM["Cards"]
     direction TB
-    CM1["Debit · Credit · Virtual"]
+    CM1["Debit &amp; credit card"]
     CM2["Freeze · spend controls"]
     CM3["Statements · disputes"]
   end
@@ -186,7 +187,7 @@ flowchart TB
     OP1["Receipts"]
     OP2["Accounting export"]
     OP3["1099 &amp; vendors"]
-    OP4["Team &amp; roles"]
+    OP4["Team &amp; permissions · card links"]
   end
   subgraph TR["Trust &amp; Compliance"]
     direction TB
@@ -222,6 +223,9 @@ flowchart TB
     <div class="grp g-entry">
       <p class="grplabel"><i class="cd"></i>Entry &amp; onboarding</p>
       <div class="grid">
+        <div class="scr"><h4>Theme picker</h4><p class="role">First-run choice — Dark or Light — shown before the splash.</p>
+          <div class="k">On screen</div><ul><li>Dark / Light preview cards</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Pick a look → continue to splash</li></ul></div>
         <div class="scr"><h4>Splash</h4><p class="role">Branded load-in; hands off to onboarding.</p>
           <div class="k">On screen</div><ul><li>Animated Zeva mark</li></ul></div>
         <div class="scr"><h4>Onboarding</h4><p class="role">A swipeable story that frames the value.</p>
@@ -241,7 +245,7 @@ flowchart TB
           <div class="k">Actions</div><ul><li class="act">Collect · Send · Bill Pay · Cards</li><li class="act">Notifications · profile · See all</li></ul></div>
         <div class="scr"><h4>Cards</h4><p class="role">Manage the clinic's cards.</p>
           <div class="k">On screen</div><ul><li>Card carousel (debit / credit)</li><li>Credit usage · cash back</li><li>Card controls list</li></ul>
-          <div class="k">Actions</div><ul><li class="act">Issue · freeze · Add to Wallet · statements · dispute</li></ul></div>
+          <div class="k">Actions</div><ul><li class="act">Freeze / unfreeze · Add to Wallet · statements · dispute</li></ul></div>
         <div class="scr"><h4>Activity</h4><p class="role">The full money ledger.</p>
           <div class="k">On screen</div><ul><li>Search bar</li><li>Filters: in / out / patients / suppliers / bills</li><li>Itemized transactions</li></ul>
           <div class="k">Actions</div><ul><li class="act">Search · filter · open detail sheet</li></ul></div>
@@ -257,8 +261,8 @@ flowchart TB
       <p class="grplabel"><i class="cd"></i>Money in · Zeva Pay</p>
       <div class="grid">
         <div class="scr"><h4>Collect payment</h4><p class="role">The core inflow — patient pays, clinic gets net instantly.</p>
-          <div class="k">On screen</div><ul><li>Charge-now / send-link toggle</li><li>Patient picker · program memo</li><li>Amount keypad · live 2% fee → net</li></ul>
-          <div class="k">Actions</div><ul><li class="act">Charge card on file · send secure pay-link</li></ul></div>
+          <div class="k">On screen</div><ul><li>Patient dropdown (chosen first)</li><li>Charge-now / send-link toggle</li><li>Program &amp; Tax dropdowns</li><li>Amount keypad · live 2% fee → net</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Select / add a patient · add a program or custom tax</li><li class="act">Charge card on file · or text a secure pay-link to the patient's mobile</li></ul></div>
         <div class="scr"><h4>Settlement</h4><p class="role">Proof that money landed now, not in days.</p>
           <div class="k">On screen</div><ul><li>Today's collected · fee · net</li><li>Instant vs 2–3 day comparison</li><li>Daily settlement history</li></ul></div>
         <div class="scr"><h4>Memberships</h4><p class="role">Recurring patient programs.</p>
@@ -273,15 +277,15 @@ flowchart TB
     <div class="grp g-out">
       <p class="grplabel"><i class="cd"></i>Money out</p>
       <div class="grid">
-        <div class="scr"><h4>Send / Move money</h4><p class="role">Pay out or shuffle between accounts.</p>
-          <div class="k">On screen</div><ul><li>Recipient / account picker</li><li>Amount keypad</li><li>Funding-account selector</li></ul>
-          <div class="k">Actions</div><ul><li class="act">Send · move · guarded against overdraw</li></ul></div>
+        <div class="scr"><h4>Send money</h4><p class="role">Pay a vendor or payee by ACH — funded from a card.</p>
+          <div class="k">On screen</div><ul><li>Payee dropdown (+ add payee)</li><li>Recipient bank · account · routing</li><li>Amount keypad</li><li>Fund from Debit or Credit card</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Send · add a new payee · guarded against overdraw / over-limit</li></ul></div>
         <div class="scr"><h4>Bill Pay</h4><p class="role">One hub for rent, utilities, vendors.</p>
-          <div class="k">On screen</div><ul><li>Due this cycle</li><li>Category tiles · recurring bills</li><li>Pay-new-bill flow (provider → fetch → pay)</li></ul>
-          <div class="k">Actions</div><ul><li class="act">Pay · autopay · add a bill</li></ul></div>
-        <div class="scr"><h4>Reserves</h4><p class="role">Profit-First auto-split of every dollar.</p>
-          <div class="k">On screen</div><ul><li>Auto-split allocation bar</li><li>Operating · Payroll · Supplies · Tax</li></ul>
-          <div class="k">Actions</div><ul><li class="act">Toggle auto-split · adjust buckets</li></ul></div>
+          <div class="k">On screen</div><ul><li>Due this cycle</li><li>Category tiles (electricity · water · internet · gas · phone) · recurring bills</li><li>Pay-new-bill flow (category → provider → fetch → pay)</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Add a bill from a category · pay from a Debit / Credit card · autopay</li></ul></div>
+        <div class="scr"><h4>Reserves</h4><p class="role">Auto-split every dollar into set-aside pots — tracking only, no separate bank accounts.</p>
+          <div class="k">On screen</div><ul><li>What-is-this explainer · auto-split allocation bar</li><li>Operating · Payroll · Supplies · Tax %</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Toggle auto-split (off → all lands in Operating)</li></ul></div>
         <div class="scr"><h4>Approvals</h4><p class="role">Sign-off before big money leaves.</p>
           <div class="k">On screen</div><ul><li>Pending payments · reason flags</li><li>Requested-by &amp; amount</li></ul>
           <div class="k">Actions</div><ul><li class="act">Approve · reject</li></ul></div>
@@ -300,9 +304,9 @@ flowchart TB
         <div class="scr"><h4>1099 &amp; vendors</h4><p class="role">Contractor tax, handled.</p>
           <div class="k">On screen</div><ul><li>Reportable total · $600 threshold flags</li><li>W-9 status per vendor</li></ul>
           <div class="k">Actions</div><ul><li class="act">Request W-9 · prepare 1099-NEC</li></ul></div>
-        <div class="scr"><h4>Team &amp; roles</h4><p class="role">Who can touch the money.</p>
-          <div class="k">On screen</div><ul><li>Members · roles · card access</li><li>Owner / manager / front desk / bookkeeper</li></ul>
-          <div class="k">Actions</div><ul><li class="act">Invite a team member</li></ul></div>
+        <div class="scr"><h4>Team &amp; permissions</h4><p class="role">Who can touch the money — and which card they hold.</p>
+          <div class="k">On screen</div><ul><li>Members · roles · linked card</li><li>Owner (Dr. Shyam GR) / manager / front desk / bookkeeper</li></ul>
+          <div class="k">Actions</div><ul><li class="act">Invite a member · assign a role · link a spend-capped card</li></ul></div>
         <div class="scr"><h4>Trust &amp; security</h4><p class="role">Bank-grade, healthcare-ready.</p>
           <div class="k">On screen</div><ul><li>FDIC via sponsor bank</li><li>PCI-DSS L1 · HIPAA · SOC 2</li></ul></div>
       </div>
@@ -315,13 +319,13 @@ flowchart TB
     <h2 class="sectitle">The jobs the app is built around</h2>
     <p class="sectnote">The handful of end-to-end journeys the whole architecture serves.</p>
     <div class="flow"><h4><i class="cd" style="background:var(--in)"></i>Collect a payment</h4>
-      <div class="steps"><span class="step">Home · Collect</span><span class="arr">→</span><span class="step">Pick patient</span><span class="arr">→</span><span class="step">Tag program</span><span class="arr">→</span><span class="step">Enter amount</span><span class="arr">→</span><span class="step">Charge / send link</span><span class="arr">→</span><span class="step">Net disbursed instantly</span></div></div>
+      <div class="steps"><span class="step">Home · Collect</span><span class="arr">→</span><span class="step">Pick / add patient</span><span class="arr">→</span><span class="step">Program &amp; tax</span><span class="arr">→</span><span class="step">Enter amount</span><span class="arr">→</span><span class="step">Charge / text pay-link</span><span class="arr">→</span><span class="step">Net disbursed instantly</span></div></div>
     <div class="flow"><h4><i class="cd" style="background:var(--out)"></i>Pay a bill</h4>
-      <div class="steps"><span class="step">Bill Pay</span><span class="arr">→</span><span class="step">Category</span><span class="arr">→</span><span class="step">Provider</span><span class="arr">→</span><span class="step">Fetch bill</span><span class="arr">→</span><span class="step">Choose card</span><span class="arr">→</span><span class="step">Pay</span></div></div>
+      <div class="steps"><span class="step">Bill Pay</span><span class="arr">→</span><span class="step">Category</span><span class="arr">→</span><span class="step">Provider</span><span class="arr">→</span><span class="step">Fetch bill</span><span class="arr">→</span><span class="step">Choose Debit / Credit card</span><span class="arr">→</span><span class="step">Pay</span></div></div>
     <div class="flow"><h4><i class="cd" style="background:var(--out)"></i>Send money</h4>
-      <div class="steps"><span class="step">Home · Send</span><span class="arr">→</span><span class="step">Recipient</span><span class="arr">→</span><span class="step">From account</span><span class="arr">→</span><span class="step">Amount</span><span class="arr">→</span><span class="step">Send</span></div></div>
-    <div class="flow"><h4><i class="cd" style="background:var(--cards)"></i>Issue &amp; control a card</h4>
-      <div class="steps"><span class="step">Cards · Issue</span><span class="arr">→</span><span class="step">Restrict to vendors</span><span class="arr">→</span><span class="step">Set spend controls</span><span class="arr">→</span><span class="step">Freeze / dispute anytime</span></div></div>
+      <div class="steps"><span class="step">Home · Send</span><span class="arr">→</span><span class="step">Pick / add payee</span><span class="arr">→</span><span class="step">See their bank details</span><span class="arr">→</span><span class="step">From Debit / Credit card</span><span class="arr">→</span><span class="step">Amount</span><span class="arr">→</span><span class="step">Send</span></div></div>
+    <div class="flow"><h4><i class="cd" style="background:var(--cards)"></i>Control a card</h4>
+      <div class="steps"><span class="step">Cards</span><span class="arr">→</span><span class="step">Freeze / unfreeze</span><span class="arr">→</span><span class="step">Set spend controls</span><span class="arr">→</span><span class="step">Statements / dispute anytime</span></div></div>
     <div class="flow"><h4><i class="cd" style="background:var(--ops)"></i>Close the books</h4>
       <div class="steps"><span class="step">Receipts · snap</span><span class="arr">→</span><span class="step">Auto-match</span><span class="arr">→</span><span class="step">Map categories</span><span class="arr">→</span><span class="step">Export to QuickBooks / Xero</span></div></div>
   </section>
@@ -333,11 +337,12 @@ flowchart TB
     <p class="sectnote">The reusable models every screen inherits.</p>
     <div class="sys">
       <div class="syscard"><h4>Navigation</h4><p>Five persistent bottom-nav tabs (Home · Cards · Activity · Insights · More). Deeper surfaces open as full-screen pushed overlays; quick choices as drag-to-dismiss bottom sheets.</p></div>
-      <div class="syscard"><h4>Card system</h4><p>A metallic, gyroscope-reactive card is the hero object — it tilts to device motion. Variants: operating debit, credit, and instant virtual cards.</p></div>
-      <div class="syscard"><h4>Money model</h4><p>Two directions, one ledger: money in through Zeva Pay (2% · instant), money out through cards &amp; bill pay. Every dollar is tagged with patient ID + Rx.</p></div>
-      <div class="syscard"><h4>Theming</h4><p>A full light and dark system with theme-aware accents, elevation, and the brand mark — dark by default, switchable under More.</p></div>
-      <div class="syscard"><h4>Roles &amp; approvals</h4><p>Role-based access shapes what each member sees and does; high-value money movement routes to owner approval.</p></div>
-      <div class="syscard"><h4>States</h4><p>Every flow resolves to a clear success moment; empty, loading, and guarded (insufficient-funds, missing-W-9) states are designed, not afterthoughts.</p></div>
+      <div class="syscard"><h4>Card system</h4><p>A metallic, gyroscope-reactive card is the hero object — it tilts to device motion. Two cards: an operating <b>debit</b> and a <b>credit</b> card. They are the only funding sources — every send, bill and payment draws from one of them; there are no internal wallets or account-splitting.</p></div>
+      <div class="syscard"><h4>Money model</h4><p>Two directions, one ledger: money in through Zeva Pay (2% · instant), money out by ACH and bill pay funded from the debit / credit card. Every dollar is tagged with patient ID + Rx.</p></div>
+      <div class="syscard"><h4>Theming</h4><p>A full light and dark system with theme-aware accents, elevation and the brand mark. A first-run picker chooses the look before the splash; light mode matches the MedaVida brand.</p></div>
+      <div class="syscard"><h4>Explainers</h4><p>Every operations screen opens with a collapsible "what is this" card — an X shrinks it to an info chip that re-expands on tap — so a PA or new teammate understands each feature at a glance.</p></div>
+      <div class="syscard"><h4>Roles &amp; approvals</h4><p>Role-based access shapes what each member sees and does, and links a spend-capped card to whoever needs one; high-value money movement routes to owner approval.</p></div>
+      <div class="syscard"><h4>States</h4><p>Every flow resolves to a clear success moment; empty, loading, and guarded (insufficient-funds, over-limit, missing-W-9) states are designed, not afterthoughts.</p></div>
     </div>
   </section>
 
