@@ -8,6 +8,7 @@ import { ZevaMark } from "@/components/ZevaMark";
 import { APP_NAME } from "@/lib/brand";
 import { haptic } from "@/lib/haptics";
 import { useKeyboardInset } from "@/lib/useKeyboardInset";
+import { useThemePref } from "@/lib/theme";
 
 const fmt = (d: string) => {
   const n = d.replace(/\D/g, "").slice(0, 10);
@@ -17,6 +18,7 @@ const fmt = (d: string) => {
 };
 
 export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }) {
+  const isLight = useThemePref() === "light"; // system defaults to dark in this app
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -55,7 +57,7 @@ export function SignIn({ onDone }: { onDone: () => void; onCreate?: () => void }
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden">
       <AnimatedBackground variant="css" intensity={0.5} />
-      <LightRays raysOrigin="top-center" raysColor="#23FFED" raysSpeed={0.7} lightSpread={0.9} rayLength={1.9} followMouse={false} style={{ opacity: "var(--rays-op, 0.7)" }} />
+      <LightRays raysOrigin="top-center" raysColor={isLight ? "#5B8DEF" : "#23FFED"} raysSpeed={0.7} lightSpread={0.9} rayLength={1.9} followMouse={false} style={{ opacity: isLight ? 0.18 : "var(--rays-op, 0.7)" }} />
 
       <div className="relative z-10 flex flex-none items-center gap-2.5 px-6 pt-5">
         {step === "otp" && (

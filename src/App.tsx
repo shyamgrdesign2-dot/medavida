@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { startGyro } from "./lib/gyro";
 import { PhoneFrame } from "./components/PhoneFrame";
+import { ThemeChoice } from "./screens/ThemeChoice";
 import { Splash } from "./screens/Splash";
 import { Onboarding } from "./screens/Onboarding";
 import { SignIn } from "./screens/SignIn";
 import { AccountCreate } from "./screens/AccountCreate";
 import { AppShell } from "./app/AppShell";
 
-type Screen = "splash" | "onboarding" | "signin" | "account" | "app";
+type Screen = "themepick" | "splash" | "onboarding" | "signin" | "account" | "app";
 
 // Dev harness: ?screen=onboarding jumps straight there; ?hold=1 freezes the
 // splash so it can be inspected. Keeps verification deterministic.
+// First-run demo aid: with no ?screen override, open on the theme picker so a
+// pitch can choose light/dark before the splash. Remove by defaulting to "splash".
 const params = new URLSearchParams(location.search);
-const initial = (params.get("screen") as Screen) || "splash";
+const initial = (params.get("screen") as Screen) || "themepick";
 const hold = params.get("hold") === "1";
 
 export function App() {
@@ -30,6 +33,11 @@ export function App() {
   return (
     <PhoneFrame>
       <AnimatePresence mode="wait">
+        {screen === "themepick" && (
+          <motion.div key="themepick" className="h-full" exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+            <ThemeChoice onPick={() => setScreen("splash")} />
+          </motion.div>
+        )}
         {screen === "splash" && (
           <motion.div key="splash" className="h-full" exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
             <Splash hold={hold} onDone={() => setScreen("onboarding")} />

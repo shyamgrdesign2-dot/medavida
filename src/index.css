@@ -61,7 +61,7 @@
   --glass-brd: rgba(255, 255, 255, 0.10);
   --glass-hi: rgba(255, 255, 255, 0.14);
   --hi: rgba(255, 255, 255, 0.08);
-  --glass-stroke: rgba(122, 176, 255, 0.16); --glass-shadow: rgba(0, 0, 0, 0.55);
+  --glass-stroke: rgba(255, 255, 255, 0.10); --glass-shadow: rgba(0, 0, 0, 0.50);
   --nav-bg: rgba(16, 18, 23, 0.52);
   --scrim: rgba(0, 0, 0, 0.55);
   --shadow-card: 0 1px 2px rgba(0,0,0,0.35), 0 16px 36px -22px rgba(0,0,0,0.8);
@@ -70,6 +70,7 @@
   --bg-glow: rgba(35,255,237,0.12);
   --bg-glow-2: rgba(15,216,200,0.06);
   --rays-op: 0.5;
+  --card-glow: transparent;
   --star: rgba(255,255,255,1);
   --bg-vignette: rgba(4,5,6,0.7);
   /* categorical accents — used as BOTH icon color and (15–24% diluted) tile bg.
@@ -98,11 +99,12 @@
     --color-go: #12a35f; --color-caution: #bd7d0a; --color-stop: #e5484d;
     --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
     --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
-  --glass-stroke: rgba(56,102,214,0.34); --glass-shadow: rgba(28,42,78,0.17);
+  --glass-stroke: rgba(22,28,40,0.08); --glass-shadow: rgba(18,24,34,0.16);
   --nav-bg: rgba(255,255,255,0.55);
     --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
     --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
     --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
+    --card-glow: rgba(58,104,214,0.30);
     --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
     --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
@@ -121,7 +123,7 @@
   --color-go: #12a35f; --color-caution: #bd7d0a; --color-stop: #e5484d;
   --glass-bg: rgba(255,255,255,0.74); --glass-brd: rgba(16,24,40,0.06); --glass-hi: rgba(255,255,255,0.96);
   --hi: rgba(255,255,255,0.8); --scrim: rgba(24,28,36,0.32);
-  --glass-stroke: rgba(56,102,214,0.34); --glass-shadow: rgba(28,42,78,0.17);
+  --glass-stroke: rgba(22,28,40,0.08); --glass-shadow: rgba(18,24,34,0.16);
   --nav-bg: rgba(255,255,255,0.55);
   --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
   --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
@@ -219,20 +221,20 @@ body {
 .np-dark { --face: var(--color-surface-2); --edge: #050506; --np-ink: var(--color-ink); }
 .np-dark .np-face { box-shadow: inset 0 0 0 1px var(--color-border); }
 
-/* Rounded CTA corners (MedaVida brand) — face + depth edges kept in sync */
-.np-face { border-radius: 12px; }
-.np-edge.right { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
-.np-edge.bottom { border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
-
-/* Liquid-glass action tile — soft depth, blueish outer stroke, real blur */
+/* Liquid-glass action tile — classic soft shadow + sheen, whisper-neutral
+   hairline, and a very subtle brand-teal wash behind (no coloured outline). */
 .glass-tile {
-  background: linear-gradient(158deg, var(--glass-hi), transparent 48%), var(--glass-bg);
+  background:
+    radial-gradient(130% 120% at 50% 0%, color-mix(in oklab, var(--color-teal) 7%, transparent), transparent 62%),
+    linear-gradient(158deg, var(--glass-hi), transparent 48%),
+    var(--glass-bg);
   -webkit-backdrop-filter: blur(18px) saturate(1.5);
   backdrop-filter: blur(18px) saturate(1.5);
   box-shadow:
     inset 0 1px 0 var(--glass-hi),
     inset 0 0 0 1px var(--glass-stroke),
-    0 10px 26px -14px var(--glass-shadow);
+    0 2px 6px -2px var(--glass-shadow),
+    0 16px 32px -18px var(--glass-shadow);
 }
 
 /* Apple-style liquid-glass nav — transparent, heavy blur, thin blueish ring */
@@ -247,15 +249,28 @@ body {
     inset 0 -1px 0 rgba(255,255,255,0.05) !important;
 }
 
-/* MedaVida brand — in LIGHT mode the primary CTA is black (teal stays the accent) */
+/* MedaVida brand — in LIGHT mode the CTA drops the NeoPop 3D plunk entirely and
+   becomes a clean flat-rounded black button with a soft shadow for depth. The
+   skewed depth edges are removed (they were poking out at the rounded corners);
+   dark mode keeps the original sharp plunk untouched. */
 @media (prefers-color-scheme: light){
   :root:not([data-theme="dark"]) .np,
-  :root:not([data-theme="dark"]) .np-primary { --face: #24272e; --edge: #050608; --np-ink: #ffffff; }
-  :root:not([data-theme="dark"]) .np .np-face { box-shadow: inset 0 1px 0 rgba(255,255,255,0.10); }
+  :root:not([data-theme="dark"]) .np-primary { --face: #17181d; --edge: transparent; --np-ink: #ffffff; --e: 0px; }
+  :root:not([data-theme="dark"]) .np .np-edge { display: none; }
+  :root:not([data-theme="dark"]) .np .np-face {
+    margin: 0; border-radius: 13px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.09), 0 1px 2px rgba(16,20,30,0.16), 0 10px 22px -10px rgba(16,20,30,0.34);
+  }
+  :root:not([data-theme="dark"]) .np:active .np-face { transform: scale(0.985); }
 }
 :root[data-theme="light"] .np,
-:root[data-theme="light"] .np-primary { --face: #24272e; --edge: #050608; --np-ink: #ffffff; }
-:root[data-theme="light"] .np .np-face { box-shadow: inset 0 1px 0 rgba(255,255,255,0.10); }
+:root[data-theme="light"] .np-primary { --face: #17181d; --edge: transparent; --np-ink: #ffffff; --e: 0px; }
+:root[data-theme="light"] .np .np-edge { display: none; }
+:root[data-theme="light"] .np .np-face {
+  margin: 0; border-radius: 13px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.09), 0 1px 2px rgba(16,20,30,0.16), 0 10px 22px -10px rgba(16,20,30,0.34);
+}
+:root[data-theme="light"] .np:active .np-face { transform: scale(0.985); }
 
 /* MedaVida brand — secondary buttons are white with a black outline in LIGHT mode
    (dark mode keeps their original teal/grey styling; no rule fires there). */

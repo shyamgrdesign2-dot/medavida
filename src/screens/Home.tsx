@@ -72,7 +72,9 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
 
       {/* CARD SHOWCASE — hero, pinned; double-tap opens Cards */}
       <motion.div variants={stagger} initial="hidden" animate="show" className="sticky top-0 z-0 px-5">
-        <motion.div variants={item}>
+        <motion.div variants={item} className="relative">
+          {/* soft brand-blue glow that blooms behind the card */}
+          <div className="pointer-events-none absolute -inset-x-6 -bottom-8 top-8 -z-10" style={{ background: "radial-gradient(58% 60% at 50% 62%, var(--card-glow), transparent 72%)", filter: "blur(26px)" }} />
           <CardWallet width={346} onCardTap={() => onQuick?.("cards")} />
         </motion.div>
       </motion.div>
