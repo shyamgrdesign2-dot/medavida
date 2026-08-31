@@ -71,6 +71,13 @@
   --bg-glow-2: rgba(15,216,200,0.06);
   --rays-op: 0.5;
   --card-glow: transparent;
+  --grid-line: rgba(35, 255, 237, 0.06);
+  --story-track: rgba(255, 255, 255, 0.15);
+  --story-fill: #ffffff;
+  --onb-glow: rgba(35, 255, 237, 0.16);
+  --onb-surface: color-mix(in oklab, var(--color-surface) 82%, transparent);
+  --onb-surface-brd: var(--color-border);
+  --onb-surface-shadow: none;
   --star: rgba(255,255,255,1);
   --bg-vignette: rgba(4,5,6,0.7);
   /* categorical accents — used as BOTH icon color and (15–24% diluted) tile bg.
@@ -104,7 +111,11 @@
     --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
     --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
     --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
-    --card-glow: rgba(58,104,214,0.30);
+    --card-glow: rgba(16,190,172,0.34);
+    --grid-line: rgba(11,160,145,0.14);
+    --story-track: rgba(18,22,32,0.14); --story-fill: #17181d;
+    --onb-glow: rgba(16,190,172,0.32);
+    --onb-surface: linear-gradient(158deg, #ffffff, #e6f7f2); --onb-surface-brd: rgba(14,150,135,0.22); --onb-surface-shadow: 0 12px 30px -16px rgba(9,120,108,0.32);
     --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
     --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
     --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
@@ -128,6 +139,11 @@
   --shadow-card: 0 1px 2px rgba(18,26,44,0.05), 0 10px 26px -14px rgba(18,26,44,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
   --aurora-1: rgba(8,169,155,0.09); --aurora-2: rgba(8,169,155,0.04);
   --bg-glow: rgba(255,255,255,0.55); --bg-glow-2: rgba(255,255,255,0.20); --rays-op: 0; --waves-op: 0.4;
+  --card-glow: rgba(16,190,172,0.34);
+  --grid-line: rgba(11,160,145,0.14);
+  --story-track: rgba(18,22,32,0.14); --story-fill: #17181d;
+  --onb-glow: rgba(16,190,172,0.32);
+  --onb-surface: linear-gradient(158deg, #ffffff, #e6f7f2); --onb-surface-brd: rgba(14,150,135,0.22); --onb-surface-shadow: 0 12px 30px -16px rgba(9,120,108,0.32);
   --star: rgba(8,120,110,0.35); --bg-vignette: rgba(120,150,150,0.16);
   --body-mesh: radial-gradient(120% 80% at 50% -8%, rgba(255,255,255,0.6), transparent 58%);
   --acc-teal: #0b9a8c; --acc-blue: #3563d6; --acc-green: #12965c; --acc-amber: #b07914;
@@ -290,8 +306,13 @@ body {
 }
 .grid-pattern-teal {
   background-image:
-    linear-gradient(rgba(35, 255, 237, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(35, 255, 237, 0.06) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 26px 26px;
 }
+
+/* Onboarding helpers — theme-aware so the light mode reads (dark unchanged) */
+.story-track { background: var(--story-track); }
+.story-fill { background: var(--story-fill); }
+.onb-surface { background: var(--onb-surface); border-color: var(--onb-surface-brd) !important; box-shadow: var(--onb-surface-shadow, none); }
 

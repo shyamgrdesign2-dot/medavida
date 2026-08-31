@@ -83,7 +83,7 @@ function HeroFlow() {
 
         {/* central balance */}
         <motion.div
-          className="teal-glow relative z-10 rounded-2xl border border-border bg-surface/85 px-5 py-3 backdrop-blur-md"
+          className="teal-glow onb-surface relative z-10 rounded-2xl border px-5 py-3 backdrop-blur-md"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
@@ -119,7 +119,7 @@ function HeroInstant() {
     <div className="flex h-full w-full flex-col items-center justify-center gap-4">
       {/* cause: a patient taps their card */}
       <motion.div
-        className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-1.5 backdrop-blur-md"
+        className="onb-surface inline-flex items-center gap-2 rounded-full border px-3 py-1.5 backdrop-blur-md"
         initial={{ y: -8, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 24 }}
@@ -185,7 +185,7 @@ function HeroCard() {
       {/* soft teal glow behind the card — no frame, no stroke */}
       <motion.div
         className="pointer-events-none absolute h-[220px] w-[300px] rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(35,255,237,0.16), transparent 65%)", filter: "blur(20px)" }}
+        style={{ background: "radial-gradient(circle, var(--onb-glow), transparent 65%)", filter: "blur(20px)" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0.6, 1, 0.7] }}
         transition={{ duration: 4, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
@@ -222,7 +222,7 @@ function HeroBills() {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <motion.div
-        className="w-[264px] border border-border bg-surface/80 p-4 backdrop-blur-md"
+        className="onb-surface w-[264px] border p-4 backdrop-blur-md"
         style={{ borderRadius: 18 }}
         initial={{ y: 14, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -339,12 +339,12 @@ export function Onboarding({ onStart, onSignin }: { onStart: () => void; onSigni
       {/* story progress bars */}
       <div className="relative z-20 flex gap-1.5 px-5 pt-4">
         {SLIDES.map((s, idx) => (
-          <div key={s.key} className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/15">
-            {idx < i && <div className="h-full w-full bg-white/80" />}
+          <div key={s.key} className="story-track h-[3px] flex-1 overflow-hidden rounded-full">
+            {idx < i && <div className="story-fill h-full w-full" />}
             {idx === i && (
               <motion.div
                 key={`fill-${i}`}
-                className="h-full bg-white"
+                className="story-fill h-full"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: (i === SLIDES.length - 1 ? 0.6 : SLIDE_MS / 1000), ease: "linear" }}
