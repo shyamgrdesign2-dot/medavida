@@ -5,8 +5,8 @@
 // =========================================================================
 
 export const CLINIC = {
-  name: "Shyam GR Clinic",
-  short: "Shyam GR",
+  name: "MyoClinic",
+  short: "MyoClinic",
   city: "Austin, TX",
   operatingBalance: 128450.2,
   owner: "Dr. Shyam GR",
