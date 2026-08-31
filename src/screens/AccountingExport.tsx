@@ -64,7 +64,7 @@ export function AccountingExport({ onBack }: { onBack: () => void }) {
             <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[12px] bg-teal/15 text-teal-2"><Link21 size={20} variant="Bulk" color="currentColor" /></span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 text-[14px] font-semibold text-ink">QuickBooks Online <TickCircle size={14} variant="Bulk" color="var(--color-go)" /></div>
-              <div className="truncate text-[11.5px] text-dim">Meridian Functional Health · synced 9:12 AM</div>
+              <div className="truncate text-[11.5px] text-dim">Shyam GR Clinic · synced 9:12 AM</div>
             </div>
           </div>
           <div className="mt-3.5 flex items-center justify-between border-t border-teal/15 pt-3">

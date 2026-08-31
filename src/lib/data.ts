@@ -1,15 +1,15 @@
 // =========================================================================
-// Zeva demo data — a US functional-medicine clinic. USD everywhere.
+// Zeva demo data — a US clinic. USD everywhere.
 // Inflow = patient card-on-file payments (patient ID + medication in memo).
 // Outflow = suppliers, payroll, rent, utilities via the Zeva card.
 // =========================================================================
 
 export const CLINIC = {
-  name: "Meridian Functional Health",
-  short: "Meridian",
+  name: "Shyam GR Clinic",
+  short: "Shyam GR",
   city: "Austin, TX",
   operatingBalance: 128450.2,
-  owner: "Dr. Alia Reyes",
+  owner: "Dr. Shyam GR",
 };
 
 export type CardType = "debit" | "virtual" | "credit";
@@ -69,10 +69,10 @@ export interface Txn {
 }
 
 export const TXNS: Txn[] = [
-  { id: "t1", title: "Patient · MFH-2831", sub: "Semaglutide 0.5mg · visit", amount: 340.0, dir: "in", when: "9:24 AM", category: "patient", icon: "HeartPulse", status: "instant" },
-  { id: "t2", title: "Patient · MFH-2830", sub: "GLP-1 program · month 2", amount: 499.0, dir: "in", when: "9:02 AM", category: "patient", icon: "HeartPulse", status: "instant" },
+  { id: "t1", title: "Patient · SGR-2831", sub: "Semaglutide 0.5mg · visit", amount: 340.0, dir: "in", when: "9:24 AM", category: "patient", icon: "HeartPulse", status: "instant" },
+  { id: "t2", title: "Patient · SGR-2830", sub: "GLP-1 program · month 2", amount: 499.0, dir: "in", when: "9:02 AM", category: "patient", icon: "HeartPulse", status: "instant" },
   { id: "t3", title: "Fullscript", sub: "Supplement order #FS-9921", amount: 1240.5, dir: "out", when: "Yesterday", category: "supplier", icon: "Pill", status: "settled" },
-  { id: "t4", title: "Patient · MFH-2822", sub: "Lab panel · Rupa Health", amount: 285.0, dir: "in", when: "Yesterday", category: "patient", icon: "HeartPulse", status: "instant" },
+  { id: "t4", title: "Patient · SGR-2822", sub: "Lab panel · Rupa Health", amount: 285.0, dir: "in", when: "Yesterday", category: "patient", icon: "HeartPulse", status: "instant" },
   { id: "t5", title: "City of Austin Utilities", sub: "Electricity · autopay", amount: 412.6, dir: "out", when: "Aug 27", category: "utility", icon: "Zap", status: "settled" },
   { id: "t6", title: "Payroll · 4 staff", sub: "Semi-monthly run", amount: 9820.0, dir: "out", when: "Aug 25", category: "payroll", icon: "Users", status: "settled" },
   { id: "t7", title: "McKesson Medical", sub: "Compounding invoice #4471", amount: 3850.0, dir: "out", when: "Aug 24", category: "supplier", icon: "Truck", status: "approval" },

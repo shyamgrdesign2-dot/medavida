@@ -65,7 +65,7 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
             <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-teal px-1 text-[9px] font-bold text-on-teal">3</span>
           </button>
           <button onClick={() => { haptic("tap"); onQuick?.("more"); }} aria-label="Account" className="flex-none">
-            <PatternAvatar seed={CLINIC.name} size={40} label="MF" />
+            <PatternAvatar seed={CLINIC.name} size={40} label="SG" />
           </button>
         </motion.div>
       </motion.div>

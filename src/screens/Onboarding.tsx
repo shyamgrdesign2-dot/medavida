@@ -125,7 +125,7 @@ function HeroInstant() {
         transition={{ type: "spring", stiffness: 300, damping: 24 }}
       >
         <span className="flex h-4 w-4 items-center justify-center rounded-full bg-teal/20 text-[9px]">💳</span>
-        <span className="text-[11px] font-medium text-dim">Patient MFH-2831 tapped •• 4821</span>
+        <span className="text-[11px] font-medium text-dim">Patient SGR-2831 tapped •• 4821</span>
       </motion.div>
 
       {/* effect: it lands, counting up */}

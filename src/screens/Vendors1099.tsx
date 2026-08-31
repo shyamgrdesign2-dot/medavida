@@ -10,7 +10,7 @@ interface Vendor { id: string; name: string; cat: string; ytd: number; w9: boole
 const INITIAL: Vendor[] = [
   { id: "malik", name: "Dr. Sana Malik", cat: "Per-diem NP", ytd: 28400, w9: true, eligible: true },
   { id: "coach", name: "Priya Coaching LLC", cat: "Health coaching", ytd: 14200, w9: true, eligible: true },
-  { id: "labs", name: "Meridian Labs Consulting", cat: "Consulting", ytd: 9600, w9: true, eligible: true },
+  { id: "labs", name: "Cornerstone Labs Consulting", cat: "Consulting", ytd: 9600, w9: true, eligible: true },
   { id: "clean", name: "CleanCo Services", cat: "Facilities", ytd: 4800, w9: false, eligible: true },
   { id: "media", name: "Bright Media", cat: "Marketing", ytd: 520, w9: false, eligible: false },
 ];

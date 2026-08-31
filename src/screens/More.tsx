@@ -88,7 +88,7 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
       {/* profile */}
       <motion.div variants={item}>
         <Squircle radius={16} className="flex items-center gap-3.5 border border-border bg-surface p-4">
-          <PatternAvatar size={52} label="MF" />
+          <PatternAvatar size={52} label="SG" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
               <span className="truncate font-display text-[16px] font-semibold text-ink">{CLINIC.name}</span>

@@ -17,7 +17,7 @@ const BUCKETS = [
 
 export function AccountCreate({ onDone, onSignin }: { onDone: () => void; onSignin: () => void }) {
   const [step, setStep] = useState(0);
-  const [name, setName] = useState("Meridian Functional Health");
+  const [name, setName] = useState("Shyam GR Clinic");
   const [ein, setEin] = useState("");
   const [ctype, setCtype] = useState(0);
   const [owner, setOwner] = useState("Dr. Alia Reyes");

@@ -12,11 +12,11 @@ interface Line { label: string; amount: number }
 interface Invoice { id: string; patient: string; summary: string; amount: number; status: Status; due: string; lines: Line[] }
 
 const INVOICES: Invoice[] = [
-  { id: "INV-1042", patient: "MFH-2831", summary: "Visit + Semaglutide + labs", amount: 520, status: "overdue", due: "Due Aug 20", lines: [{ label: "Office visit", amount: 180 }, { label: "Semaglutide 0.5mg", amount: 220 }, { label: "Lab panel · Rupa", amount: 120 }] },
-  { id: "INV-1041", patient: "MFH-2830", summary: "GLP-1 program · month 2", amount: 499, status: "viewed", due: "Due Sep 2", lines: [{ label: "GLP-1 program", amount: 499 }] },
-  { id: "INV-1040", patient: "MFH-2822", summary: "Lab panel · Rupa Health", amount: 285, status: "sent", due: "Due Sep 5", lines: [{ label: "Comprehensive panel", amount: 285 }] },
-  { id: "INV-1039", patient: "MFH-2815", summary: "Consult + supplements", amount: 340, status: "paid", due: "Paid Aug 26", lines: [{ label: "Consult", amount: 180 }, { label: "Supplements · Fullscript", amount: 160 }] },
-  { id: "INV-1038", patient: "MFH-2808", summary: "Peptide therapy", amount: 189, status: "paid", due: "Paid Aug 24", lines: [{ label: "Peptide therapy", amount: 189 }] },
+  { id: "INV-1042", patient: "SGR-2831", summary: "Visit + Semaglutide + labs", amount: 520, status: "overdue", due: "Due Aug 20", lines: [{ label: "Office visit", amount: 180 }, { label: "Semaglutide 0.5mg", amount: 220 }, { label: "Lab panel · Rupa", amount: 120 }] },
+  { id: "INV-1041", patient: "SGR-2830", summary: "GLP-1 program · month 2", amount: 499, status: "viewed", due: "Due Sep 2", lines: [{ label: "GLP-1 program", amount: 499 }] },
+  { id: "INV-1040", patient: "SGR-2822", summary: "Lab panel · Rupa Health", amount: 285, status: "sent", due: "Due Sep 5", lines: [{ label: "Comprehensive panel", amount: 285 }] },
+  { id: "INV-1039", patient: "SGR-2815", summary: "Consult + supplements", amount: 340, status: "paid", due: "Paid Aug 26", lines: [{ label: "Consult", amount: 180 }, { label: "Supplements · Fullscript", amount: 160 }] },
+  { id: "INV-1038", patient: "SGR-2808", summary: "Peptide therapy", amount: 189, status: "paid", due: "Paid Aug 24", lines: [{ label: "Peptide therapy", amount: 189 }] },
 ];
 
 const chipFor = (s: Status) =>

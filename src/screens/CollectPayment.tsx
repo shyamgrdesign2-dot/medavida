@@ -9,10 +9,10 @@ import { haptic } from "@/lib/haptics";
 // Recent patients (card-on-file) + a "new" option. Inflow is the core value prop:
 // patient pays via Zeva Pay → ~2% fee → clinic gets net disbursed INSTANTLY.
 const PATIENTS = [
-  { id: "MFH-2831", initials: "AR" },
-  { id: "MFH-2830", initials: "JT" },
-  { id: "MFH-2822", initials: "LM" },
-  { id: "MFH-2790", initials: "DP" },
+  { id: "SGR-2831", initials: "AR" },
+  { id: "SGR-2830", initials: "JT" },
+  { id: "SGR-2822", initials: "LM" },
+  { id: "SGR-2790", initials: "DP" },
   { id: "new", initials: "+" },
 ];
 const PROGRAMS = ["Semaglutide 0.5mg", "GLP-1 program", "Lab panel", "Consult", "Peptide therapy"];

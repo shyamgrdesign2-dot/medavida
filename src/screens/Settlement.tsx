@@ -15,10 +15,10 @@ const DAYS = [
   { d: "Aug 27", count: 84, net: 5127.6 },
 ];
 const TODAY_ITEMS = [
-  { id: "MFH-2831", prog: "Semaglutide 0.5mg", amt: 340 },
-  { id: "MFH-2830", prog: "GLP-1 program", amt: 499 },
-  { id: "MFH-2822", prog: "Lab panel", amt: 285 },
-  { id: "MFH-2815", prog: "Consult", amt: 180 },
+  { id: "SGR-2831", prog: "Semaglutide 0.5mg", amt: 340 },
+  { id: "SGR-2830", prog: "GLP-1 program", amt: 499 },
+  { id: "SGR-2822", prog: "Lab panel", amt: 285 },
+  { id: "SGR-2815", prog: "Consult", amt: 180 },
 ];
 
 export function Settlement({ onBack }: { onBack: () => void }) {
