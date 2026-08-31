@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { GradientWaves } from "./backgrounds/GradientWaves";
+import { useThemePref } from "@/lib/theme";
 
 /**
  * Cosmic background. `variant="waves"` uses the ReactBits GradientWaves WebGL
@@ -15,6 +16,7 @@ export function AnimatedBackground({
   variant?: "css" | "waves";
 }) {
   const reduce = useReducedMotion();
+  const isLight = useThemePref() === "light"; // system defaults to dark in this app
 
   const stars = useMemo(
     () =>
@@ -42,7 +44,15 @@ export function AnimatedBackground({
     <div className="pointer-events-none absolute inset-0 overflow-hidden bg-bg">
       {variant === "waves" ? (
         <div className="absolute inset-0" style={{ opacity: `calc(${0.9 * intensity} * var(--waves-op, 1))` }}>
-          <GradientWaves opacity={0.95} brightness={0.95} tilt={1.2} speed={0.3} mouseInteraction />
+          {/* light mode tints the whole shader teal against white; dark keeps its defaults */}
+          <GradientWaves
+            opacity={0.95}
+            brightness={isLight ? 1.05 : 0.95}
+            tilt={1.2}
+            speed={0.3}
+            mouseInteraction
+            {...(isLight ? { horizonColor: "#f2fbf9", waveColor: "#2fd0c0", crestColor: "#8ff5ea" } : {})}
+          />
         </div>
       ) : (
         <>
