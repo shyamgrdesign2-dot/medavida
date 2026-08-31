@@ -65,9 +65,6 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
           <div className="font-display text-[22px] font-semibold tracking-tight text-ink">Cards</div>
           <div className="text-[12px] text-dim">{CARDS.length} active</div>
         </div>
-        <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => { haptic("tap"); setIssued(false); setSheet("issue"); onIssue?.(); }}>
-          <Add size={17} variant="Linear" color="currentColor" /> Issue
-        </NeoPopButton>
       </div>
 
       {/* card carousel */}

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Add, TickCircle, ArrowRight2, ArrowLeft2 } from "iconsax-react";
+import { TickCircle, ArrowRight2, ArrowLeft2 } from "iconsax-react";
+import { CardNetwork } from "@/components/glyphs";
 import { Icon, Chip, SectionTitle } from "@/components/ui";
 import { AnimatedGradient } from "@/components/AnimatedGradient";
 import { BottomSheet } from "@/components/BottomSheet";
@@ -48,7 +49,6 @@ export function BillPay({ onBack }: { onBack?: () => void } = {}) {
             <div className="text-[12px] text-dim">{bills.filter((b) => b.status !== "paid").length} bills this cycle</div>
           </div>
         </div>
-        <NeoPopButton depth={4} faceClassName="px-3.5 py-2.5 text-[12.5px] font-semibold" onClick={() => openNew()}><Add size={15} variant="Linear" color="currentColor" /> Add</NeoPopButton>
       </div>
 
       {/* due summary card with animated gradient */}
@@ -126,15 +126,15 @@ export function BillPay({ onBack }: { onBack?: () => void } = {}) {
                   {CARDS.filter((c) => c.type !== "virtual").map((c, i) => {
                     const on = cardIdx === i;
                     return (
-                      <button key={c.id} onClick={() => { haptic("tap"); setCardIdx(i); }} className={"flex items-center gap-3 rounded-[9px] border p-3 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface-2")}>
+                      <button key={c.id} onClick={() => { haptic("tap"); setCardIdx(i); }} className={"flex items-center gap-3 rounded-[10px] border p-3 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface-2")}>
                         <span className="flex h-9 w-12 flex-none items-center justify-center rounded-md" style={{ background: c.variant === "credit" ? "linear-gradient(135deg,#0c211d,#05423a)" : "linear-gradient(135deg,#16201f,#08130f)", boxShadow: "inset 0 0 0 1px rgba(35,255,237,0.2)" }}>
-                          <span className="font-mono text-[9px] font-bold text-teal-2">{c.last4}</span>
+                          <CardNetwork size={17} color="#eafff9" />
                         </span>
-                        <span className="flex-1">
-                          <span className="block text-[13px] font-semibold text-ink">{c.label}</span>
-                          <span className="block font-mono text-[10.5px] text-dim">•••• {c.last4} · {c.type}</span>
+                        <span className="min-w-0 flex-1 leading-tight">
+                          <span className="block text-[13px] font-semibold text-ink">{c.type === "credit" ? "Credit card" : "Debit card"}</span>
+                          <span className="flex items-center gap-1.5 font-mono text-[10.5px] text-dim"><CardNetwork size={12} color="var(--color-teal-2)" /> •••• {c.last4}</span>
                         </span>
-                        <span className={"flex h-5 w-5 items-center justify-center rounded-full border " + (on ? "border-teal bg-teal text-on-teal" : "border-border")}>{on && <TickCircle size={12} variant="Bulk" color="currentColor" />}</span>
+                        <span className={"flex h-5 w-5 flex-none items-center justify-center rounded-full border " + (on ? "border-teal bg-teal text-on-teal" : "border-border")}>{on && <TickCircle size={12} variant="Bulk" color="currentColor" />}</span>
                       </button>
                     );
                   })}

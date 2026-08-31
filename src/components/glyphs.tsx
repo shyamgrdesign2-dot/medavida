@@ -27,16 +27,27 @@ export function Injection({ size = 24, color = "currentColor", className }: Glyp
 export function Snowflake({ size = 24, color = "currentColor", className }: GlyphProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
-      <g stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        {/* three axes through the centre */}
-        <path d="M12 2.5v19M4.05 7.25l15.9 9.5M19.95 7.25l-15.9 9.5" />
-        {/* vertical tips */}
-        <path d="M9.3 4.9 12 6.6l2.7-1.7M9.3 19.1 12 17.4l2.7 1.7" />
-        {/* upper-left / lower-right tips */}
-        <path d="M4.4 10.4l.4 3.15 3-.9M19.6 13.6l-.4-3.15-3 .9" />
-        {/* upper-right / lower-left tips */}
-        <path d="M19.6 10.4l-.4 3.15-3-.9M4.4 13.6l.4-3.15 3 .9" />
+      <g stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M15.33 2 12 5.33" />
+        <path d="M8.67 22 12 18.67" />
+        <path d="M15.33 22 12 18.67V5.33L8.67 2" />
+        <path d="M2 8.67 5.33 12" />
+        <path d="M2 15.33 5.33 12h13.33l3.33-3.33" />
+        <path d="M22 15.33 18.67 12" />
+        <path opacity="0.4" d="M18.67 5.33 5.34 18.66" />
+        <path opacity="0.4" d="M5.33 5.33 18.66 18.66" />
       </g>
+    </svg>
+  );
+}
+
+/** Generic card-network mark (interlocking discs) — stands in for Visa/Mastercard
+    without reproducing a real brand logo. */
+export function CardNetwork({ size = 24, color = "currentColor", className }: GlyphProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <circle cx="9" cy="12" r="6" fill={color} opacity="0.45" />
+      <circle cx="15" cy="12" r="6" fill={color} opacity="0.85" />
     </svg>
   );
 }

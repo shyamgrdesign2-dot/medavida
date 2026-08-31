@@ -16,8 +16,8 @@ const INITIAL_PATIENTS: Patient[] = [
   { id: "SGR-2822", name: "Lena Marsh", initials: "LM", mobile: "(512) 555-2822" },
   { id: "SGR-2790", name: "Dev Patel", initials: "DP", mobile: "(512) 555-2790" },
 ];
-const PROGRAMS = ["Semaglutide 0.5mg", "GLP-1 program", "Lab panel", "Consult", "Peptide therapy"];
-const TAXES = [
+const INITIAL_PROGRAMS = ["Semaglutide 0.5mg", "GLP-1 program", "Lab panel", "Consult", "Peptide therapy"];
+const INITIAL_TAXES = [
   { id: "none", label: "No tax", rate: 0 },
   { id: "sales", label: "Sales tax 8.25%", rate: 0.0825 },
   { id: "svc", label: "Wellness svc 5%", rate: 0.05 },
@@ -27,32 +27,23 @@ const FEE = 0.02;
 export function CollectPayment({ onBack }: { onBack: () => void }) {
   const [patients, setPatients] = useState<Patient[]>(INITIAL_PATIENTS);
   const [ptId, setPtId] = useState(INITIAL_PATIENTS[0].id);
+  const [programs, setPrograms] = useState(INITIAL_PROGRAMS);
   const [prog, setProg] = useState(0);
-  const [taxes, setTaxes] = useState(TAXES);
+  const [taxes, setTaxes] = useState(INITIAL_TAXES);
   const [taxIdx, setTaxIdx] = useState(0);
-  const [pickTax, setPickTax] = useState(false);
-  const [newTaxLabel, setNewTaxLabel] = useState("");
-  const [newTaxRate, setNewTaxRate] = useState("");
   const [amount, setAmount] = useState("0");
   const [done, setDone] = useState(false);
   const [link, setLink] = useState(false); // false = charge card-on-file now, true = send a pay link
-  const [pickPt, setPickPt] = useState(false);
+
+  // one sheet at a time: patient | program | tax
+  const [sheet, setSheet] = useState<null | "patient" | "program" | "tax">(null);
   const [adding, setAdding] = useState(false);
-  const [newName, setNewName] = useState("");
-  const [newMobile, setNewMobile] = useState("");
+  const [nName, setNName] = useState(""); const [nMobile, setNMobile] = useState("");
+  const [nProg, setNProg] = useState("");
+  const [nTaxLabel, setNTaxLabel] = useState(""); const [nTaxRate, setNTaxRate] = useState("");
 
   const patient = patients.find((p) => p.id === ptId) ?? patients[0];
   const tax = taxes[taxIdx] ?? taxes[0];
-
-  const addTax = () => {
-    const rate = parseFloat(newTaxRate);
-    if (!newTaxLabel.trim() || !(rate > 0)) return;
-    haptic("success");
-    const t = { id: "custom-" + taxes.length, label: `${newTaxLabel.trim()} ${rate}%`, rate: rate / 100 };
-    setTaxes((ts) => [...ts, t]);
-    setTaxIdx(taxes.length);
-    setNewTaxLabel(""); setNewTaxRate(""); setPickTax(false);
-  };
 
   const val = parseFloat(amount) || 0;
   const taxAmt = Math.round(val * tax.rate * 100) / 100;
@@ -60,15 +51,26 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
   const fee = Math.round(total * FEE * 100) / 100;
   const net = Math.round((total - fee) * 100) / 100;
 
+  const close = () => { setSheet(null); setAdding(false); };
   const addPatient = () => {
-    if (!newName.trim() || newMobile.replace(/\D/g, "").length < 10) return;
+    if (!nName.trim() || nMobile.replace(/\D/g, "").length < 10) return;
     haptic("success");
     const id = "SGR-" + (2832 + patients.length);
-    const initials = newName.trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
-    const np: Patient = { id, name: newName.trim(), initials, mobile: newMobile.trim() };
-    setPatients((ps) => [...ps, np]);
-    setPtId(id);
-    setNewName(""); setNewMobile(""); setAdding(false); setPickPt(false);
+    const initials = nName.trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
+    setPatients((ps) => [...ps, { id, name: nName.trim(), initials, mobile: nMobile.trim() }]);
+    setPtId(id); setNName(""); setNMobile(""); close();
+  };
+  const addProgram = () => {
+    if (!nProg.trim()) return;
+    haptic("success");
+    setPrograms((ps) => [...ps, nProg.trim()]); setProg(programs.length); setNProg(""); close();
+  };
+  const addTax = () => {
+    const rate = parseFloat(nTaxRate);
+    if (!nTaxLabel.trim() || !(rate > 0)) return;
+    haptic("success");
+    setTaxes((ts) => [...ts, { id: "custom-" + ts.length, label: `${nTaxLabel.trim()} ${rate}%`, rate: rate / 100 }]);
+    setTaxIdx(taxes.length); setNTaxLabel(""); setNTaxRate(""); close();
   };
 
   const press = (k: string) => {
@@ -91,7 +93,7 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
           {link ? <Message size={36} variant="Bulk" color="var(--color-go)" /> : <TickCircle size={40} variant="Bulk" color="var(--color-go)" />}
         </motion.div>
         <div className="mt-5 font-display text-[24px] font-semibold text-ink">{link ? "Link sent" : `${money(total)} collected`}</div>
-        <div className="mt-1 text-[13px] text-dim">{patient.name} · {PROGRAMS[prog]}</div>
+        <div className="mt-1 text-[13px] text-dim">{patient.name} · {programs[prog]}</div>
         {link ? (
           <motion.div className="mt-6 w-full max-w-[300px] rounded-[14px] border border-teal/25 bg-teal/8 p-4" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <div className="flex items-center justify-between text-[12.5px]"><span className="text-dim">Requested</span><span className="tnum font-semibold text-ink">{money(total)}</span></div>
@@ -112,6 +114,17 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
     );
   }
 
+  // labeled dropdown trigger
+  const Dropdown = ({ label, value, onClick }: { label: string; value: string; onClick: () => void }) => (
+    <button onClick={onClick} className="card-lift flex items-center justify-between gap-2 rounded-[10px] border border-border bg-surface px-3 py-2 text-left">
+      <span className="min-w-0 leading-tight">
+        <span className="block text-[9px] font-bold uppercase tracking-wide text-faint">{label}</span>
+        <span className="block truncate text-[12.5px] font-semibold text-ink">{value}</span>
+      </span>
+      <ArrowDown2 size={15} variant="Linear" color="var(--color-teal-2)" className="flex-none" />
+    </button>
+  );
+
   return (
     <div className="flex h-full w-full flex-col bg-bg">
       <div className="flex flex-none items-center gap-3 px-5 pt-4">
@@ -119,8 +132,18 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
         <div className="font-display text-[18px] font-semibold text-ink">Collect payment</div>
       </div>
 
-      {/* method toggle: charge card-on-file now vs. send a payment link */}
-      <div className="mx-5 mt-4 grid grid-cols-2 gap-1 rounded-[12px] border border-border bg-surface-2 p-1">
+      {/* 1. patient FIRST — pick who's paying before anything else */}
+      <button onClick={() => { haptic("tap"); setSheet("patient"); }} className="card-lift mx-5 mt-4 flex items-center gap-2.5 rounded-[12px] border border-border bg-surface px-3 py-2 text-left">
+        <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-teal/12 text-[12px] font-bold text-teal-2">{patient.initials}</span>
+        <span className="min-w-0 flex-1 leading-tight">
+          <span className="block truncate text-[13.5px] font-semibold text-ink">{patient.name} <span className="text-[10px] font-bold uppercase tracking-wide text-faint">· patient</span></span>
+          <span className="block truncate text-[11px] text-dim">{patient.id} · {patient.mobile}</span>
+        </span>
+        <ArrowDown2 size={16} variant="Linear" color="var(--color-teal-2)" className="flex-none" />
+      </button>
+
+      {/* 2. how to collect — charge card-on-file now, or text a pay link */}
+      <div className="mx-5 mt-3 grid grid-cols-2 gap-1 rounded-[12px] border border-border bg-surface-2 p-1">
         {[{ k: false, label: "Charge now", icon: Card }, { k: true, label: "Send link", icon: Link21 }].map((m) => {
           const on = link === m.k;
           return (
@@ -133,17 +156,7 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
         })}
       </div>
 
-      {/* patient selector → opens a bottom sheet to pick / add a patient */}
-      <button onClick={() => { haptic("tap"); setPickPt(true); }} className="mx-5 mt-3 flex items-center gap-3 rounded-[12px] border border-border bg-surface px-3.5 py-3 text-left">
-        <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-surface-2 text-[13px] font-bold text-ink">{patient.initials}</span>
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-[14px] font-semibold text-ink">{patient.name}</span>
-          <span className="block truncate text-[11.5px] text-dim">{patient.id} · {patient.mobile}</span>
-        </span>
-        <ArrowDown2 size={16} variant="Linear" color="var(--color-faint)" />
-      </button>
-
-      {/* the pay-link is texted to the patient's mobile — make that explicit */}
+      {/* pay-link is texted to the patient's mobile — make that explicit */}
       {link && (
         <div className="mx-5 mt-2 flex items-center gap-1.5 rounded-[9px] bg-teal/8 px-3 py-2 text-[11px] text-dim">
           <Message size={13} variant="Linear" color="var(--color-teal-2)" className="flex-none" />
@@ -151,20 +164,10 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
         </div>
       )}
 
-      {/* program / memo chips */}
-      <div className="no-scrollbar mt-3 flex gap-2 overflow-x-auto px-5 pb-1">
-        {PROGRAMS.map((p, i) => (
-          <button key={p} onClick={() => { haptic("tap"); setProg(i); }} className={"flex-none rounded-full border px-3 py-1.5 text-[11.5px] font-semibold transition-colors " + (prog === i ? "border-teal bg-teal text-on-teal" : "border-border bg-surface text-dim")}>{p}</button>
-        ))}
-      </div>
-
-      {/* tax selector */}
-      <div className="no-scrollbar mt-2 flex items-center gap-2 overflow-x-auto px-5 pb-1">
-        <span className="flex flex-none items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-faint"><ReceiptText size={13} variant="Linear" color="var(--color-faint)" />Tax</span>
-        {taxes.map((t, i) => (
-          <button key={t.id} onClick={() => { haptic("tap"); setTaxIdx(i); }} className={"flex-none rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-colors " + (taxIdx === i ? "border-teal bg-teal/12 text-teal-2" : "border-border bg-surface text-dim")}>{t.label}</button>
-        ))}
-        <button onClick={() => { haptic("tap"); setPickTax(true); }} className="flex flex-none items-center gap-1 rounded-full border border-dashed border-teal/40 bg-teal/5 px-3 py-1.5 text-[11px] font-semibold text-teal-2"><Add size={13} variant="Linear" color="currentColor" />Add</button>
+      {/* 3. program + tax as labeled dropdowns */}
+      <div className="mx-5 mt-3 grid grid-cols-2 gap-2">
+        <Dropdown label="Program / service" value={programs[prog]} onClick={() => { haptic("tap"); setSheet("program"); }} />
+        <Dropdown label="Tax" value={tax.label} onClick={() => { haptic("tap"); setSheet("tax"); }} />
       </div>
 
       {/* amount + live fee breakdown */}
@@ -198,22 +201,20 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
         </NeoPopButton>
       </div>
 
-      {/* patient picker / add-new sheet */}
-      <BottomSheet open={pickPt} onClose={() => { setPickPt(false); setAdding(false); }} title={adding ? "New patient" : "Select patient"} onBack={adding ? () => setAdding(false) : undefined}>
+      {/* ---- patient sheet ---- */}
+      <BottomSheet open={sheet === "patient"} onClose={close} title={adding ? "New patient" : "Select patient"} onBack={adding ? () => setAdding(false) : undefined}>
         {adding ? (
           <div className="space-y-3">
-            <InputField label="Full name" value={newName} onChange={setNewName} placeholder="e.g. Maria Gomez" prefix={<Profile size={16} variant="Linear" color="var(--color-faint)" />} />
-            <InputField label="Mobile number" value={newMobile} onChange={setNewMobile} placeholder="(512) 555-0123" type="tel" prefix={<Call size={16} variant="Linear" color="var(--color-faint)" />} hint="A secure Zeva Pay link is texted here when you send a request." />
-            <NeoPopButton onClick={addPatient} className="w-full" faceClassName="px-5 py-3.5 text-[14.5px] font-semibold">
-              <Add size={17} variant="Linear" color="currentColor" /> Add patient
-            </NeoPopButton>
+            <InputField label="Full name" value={nName} onChange={setNName} placeholder="e.g. Maria Gomez" prefix={<Profile size={16} variant="Linear" color="var(--color-faint)" />} />
+            <InputField label="Mobile number" value={nMobile} onChange={setNMobile} placeholder="(512) 555-0123" type="tel" prefix={<Call size={16} variant="Linear" color="var(--color-faint)" />} hint="A secure Zeva Pay link is texted here when you send a request." />
+            <NeoPopButton onClick={addPatient} className="w-full" faceClassName="px-5 py-3.5 text-[14.5px] font-semibold"><Add size={17} variant="Linear" color="currentColor" /> Add patient</NeoPopButton>
           </div>
         ) : (
           <div className="space-y-2">
             {patients.map((p) => {
               const on = p.id === ptId;
               return (
-                <button key={p.id} onClick={() => { haptic("tap"); setPtId(p.id); setPickPt(false); }} className={"flex w-full items-center gap-3 rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface")}>
+                <button key={p.id} onClick={() => { haptic("tap"); setPtId(p.id); close(); }} className={"flex w-full items-center gap-3 rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface")}>
                   <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-surface-2 text-[13px] font-bold text-ink">{p.initials}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-[14px] font-semibold text-ink">{p.name}</span>
@@ -231,15 +232,57 @@ export function CollectPayment({ onBack }: { onBack: () => void }) {
         )}
       </BottomSheet>
 
-      {/* add a custom tax rate */}
-      <BottomSheet open={pickTax} onClose={() => setPickTax(false)} title="Add a tax">
-        <div className="space-y-3">
-          <InputField label="Tax name" value={newTaxLabel} onChange={setNewTaxLabel} placeholder="e.g. County tax" prefix={<ReceiptText size={16} variant="Linear" color="var(--color-faint)" />} />
-          <InputField label="Rate" value={newTaxRate} onChange={(v) => setNewTaxRate(v.replace(/[^\d.]/g, ""))} placeholder="8.25" type="tel" prefix={<span className="text-[13px] font-semibold text-faint">%</span>} hint="Applied on top of the amount you enter." />
-          <NeoPopButton onClick={addTax} className="w-full" faceClassName="px-5 py-3.5 text-[14.5px] font-semibold">
-            <Add size={17} variant="Linear" color="currentColor" /> Add tax
-          </NeoPopButton>
-        </div>
+      {/* ---- program sheet ---- */}
+      <BottomSheet open={sheet === "program"} onClose={close} title={adding ? "New program" : "Program / service"} onBack={adding ? () => setAdding(false) : undefined}>
+        {adding ? (
+          <div className="space-y-3">
+            <InputField label="Program / service name" value={nProg} onChange={setNProg} placeholder="e.g. Vitamin IV drip" prefix={<ReceiptText size={16} variant="Linear" color="var(--color-faint)" />} />
+            <NeoPopButton onClick={addProgram} className="w-full" faceClassName="px-5 py-3.5 text-[14.5px] font-semibold"><Add size={17} variant="Linear" color="currentColor" /> Add program</NeoPopButton>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {programs.map((p, i) => {
+              const on = i === prog;
+              return (
+                <button key={p} onClick={() => { haptic("tap"); setProg(i); close(); }} className={"flex w-full items-center justify-between rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface")}>
+                  <span className="truncate text-[14px] font-semibold text-ink">{p}</span>
+                  {on && <TickCircle size={18} variant="Bulk" color="var(--color-teal-2)" className="flex-none" />}
+                </button>
+              );
+            })}
+            <button onClick={() => { haptic("tap"); setAdding(true); }} className="flex w-full items-center gap-3 rounded-[12px] border border-dashed border-teal/40 bg-teal/5 p-3.5 text-left">
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-teal/12 text-teal-2"><Add size={18} variant="Linear" color="currentColor" /></span>
+              <span className="text-[13.5px] font-semibold text-teal-2">Add a program / service</span>
+            </button>
+          </div>
+        )}
+      </BottomSheet>
+
+      {/* ---- tax sheet ---- */}
+      <BottomSheet open={sheet === "tax"} onClose={close} title={adding ? "Add a tax" : "Tax"} onBack={adding ? () => setAdding(false) : undefined}>
+        {adding ? (
+          <div className="space-y-3">
+            <InputField label="Tax name" value={nTaxLabel} onChange={setNTaxLabel} placeholder="e.g. County tax" prefix={<ReceiptText size={16} variant="Linear" color="var(--color-faint)" />} />
+            <InputField label="Rate" value={nTaxRate} onChange={(v) => setNTaxRate(v.replace(/[^\d.]/g, ""))} placeholder="8.25" type="tel" prefix={<span className="text-[13px] font-semibold text-faint">%</span>} hint="Applied on top of the amount you enter." />
+            <NeoPopButton onClick={addTax} className="w-full" faceClassName="px-5 py-3.5 text-[14.5px] font-semibold"><Add size={17} variant="Linear" color="currentColor" /> Add tax</NeoPopButton>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {taxes.map((t, i) => {
+              const on = i === taxIdx;
+              return (
+                <button key={t.id} onClick={() => { haptic("tap"); setTaxIdx(i); close(); }} className={"flex w-full items-center justify-between rounded-[12px] border p-3.5 text-left transition-colors " + (on ? "border-teal bg-teal/8" : "border-border bg-surface")}>
+                  <span className="truncate text-[14px] font-semibold text-ink">{t.label}</span>
+                  {on && <TickCircle size={18} variant="Bulk" color="var(--color-teal-2)" className="flex-none" />}
+                </button>
+              );
+            })}
+            <button onClick={() => { haptic("tap"); setAdding(true); }} className="flex w-full items-center gap-3 rounded-[12px] border border-dashed border-teal/40 bg-teal/5 p-3.5 text-left">
+              <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-teal/12 text-teal-2"><Add size={18} variant="Linear" color="currentColor" /></span>
+              <span className="text-[13.5px] font-semibold text-teal-2">Add a custom tax</span>
+            </button>
+          </div>
+        )}
       </BottomSheet>
     </div>
   );
