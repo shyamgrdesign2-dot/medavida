@@ -1,122 +1,167 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 760" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1000" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
   <defs>
     <linearGradient id="shell" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#0f2b28"/>
-      <stop offset="1" stop-color="#0c1a19"/>
+      <stop offset="0" stop-color="#0f2b28"/><stop offset="1" stop-color="#0c1a19"/>
     </linearGradient>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <linearGradient id="plat" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0d211f"/><stop offset="0.5" stop-color="#0f2a26"/><stop offset="1" stop-color="#0d211f"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0b0d"/><stop offset="1" stop-color="#0b1210"/>
+    </linearGradient>
+    <marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
       <path d="M0 0 L10 5 L0 10 z" fill="#4a4f57"/>
     </marker>
   </defs>
 
-  <!-- background -->
-  <rect x="0" y="0" width="1040" height="760" rx="18" fill="#0a0b0d"/>
+  <rect x="0" y="0" width="1280" height="1000" rx="20" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="1279" height="999" rx="20" fill="none" stroke="#1a1d22"/>
 
-  <!-- title -->
-  <text x="40" y="46" fill="#f5f6f5" font-size="22" font-weight="700">Zeva — App Architecture</text>
-  <text x="40" y="68" fill="#9a9ea4" font-size="13">The money layer for clinics · a MedaVida product</text>
-
-  <!-- ============ ENTRY FLOW ============ -->
-  <g font-size="13" font-weight="600" text-anchor="middle">
-    <rect x="300" y="92" width="130" height="38" rx="10" fill="#16181d" stroke="#2a2d34"/>
-    <text x="365" y="116" fill="#e7e9ea">Splash</text>
-    <rect x="455" y="92" width="150" height="38" rx="10" fill="#16181d" stroke="#2a2d34"/>
-    <text x="530" y="116" fill="#e7e9ea">Onboarding</text>
-    <rect x="630" y="92" width="160" height="38" rx="10" fill="#16181d" stroke="#2a2d34"/>
-    <text x="710" y="116" fill="#e7e9ea">Sign in · OTP</text>
-  </g>
-  <g stroke="#4a4f57" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
-    <line x1="430" y1="111" x2="452" y2="111"/>
-    <line x1="605" y1="111" x2="627" y2="111"/>
-    <line x1="710" y1="130" x2="710" y2="152"/>
+  <!-- ===== header + legend ===== -->
+  <text x="44" y="50" fill="#f5f6f5" font-size="26" font-weight="800">Zeva — Reference Architecture</text>
+  <text x="44" y="74" fill="#9a9ea4" font-size="13.5">The money layer for clinics · a MedaVida product · prototype: https://zeva-medavida.vercel.app/</text>
+  <g font-size="11.5" fill="#9a9ea4" transform="translate(884,40)">
+    <circle cx="0" cy="0" r="4" fill="#2fd07a"/><text x="10" y="4">Money in</text>
+    <circle cx="92" cy="0" r="4" fill="#f7b955"/><text x="102" y="4">Money out</text>
+    <circle cx="196" cy="0" r="4" fill="#a78bff"/><text x="206" y="4">Cards</text>
+    <circle cx="264" cy="0" r="4" fill="#23ffed"/><text x="274" y="4">Insights</text>
+    <circle cx="348" cy="0" r="4" fill="#6ea8ff"/><text x="358" y="4">Ops</text>
   </g>
 
-  <!-- ============ APP SHELL ============ -->
-  <rect x="40" y="156" width="960" height="46" rx="12" fill="url(#shell)" stroke="#1f5a54"/>
-  <text x="520" y="184" fill="#23ffed" font-size="15" font-weight="700" text-anchor="middle">APP SHELL</text>
-
-  <!-- shell -> tabs connectors -->
-  <g stroke="#4a4f57" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
-    <path d="M130 202 L130 232"/>
-    <path d="M325 202 L325 232"/>
-    <path d="M520 202 L520 232"/>
-    <path d="M715 202 L715 232"/>
-    <path d="M910 202 L910 232"/>
+  <!-- ===== 1 · ACCESS ===== -->
+  <text x="44" y="112" fill="#63c8bd" font-size="12" font-weight="700" letter-spacing="1.5">1 · ACCESS &amp; ONBOARDING</text>
+  <g font-size="13" font-weight="600" text-anchor="middle" fill="#e7e9ea">
+    <rect x="44" y="122" width="150" height="40" rx="11" fill="#16181d" stroke="#2a2d34"/><text x="119" y="147">Splash</text>
+    <rect x="220" y="122" width="180" height="40" rx="11" fill="#16181d" stroke="#2a2d34"/><text x="310" y="147">Onboarding · story</text>
+    <rect x="426" y="122" width="170" height="40" rx="11" fill="#16181d" stroke="#2a2d34"/><text x="511" y="147">Sign in · OTP</text>
+    <rect x="622" y="122" width="190" height="40" rx="11" fill="#16181d" stroke="#2a2d34"/><text x="717" y="147">Account setup</text>
+  </g>
+  <g stroke="#4a4f57" stroke-width="1.4" marker-end="url(#arw)" fill="none">
+    <line x1="194" y1="142" x2="218" y2="142"/><line x1="400" y1="142" x2="424" y2="142"/><line x1="596" y1="142" x2="620" y2="142"/>
+    <line x1="640" y1="162" x2="640" y2="188"/>
   </g>
 
-  <!-- ============ TABS ============ -->
-  <g font-size="14" font-weight="700" text-anchor="middle">
-    <rect x="65" y="234" width="130" height="44" rx="11" fill="#101a19" stroke="#1f5a54"/>
-    <text x="130" y="261" fill="#5cffef">Home</text>
-    <rect x="260" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
-    <text x="325" y="261" fill="#e7e9ea">Cards</text>
-    <rect x="455" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
-    <text x="520" y="261" fill="#e7e9ea">Activity</text>
-    <rect x="650" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
-    <text x="715" y="261" fill="#e7e9ea">Insights</text>
-    <rect x="845" y="234" width="130" height="44" rx="11" fill="#16181d" stroke="#2a2d34"/>
-    <text x="910" y="261" fill="#e7e9ea">More</text>
+  <!-- ===== 2 · APP SHELL ===== -->
+  <rect x="44" y="190" width="1192" height="56" rx="14" fill="url(#shell)" stroke="#1f5a54"/>
+  <text x="70" y="223" fill="#23ffed" font-size="14" font-weight="800" letter-spacing="1">APP SHELL</text>
+  <g font-size="13" font-weight="700" text-anchor="middle">
+    <rect x="360" y="203" width="120" height="30" rx="8" fill="#123028" stroke="#23ffed" stroke-opacity="0.5"/><text x="420" y="223" fill="#5cffef">Home</text>
+    <rect x="500" y="203" width="120" height="30" rx="8" fill="#1b1e24"/><text x="560" y="223" fill="#cfd2d6">Cards</text>
+    <rect x="640" y="203" width="120" height="30" rx="8" fill="#1b1e24"/><text x="700" y="223" fill="#cfd2d6">Activity</text>
+    <rect x="780" y="203" width="120" height="30" rx="8" fill="#1b1e24"/><text x="840" y="223" fill="#cfd2d6">Insights</text>
+    <rect x="920" y="203" width="120" height="30" rx="8" fill="#1b1e24"/><text x="980" y="223" fill="#cfd2d6">More</text>
+  </g>
+  <g stroke="#4a4f57" stroke-width="1.4" marker-end="url(#arw)" fill="none">
+    <line x1="230" y1="246" x2="230" y2="298"/><line x1="640" y1="246" x2="640" y2="298"/><line x1="1050" y1="246" x2="1050" y2="298"/>
   </g>
 
-  <!-- Home -> Money In / Money Out ; More -> Operations -->
-  <g stroke="#4a4f57" stroke-width="1.5" marker-end="url(#arrow)" fill="none">
-    <path d="M110 278 L110 300 L185 300 L185 330"/>
-    <path d="M150 278 L150 314 L500 314 L500 330"/>
-    <path d="M910 278 L910 330"/>
+  <!-- ===== 3 · MONEY MOVEMENT (3 columns) ===== -->
+  <text x="44" y="288" fill="#63c8bd" font-size="12" font-weight="700" letter-spacing="1.5">3 · MONEY MOVEMENT</text>
+
+  <!-- Col 1 · MONEY IN -->
+  <rect x="44" y="300" width="380" height="384" rx="14" fill="#0d1614" stroke="#1f5a54"/>
+  <rect x="44" y="300" width="380" height="42" rx="14" fill="#0f2a24"/>
+  <circle cx="70" cy="321" r="5" fill="#2fd07a"/><text x="86" y="326" fill="#7be6b0" font-size="14" font-weight="800">MONEY IN · Zeva Pay</text>
+  <g font-size="12.5">
+    <rect x="62" y="356" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="78" y="376" fill="#e7e9ea" font-weight="700">Collect payment</text>
+      <text x="78" y="393" fill="#9a9ea4" font-size="11">Charge card-on-file · or send a secure pay-link</text>
+    <rect x="62" y="410" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="78" y="430" fill="#e7e9ea" font-weight="700">Zeva Pay fee engine</text>
+      <text x="78" y="447" fill="#9a9ea4" font-size="11">Flat 2% · patient ID + Rx written to every memo</text>
+    <rect x="62" y="464" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="78" y="484" fill="#e7e9ea" font-weight="700">Instant disbursement</text>
+      <text x="78" y="501" fill="#9a9ea4" font-size="11">Net lands now — no 2–3 day settlement wait</text>
+    <rect x="62" y="518" width="344" height="36" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="78" y="541" fill="#e7e9ea" font-weight="700">Settlement <tspan fill="#9a9ea4" font-size="11" font-weight="400">· daily proof &amp; history</tspan></text>
+    <rect x="62" y="562" width="344" height="36" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="78" y="585" fill="#e7e9ea" font-weight="700">Memberships <tspan fill="#9a9ea4" font-size="11" font-weight="400">· recurring MRR + dunning</tspan></text>
+    <rect x="62" y="606" width="344" height="36" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="78" y="629" fill="#e7e9ea" font-weight="700">Invoices <tspan fill="#9a9ea4" font-size="11" font-weight="400">· create, send, chase overdue</tspan></text>
+    <text x="78" y="666" fill="#5f8f86" font-size="10.5">Every inflow is itemized by patient &amp; by program.</text>
   </g>
 
-  <!-- ============ MONEY IN (Zeva Pay) ============ -->
-  <rect x="60" y="332" width="250" height="384" rx="14" fill="#0d1614" stroke="#1f5a54"/>
-  <rect x="60" y="332" width="250" height="40" rx="14" fill="#123028"/>
-  <circle cx="86" cy="352" r="5" fill="#2fd07a"/>
-  <text x="102" y="357" fill="#7be6b0" font-size="14" font-weight="700">MONEY IN · Zeva Pay</text>
-  <g font-size="12.5" fill="#e7e9ea">
-    <rect x="78" y="388" width="214" height="64" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="92" y="410" font-weight="600">Collect payment</text>
-    <text x="92" y="430" fill="#9a9ea4" font-size="11">Charge card-on-file / send link · 2% fee</text>
-    <text x="92" y="445" fill="#9a9ea4" font-size="11">→ net disbursed instantly</text>
-    <rect x="78" y="462" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="92" y="486" font-weight="600">Settlement <tspan fill="#9a9ea4" font-size="11" font-weight="400">· instant proof</tspan></text>
-    <rect x="78" y="512" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="92" y="536" font-weight="600">Memberships <tspan fill="#9a9ea4" font-size="11" font-weight="400">· recurring MRR</tspan></text>
-    <rect x="78" y="562" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="92" y="586" font-weight="600">Invoices <tspan fill="#9a9ea4" font-size="11" font-weight="400">· send &amp; track</tspan></text>
+  <!-- Col 2 · MONEY OUT -->
+  <rect x="450" y="300" width="380" height="384" rx="14" fill="#12100a" stroke="#5a4a1f"/>
+  <rect x="450" y="300" width="380" height="42" rx="14" fill="#2a2410"/>
+  <circle cx="476" cy="321" r="5" fill="#f7b955"/><text x="492" y="326" fill="#f2cf8c" font-size="14" font-weight="800">MONEY OUT</text>
+  <g font-size="12.5">
+    <rect x="468" y="356" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="484" y="376" fill="#e7e9ea" font-weight="700">Send / Move money</text>
+      <text x="484" y="393" fill="#9a9ea4" font-size="11">Suppliers, labs, payroll · move between accounts</text>
+    <rect x="468" y="410" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="484" y="430" fill="#e7e9ea" font-weight="700">Bill Pay</text>
+      <text x="484" y="447" fill="#9a9ea4" font-size="11">Category → provider → fetch bill → confirm → pay</text>
+    <rect x="468" y="464" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="484" y="484" fill="#e7e9ea" font-weight="700">Reserves</text>
+      <text x="484" y="501" fill="#9a9ea4" font-size="11">Profit-First auto-split: Operating · Payroll · Tax</text>
+    <rect x="468" y="518" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="484" y="538" fill="#e7e9ea" font-weight="700">Approvals</text>
+      <text x="484" y="555" fill="#9a9ea4" font-size="11">Thresholds, new vendors &amp; payroll → owner sign-off</text>
+    <text x="484" y="601" fill="#8f7a46" font-size="10.5">Role-aware: front desk collects, owner approves.</text>
   </g>
 
-  <!-- ============ MONEY OUT ============ -->
-  <rect x="335" y="332" width="250" height="384" rx="14" fill="#12100a" stroke="#5a4a1f"/>
-  <rect x="335" y="332" width="250" height="40" rx="14" fill="#2a2410"/>
-  <circle cx="361" cy="352" r="5" fill="#f7b955"/>
-  <text x="377" y="357" fill="#f2cf8c" font-size="14" font-weight="700">MONEY OUT</text>
-  <g font-size="12.5" fill="#e7e9ea">
-    <rect x="353" y="388" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="367" y="412" font-weight="600">Send / Move money <tspan fill="#9a9ea4" font-size="11" font-weight="400">· vendors, payroll</tspan></text>
-    <rect x="353" y="438" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="367" y="462" font-weight="600">Bill Pay <tspan fill="#9a9ea4" font-size="11" font-weight="400">· rent, utilities</tspan></text>
-    <rect x="353" y="488" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="367" y="512" font-weight="600">Reserves <tspan fill="#9a9ea4" font-size="11" font-weight="400">· auto-split</tspan></text>
-    <rect x="353" y="538" width="214" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="367" y="562" font-weight="600">Approvals <tspan fill="#9a9ea4" font-size="11" font-weight="400">· sign-off</tspan></text>
+  <!-- Col 3 · CARDS -->
+  <rect x="856" y="300" width="380" height="384" rx="14" fill="#120f1c" stroke="#413066"/>
+  <rect x="856" y="300" width="380" height="42" rx="14" fill="#1e1830"/>
+  <circle cx="882" cy="321" r="5" fill="#a78bff"/><text x="898" y="326" fill="#c9b8ff" font-size="14" font-weight="800">CARDS</text>
+  <g font-size="12.5">
+    <rect x="874" y="356" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="890" y="376" fill="#e7e9ea" font-weight="700">Debit · Credit · Virtual</text>
+      <text x="890" y="393" fill="#9a9ea4" font-size="11">Physical + instant virtual cards for the clinic</text>
+    <rect x="874" y="410" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="890" y="430" fill="#e7e9ea" font-weight="700">Issue &amp; freeze</text>
+      <text x="890" y="447" fill="#9a9ea4" font-size="11">Vendor-locked virtual cards · one-tap freeze</text>
+    <rect x="874" y="464" width="344" height="46" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="890" y="484" fill="#e7e9ea" font-weight="700">Spend controls</text>
+      <text x="890" y="501" fill="#9a9ea4" font-size="11">Limits, merchant &amp; category rules · auto-freeze</text>
+    <rect x="874" y="518" width="344" height="36" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="890" y="541" fill="#e7e9ea" font-weight="700">Statements &amp; disputes <tspan fill="#9a9ea4" font-size="11" font-weight="400">· PDF / CSV</tspan></text>
+    <rect x="874" y="562" width="344" height="36" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="890" y="585" fill="#e7e9ea" font-weight="700">Add to Apple Wallet</text>
+    <rect x="874" y="606" width="344" height="36" rx="9" fill="#16181d" stroke="#2a2d34"/>
+      <text x="890" y="629" fill="#e7e9ea" font-weight="700">Cash back <tspan fill="#9a9ea4" font-size="11" font-weight="400">· 1.5% on all card spend</tspan></text>
   </g>
 
-  <!-- ============ OPERATIONS ============ -->
-  <rect x="690" y="332" width="290" height="384" rx="14" fill="#0d1119" stroke="#2a3a5a"/>
-  <rect x="690" y="332" width="290" height="40" rx="14" fill="#111a2a"/>
-  <circle cx="716" cy="352" r="5" fill="#6ea8ff"/>
-  <text x="732" y="357" fill="#aecaff" font-size="14" font-weight="700">OPERATIONS &amp; BOOKS</text>
-  <g font-size="12.5" fill="#e7e9ea">
-    <rect x="708" y="388" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="722" y="412" font-weight="600">Receipts <tspan fill="#9a9ea4" font-size="11" font-weight="400">· snap &amp; auto-match</tspan></text>
-    <rect x="708" y="438" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="722" y="462" font-weight="600">Accounting export <tspan fill="#9a9ea4" font-size="11" font-weight="400">· QuickBooks / Xero</tspan></text>
-    <rect x="708" y="488" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="722" y="512" font-weight="600">1099 &amp; vendors <tspan fill="#9a9ea4" font-size="11" font-weight="400">· W-9, 1099-NEC</tspan></text>
-    <rect x="708" y="538" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="722" y="562" font-weight="600">Team &amp; roles <tspan fill="#9a9ea4" font-size="11" font-weight="400">· role-based access</tspan></text>
-    <rect x="708" y="588" width="254" height="40" rx="9" fill="#16181d" stroke="#2a2d34"/>
-    <text x="722" y="612" font-weight="600">Trust &amp; security <tspan fill="#9a9ea4" font-size="11" font-weight="400">· FDIC, PCI, HIPAA</tspan></text>
+  <!-- ===== 4 · INSIGHTS & OPERATIONS ===== -->
+  <text x="44" y="712" fill="#63c8bd" font-size="12" font-weight="700" letter-spacing="1.5">4 · INSIGHTS &amp; OPERATIONS</text>
+
+  <!-- Insights -->
+  <rect x="44" y="722" width="580" height="150" rx="14" fill="#0d1618" stroke="#1c4a4a"/>
+  <rect x="44" y="722" width="580" height="40" rx="14" fill="#0e2429"/>
+  <circle cx="70" cy="742" r="5" fill="#23ffed"/><text x="86" y="747" fill="#8fe6df" font-size="14" font-weight="800">INSIGHTS</text>
+  <g font-size="12" fill="#e7e9ea" font-weight="600">
+    <rect x="62" y="776" width="270" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="78" y="800">KPIs <tspan fill="#9a9ea4" font-size="11" font-weight="400">· collected · spent · net · /visit</tspan></text>
+    <rect x="344" y="776" width="264" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="360" y="800">Cashflow <tspan fill="#9a9ea4" font-size="11" font-weight="400">· money in vs out</tspan></text>
+    <rect x="62" y="822" width="270" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="78" y="846">Revenue by program</text>
+    <rect x="344" y="822" width="264" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="360" y="846">Spend breakdown <tspan fill="#9a9ea4" font-size="11" font-weight="400">· donut</tspan></text>
   </g>
 
-  <!-- footer -->
-  <text x="40" y="742" fill="#63676d" font-size="11">Prototype: https://zeva-medavida.vercel.app/</text>
+  <!-- Operations -->
+  <rect x="656" y="722" width="580" height="150" rx="14" fill="#0d1119" stroke="#2a3a5a"/>
+  <rect x="656" y="722" width="580" height="40" rx="14" fill="#111a2a"/>
+  <circle cx="682" cy="742" r="5" fill="#6ea8ff"/><text x="698" y="747" fill="#aecaff" font-size="14" font-weight="800">OPERATIONS &amp; BOOKS</text>
+  <g font-size="12" fill="#e7e9ea" font-weight="600">
+    <rect x="674" y="776" width="270" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="690" y="800">Receipts <tspan fill="#9a9ea4" font-size="11" font-weight="400">· snap &amp; auto-match</tspan></text>
+    <rect x="956" y="776" width="264" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="972" y="800">Accounting export <tspan fill="#9a9ea4" font-size="11" font-weight="400">· QB / Xero</tspan></text>
+    <rect x="674" y="822" width="270" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="690" y="846">1099 &amp; vendors <tspan fill="#9a9ea4" font-size="11" font-weight="400">· W-9, 1099-NEC</tspan></text>
+    <rect x="956" y="822" width="264" height="38" rx="9" fill="#16181d" stroke="#2a2d34"/><text x="972" y="846">Team &amp; roles <tspan fill="#9a9ea4" font-size="11" font-weight="400">· RBAC</tspan></text>
+  </g>
+
+  <!-- ===== 5 · PLATFORM / TRUST ===== -->
+  <text x="44" y="900" fill="#63c8bd" font-size="12" font-weight="700" letter-spacing="1.5">5 · PLATFORM · TRUST · COMPLIANCE</text>
+  <rect x="44" y="910" width="1192" height="70" rx="14" fill="url(#plat)" stroke="#1f5a54"/>
+  <g text-anchor="middle">
+    <text x="192" y="940" fill="#e7e9ea" font-size="13" font-weight="700">Zeva Pay engine</text>
+    <text x="192" y="958" fill="#9a9ea4" font-size="11">card processing · instant payout rails</text>
+    <line x1="384" y1="924" x2="384" y2="966" stroke="#20423d"/>
+    <text x="536" y="940" fill="#e7e9ea" font-size="13" font-weight="700">Ledger &amp; memos</text>
+    <text x="536" y="958" fill="#9a9ea4" font-size="11">every dollar tagged: patient ID + Rx</text>
+    <line x1="688" y1="924" x2="688" y2="966" stroke="#20423d"/>
+    <text x="836" y="940" fill="#e7e9ea" font-size="13" font-weight="700">Sponsor bank · FDIC</text>
+    <text x="836" y="958" fill="#9a9ea4" font-size="11">deposits held at Anchor Trust Bank, N.A.</text>
+    <line x1="984" y1="924" x2="984" y2="966" stroke="#20423d"/>
+    <text x="1110" y="940" fill="#e7e9ea" font-size="13" font-weight="700">Compliance</text>
+    <text x="1110" y="958" fill="#9a9ea4" font-size="11">PCI-DSS L1 · HIPAA · SOC 2 · tokenized</text>
+  </g>
 </svg>
