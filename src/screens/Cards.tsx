@@ -96,7 +96,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
 
       {/* spending limit / credit usage */}
       {limit && (
-        <div className="mx-5 mt-4 rounded-[12px] border border-border bg-surface p-4">
+        <div className="card-lift mx-5 mt-4 rounded-[12px] border border-border bg-surface p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-[12px] font-semibold text-dim"><Speedometer size={15} variant="Linear" color="var(--color-dim)" />{limit.label}</div>
             <div className="tnum text-[12.5px] font-bold text-ink">{money(limit.used)} <span className="text-faint">/ {money(limit.total)}</span></div>
@@ -114,7 +114,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
       )}
 
       {merchants.length > 0 && (
-        <div className="mx-5 mt-3 rounded-[12px] border border-border bg-surface p-4">
+        <div className="card-lift mx-5 mt-3 rounded-[12px] border border-border bg-surface p-4">
           <div className="mb-2.5 flex items-center gap-1.5 text-[12px] font-semibold text-dim"><Shop size={15} variant="Linear" color="var(--color-dim)" />Locked to approved vendors</div>
           <div className="flex flex-wrap gap-2">{merchants.map((m) => <Chip key={m} tone="accent">{m}</Chip>)}</div>
         </div>
@@ -122,7 +122,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
 
       {/* card controls */}
       <SectionTitle>Card controls</SectionTitle>
-      <div className="mx-5 -mt-1 rounded-[12px] border border-border bg-surface px-4">
+      <div className="card-lift mx-5 -mt-1 rounded-[12px] border border-border bg-surface px-4">
         <ControlRow title="Show card number" sub={`•••• •••• •••• ${card.last4}`} onClick={() => haptic("tap")} trailing={<Eye size={18} variant="Linear" color="var(--color-dim)" />} />
         <div className="border-t border-border-soft" />
         <ControlRow title="Card PIN" sub="Change your 4-digit PIN" onClick={() => haptic("tap")} trailing={<Lock1 size={18} variant="Linear" color="var(--color-dim)" />} />
@@ -134,7 +134,7 @@ export function Cards({ onIssue }: { onIssue?: () => void }) {
 
       {/* statements & support */}
       <SectionTitle>Statements &amp; support</SectionTitle>
-      <div className="mx-5 -mt-1 rounded-[12px] border border-border bg-surface px-4">
+      <div className="card-lift mx-5 -mt-1 rounded-[12px] border border-border bg-surface px-4">
         <ControlRow title="Statements" sub="Monthly PDF & CSV" onClick={() => { haptic("tap"); setSheet("statements"); }} trailing={<DocumentText size={18} variant="Linear" color="var(--color-dim)" />} />
         <div className="border-t border-border-soft" />
         <ControlRow title="Dispute a charge" sub="Flag a transaction for review" onClick={() => { haptic("tap"); setSheet("dispute"); }} trailing={<Danger size={18} variant="Linear" color="var(--color-dim)" />} />

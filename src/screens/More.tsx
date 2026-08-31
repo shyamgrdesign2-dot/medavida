@@ -81,7 +81,7 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
     <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar h-full overflow-y-auto px-5 pb-28 pt-4">
       {/* profile */}
       <motion.div variants={item}>
-        <Squircle radius={16} className="flex items-center gap-3.5 border border-border bg-surface p-4">
+        <Squircle radius={16} className="card-lift flex items-center gap-3.5 border border-border bg-surface p-4">
           <PatternAvatar size={52} label="SG" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
@@ -114,7 +114,7 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
       {/* accounts */}
       <motion.div variants={item} className="mb-2 mt-6 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Accounts</motion.div>
       <motion.div variants={item}>
-        <Squircle radius={16} className="border border-border bg-surface px-4">
+        <Squircle radius={16} className="card-lift border border-border bg-surface px-4">
           {ACCOUNTS.map((a, i) => (
             <button key={a.id} onClick={() => { haptic("tap"); onOpen?.("reserves"); }} className={"flex w-full items-center gap-3 py-3 text-left " + (i > 0 ? "border-t border-border-soft" : "")}>
               <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[9px] bg-surface-2"><Bank size={17} variant="Bulk" color="var(--color-teal-2)" /></span>
@@ -135,7 +135,7 @@ export function More({ onOpen }: { onOpen?: (k: string) => void }) {
       {/* preferences */}
       <motion.div variants={item} className="mb-2 mt-6 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Preferences</motion.div>
       <motion.div variants={item}>
-        <Squircle radius={16} className="border border-border bg-surface px-4">
+        <Squircle radius={16} className="card-lift border border-border bg-surface px-4">
           <ControlRow title="Push notifications" sub="Payments, approvals, alerts" trailing={<Toggle on={notif} onChange={setNotif} />} />
           <div className="border-t border-border-soft" />
           <ControlRow title="Face ID & PIN" sub="Unlock with biometrics" trailing={<Toggle on={biometric} onChange={setBiometric} />} />

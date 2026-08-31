@@ -75,7 +75,7 @@ export function Transactions({ onBack }: { onBack?: () => void }) {
       </div>
 
       {/* list */}
-      <div className="mx-5 mt-2 rounded-[12px] border border-border bg-surface px-3.5">
+      <div className="card-lift mx-5 mt-2 rounded-[12px] border border-border bg-surface px-3.5">
         {list.length === 0 && <div className="py-10 text-center text-[13px] text-dim">No transactions match.</div>}
         {list.map((t, i) => (
           <div key={t.id} className={i > 0 ? "border-t border-border-soft" : ""}>

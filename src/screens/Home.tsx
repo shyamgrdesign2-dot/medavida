@@ -49,7 +49,7 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
   useMotionValueEvent(scrollY, "change", (v) => setLifted(v > 24));
 
   return (
-    <div ref={scrollRef} className="no-scrollbar relative h-full overflow-y-auto">
+    <div ref={scrollRef} className="no-scrollbar relative h-full overflow-y-auto overflow-x-hidden">
       {/* HEADER — greeting left, notifications + profile at the far right */}
       <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-20 px-5 pb-6 pt-4">
         <motion.div variants={item} className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
       <motion.div variants={stagger} initial="hidden" animate="show" className="sticky top-0 z-0 px-5">
         <motion.div variants={item} className="relative">
           {/* soft brand-blue glow that blooms behind the card */}
-          <div className="pointer-events-none absolute -inset-x-6 -bottom-8 top-8 -z-10" style={{ background: "radial-gradient(58% 60% at 50% 62%, var(--card-glow), transparent 72%)", filter: "blur(26px)" }} />
+          <div className="pointer-events-none absolute -inset-x-3 -bottom-8 top-8 -z-10" style={{ background: "radial-gradient(58% 60% at 50% 62%, var(--card-glow), transparent 72%)", filter: "blur(26px)" }} />
           <CardWallet width={346} onCardTap={() => onQuick?.("cards")} />
         </motion.div>
       </motion.div>
@@ -103,7 +103,7 @@ export function Home({ onOpenTxn, onQuick, onSeeAll }: { onOpenTxn?: (id: string
 
           {/* recent activity */}
           <SectionTitle action={<button onClick={onSeeAll} className="text-[11px] font-semibold text-teal-2">See all</button>}>Recent activity</SectionTitle>
-          <Squircle radius={12} className="border border-border bg-surface-2 px-3.5">
+          <Squircle radius={12} className="card-lift border border-border bg-surface-2 px-3.5">
             {TXNS.slice(0, 8).map((t, i) => (
               <div key={t.id} className={i > 0 ? "border-t border-border-soft" : ""}>
                 <TxnRow

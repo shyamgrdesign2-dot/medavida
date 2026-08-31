@@ -50,7 +50,7 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
 
       <motion.div variants={stagger} initial="hidden" animate="show" className="no-scrollbar flex-1 overflow-y-auto px-5 pb-28 pt-4">
         {/* year summary */}
-        <motion.div variants={item} className="rounded-[16px] border border-border bg-surface p-4">
+        <motion.div variants={item} className="card-lift rounded-[16px] border border-border bg-surface p-4">
           <div className="text-[10.5px] font-bold uppercase tracking-[0.14em] text-faint">Tax year 2026 · reportable</div>
           <div className="tnum mt-1 font-display text-[28px] font-semibold text-ink">{money(reportable)}</div>
           <div className="mt-1 text-[11.5px] text-dim">{eligible.length} vendors need a 1099-NEC</div>
@@ -72,7 +72,7 @@ export function Vendors1099({ onBack }: { onBack: () => void }) {
 
         {/* vendors */}
         <motion.div variants={item} className="mb-2 mt-6 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Contractors paid this year</motion.div>
-        <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
+        <motion.div variants={item} className="card-lift rounded-[12px] border border-border bg-surface px-4">
           {vendors.map((v, i) => (
             <div key={v.id} className={"py-3 " + (i > 0 ? "border-t border-border-soft" : "")}>
               <div className="flex items-center gap-3">

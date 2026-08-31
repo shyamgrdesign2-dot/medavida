@@ -51,7 +51,7 @@ export function Approvals({ onBack }: { onBack: () => void }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
               transition={{ type: "spring", stiffness: 320, damping: 34 }}
-              className="mb-3 rounded-[14px] border border-border bg-surface p-4"
+              className="card-lift mb-3 rounded-[14px] border border-border bg-surface p-4"
             >
               <div className="flex items-center gap-3">
                 <span className="flex h-11 w-11 flex-none items-center justify-center rounded-[11px] bg-surface-2 text-ink"><Icon name={p.icon} size={19} /></span>

@@ -70,7 +70,7 @@ export function Settlement({ onBack }: { onBack: () => void }) {
 
         {/* daily settlements */}
         <motion.div variants={item} className="mb-2 mt-6 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-faint"><TrendUp size={13} variant="Linear" color="currentColor" />Daily settlements</motion.div>
-        <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
+        <motion.div variants={item} className="card-lift rounded-[12px] border border-border bg-surface px-4">
           {DAYS.map((d, i) => (
             <button key={d.d} onClick={() => haptic("tap")} className={"flex w-full items-center gap-3 py-3 text-left " + (i > 0 ? "border-t border-border-soft" : "")}>
               <span className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-teal/10 text-teal-2"><Flash size={15} variant="Bulk" color="currentColor" /></span>
@@ -86,7 +86,7 @@ export function Settlement({ onBack }: { onBack: () => void }) {
 
         {/* today's line items */}
         <motion.div variants={item} className="mb-2 mt-6 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Today's collections</motion.div>
-        <motion.div variants={item} className="rounded-[12px] border border-border bg-surface px-4">
+        <motion.div variants={item} className="card-lift rounded-[12px] border border-border bg-surface px-4">
           {TODAY_ITEMS.map((t, i) => (
             <div key={t.id} className={"flex items-center gap-3 py-3 " + (i > 0 ? "border-t border-border-soft" : "")}>
               <span className="flex-1">

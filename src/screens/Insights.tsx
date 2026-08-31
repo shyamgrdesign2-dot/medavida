@@ -93,7 +93,7 @@ export function Insights() {
       </div>
 
       {/* net cashflow narrative */}
-      <Squircle radius={16} className="relative mt-3 overflow-hidden border border-border bg-surface p-4">
+      <Squircle radius={16} className="card-lift relative mt-3 overflow-hidden border border-border bg-surface p-4">
         <AnimatedGradient tone="teal" opacity={0.6} />
         <div className="relative flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-faint"><TrendUp size={14} variant="Bulk" color="currentColor" />Net cashflow · {PERIODS[p].toLowerCase()}</div>
         <div className="tnum relative mt-1 font-display text-[28px] font-semibold text-go">+{money0(net)}</div>
@@ -101,7 +101,7 @@ export function Insights() {
       </Squircle>
 
       {/* cashflow chart */}
-      <Squircle radius={16} className="mt-3 border border-border bg-surface p-4">
+      <Squircle radius={16} className="card-lift mt-3 border border-border bg-surface p-4">
         <div className="mb-3 flex items-center justify-between">
           <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Money in vs out</div>
           <div className="flex items-center gap-3 text-[10px] font-semibold">
@@ -123,7 +123,7 @@ export function Insights() {
       </Squircle>
 
       {/* revenue by program — new metric */}
-      <Squircle radius={16} className="mt-3 border border-border bg-surface p-4">
+      <Squircle radius={16} className="card-lift mt-3 border border-border bg-surface p-4">
         <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Revenue by program</div>
         <div className="space-y-2.5">
           {PROGRAMS.map((pr, i) => (
@@ -141,7 +141,7 @@ export function Insights() {
       </Squircle>
 
       {/* spend donut + legend */}
-      <Squircle radius={16} className="mt-3 border border-border bg-surface p-4">
+      <Squircle radius={16} className="card-lift mt-3 border border-border bg-surface p-4">
         <div className="mb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-faint">Where it went</div>
         <div className="flex items-center gap-4">
           <Donut />

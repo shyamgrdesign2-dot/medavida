@@ -52,7 +52,7 @@ export function BillPay({ onBack }: { onBack?: () => void } = {}) {
       </div>
 
       {/* due summary card with animated gradient */}
-      <div className="relative mt-4 overflow-hidden rounded-[12px] border border-border bg-surface p-4">
+      <div className="card-lift relative mt-4 overflow-hidden rounded-[12px] border border-border bg-surface p-4">
         <AnimatedGradient tone="teal" opacity={0.85} />
         <div className="relative text-[10.5px] font-bold uppercase tracking-[0.14em] text-faint">Due this cycle</div>
         <div className="tnum relative mt-1 font-display text-[28px] font-semibold text-ink">{money(totalDue)}</div>
@@ -77,7 +77,7 @@ export function BillPay({ onBack }: { onBack?: () => void } = {}) {
 
       {/* bill list */}
       <SectionTitle>Recurring bills</SectionTitle>
-      <div className="rounded-[12px] border border-border bg-surface px-3.5">
+      <div className="card-lift rounded-[12px] border border-border bg-surface px-3.5">
         {bills.map((b, i) => (
           <motion.button
             key={b.id}
